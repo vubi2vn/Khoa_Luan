@@ -54,7 +54,7 @@ class SVMmodel(object):
 
 
 if __name__=='__main__':
-    string = 'điện thoại này rất tốt'
+    string = 'Tương đối tốt, nói chung pin nhanh hết so với con A70 của mình mua trước đó, phím tăng giảm âm lượng bấm hơi cứng,'
     svm=SVMmodel(urlModel=r'C:\Users\QuocDai\Desktop\Khóa luận\Classification\Train\train.joblib',stringTest=string)
     svm.testing()
 
