@@ -1,72 +1,128 @@
 body {
   background: #f0f0f0;
 }
+header{
+  margin-bottom: 20px;
+}
 .btn {
   border-radius: 10px;
 }
-
+.center{
+  text-align: center !important;
+}
+.right{
+  text-align: right !important;
+}
+.left{
+  text-align: left !important;
+}
+.no-padding{
+  padding: 0 !important; 
+}
+.no-margin{
+  margin: 0 !important;
+}
+div{
+  display: block;
+}
+.clr {
+  clear: both;
+  display: block;
+  border-bottom: 1px solid #ccc ;
+}
 a {
   text-decoration: none;
   color: #696969;
 }
-/* Navbar */
-.mynav {
-  background-color: #fed700;
+/* menu */
+header{
+  background: #fed700;
 }
-.navbar {
-  background-color: transparent !important;
+.wrap-main {
+  width: 1200px;
+  height: 55px;
+  background: #fed700;
+  margin: auto;
+  position: relative;
+  display: block;
+}
+.logo {
+  float: left;
+  display: block;
+}
+.logo img{
   height: 60px;
-  width: fit-content;
 }
-
-.navbar .navbar-brand img {
-  padding-left: 150px;
-  height: 100px;
+#search-site {
+  float: left;
+  margin: 10px 10px 0 10px;
+  position: relative;
 }
-
-.navbar .nav-item a {
-  color: #fff !important;
-}
-
-.navbar .dropdown-menu {
-  background-color: rgba(0, 0, 0, 0.3);
-}
-.dropdown-item:hover {
-  background-color: rgba(0, 0, 0, 0.3);
-}
-.navbar form button {
-  background-color: transparent;
-  color: #fff;
+#search-site .form-control {
+  float: left;
+  width: 160px;
+  margin-left: 10px;
   border: 0;
+  position: relative;
+  background: #fff;
+  border-radius: 0%;
 }
-.nav-link:hover {
-  background-color: rgba(0, 0, 0, 0.3);
-  border-radius: 10px;
-}
-.navbar form button:hover {
-  background-color: rgba(63, 59, 6, 0.3);
-}
-#login {
-  position: absolute;
-  right: -500px;
-}
-#login a {
-  color: #FFF(247, 17, 17) !important;
+#search-site .btn{
+  border-radius: 0%;
 }
 
+#menu{
+  float: left;
+}
+#menu ul {
+  list-style-type: none;
+  text-align: center;
+}
+#menu li {
+  display: inline-block;
+  width: 100px;
+  line-height: 56px;
+}
+#menu a {
+  text-decoration: none;
+  color: #fff;
+  display: block;
+}
+#menu a:hover {
+  background: #fff;
+  color: #111111;
+}
+.login{
+  background: none;
+  border: none  ;
+  height: 55px;
+  width: 60px;
+}
+.login:hover{
+  background: #fff;
+}
 /* Container */
 .container-1 {
-  padding-top: 20px;
   width: 1200px;
   margin: auto;
 }
-/* .container-1::after{
-    content: ".";
-    visibility: hidden;
-    display: block;
-    height: 0;
-    clear: both;
-} */
+.container-1 a{
+  text-decoration: none;
+}
+.container-dangnhap {
+  width: 600px;
+  margin: auto;
+  border: 1px solid #ccc;
+  background: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+}
+
+.container-dangnhap img{
+  height: 80px;
+}
+
 .box {
   float: left;
   background: #fff;
@@ -146,11 +202,16 @@ a {
     padding: 5px 15px;
     font-size: larger;
     background: #fed700;
+    margin-top: 20px;
     margin-bottom: 3px;
 }
 .owl-carousel {
   background: #fff;
 }
+.owl-carousel a{
+  text-decoration: none;
+}
+
 .owl-carousel .item {
   margin: 3px;
   width: 200px;
@@ -164,6 +225,178 @@ a {
     color: red;
 }
 .owl-carousel .item img {
+  margin: 0 auto 0 auto;
   width: auto;
   height: 200px;
+}
+/* phone list */
+.phone-list{
+  background: #fff;
+}
+.phone-list::after{
+  clear: both;
+  content: "";
+  display: block;
+  width: 0px;
+  height: 0px;
+}
+.phone-list a{
+  text-decoration: none;
+}
+.phone-list-item{
+  float: left;
+  width: 240px;
+  height: 300px;
+  background: #fff;
+  border: 1px solid #eee;
+}
+.phone-list-item:hover{
+  /* margin-top: -3px; */
+  border: 1px solid #ccc;
+}
+.phone-list-item img{
+  display: block;
+  margin: 20px auto 0 auto;
+  width: 200px;
+}
+
+.phone-list-item .desc{
+  padding: auto;
+  text-align: center;
+}
+/* Trang chitiet */
+/* chi tiet hinh anh */
+.chitiet-hinh{
+  height: 480px;
+  width: 500px;
+}
+.chitiet-hinh img{
+  margin: 20px auto 0 50px;
+  width: 400px;
+}
+
+/* chi tiet dia diem mua */
+.chitiet-mua{
+  height: 480px;
+  text-align: center;
+  width: 250px;
+  border-left: 1px solid #eee;
+  border-right: 1px solid #eee;
+  padding: 0 15px;
+}
+.chitiet-mua-item{
+  border-top: 1px solid #ccc;
+}
+.chitiet-mua-item a{
+  font-size: 20px;
+  color: #666;
+}
+.chitiet-mua-item a:hover{
+  color: #fed700;
+}
+.chitiet-mua-item p{
+  color: red;
+}
+/* chi tiet cau hinh */
+.chitiet-cauhinh{
+  height: 480px;
+  width: 450px;
+  padding: 0 20px;
+}
+
+.chitiet-cauhinh table{
+  border-collapse:collapse;
+  width: 100%;
+}
+.chitiet-cauhinh table td{
+  color: #666;
+  border-top:1px solid #ccc;
+  height: 40px;
+  text-align: left;
+}
+/* Bai danh gia */
+.chitiet-review{
+  background: #fff;
+  padding: 10px;
+}
+.chitiet-review img{
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+/* Phan binh luan */
+.chitiet-cmt{
+  background: #fff;
+  padding: 10px;
+}
+.chitiet-cmt-emotion{
+  height: 50px;
+}
+.chitiet-cmt-emotion button{
+  float: right;
+}
+.chitiet-cmt ul{
+  list-style-type: none;
+}
+.list-cmt{
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 20px;
+}
+.cmt{
+  border-top: 1px solid #ccc;
+}
+.cmt-ten{
+  font-weight:bolder ;
+}
+.cmt-noidung{
+  padding-left: 10px;
+}
+
+/* like/dislike */
+.cmt .fas {
+  margin: 0px 20px;
+  font-size: 20px;
+  cursor: pointer;
+}
+.fa-thumbs-up:hover {
+  color: blue;
+}
+.fa-thumbs-down:hover {
+  color: red;
+}
+/* footer */
+footer .footer-copyright{
+  background-color: #fed700;
+  text-align: center;
+}
+footer .fab{
+  padding: 10px;
+  font-size: 20px;
+  width: 40px;
+  text-align: center;
+  text-decoration: none;
+  margin: 5px 2px;
+  border-radius: 50%;
+}
+footer .fab:hover {
+  opacity: 0.7;
+}
+
+.fa-facebook-f {
+  background: #3B5998;
+  color: white;
+}
+
+.fa-twitter {
+  background: #55ACEE;
+  color: white;
+}
+
+.fa-google-plus-g {
+  background: #dd4b39;
+  color: white;
+}
+.fa-youtube {
+  background: #bb0000;
+  color: white;
 }
