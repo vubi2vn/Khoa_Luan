@@ -154,9 +154,9 @@ if __name__=='__main__':
     label_train = []
     features_test = []
     label_test = []
-    file_train = open(r'C:\Users\QuocDai\Desktop\Khóa luận\Classification\Training\Vector_traning.txt', 'r',
+    file_train = open(r'D:\GITHUB\Khoa_Luan\Classification\Training\Vector_traning.txt', 'r',
                       encoding='UTF-8')
-    file_test = open(r'C:\Users\QuocDai\Desktop\Khóa luận\Classification\Test_data\Result_1000_Vector.txt', 'r',
+    file_test = open(r'D:\GITHUB\Khoa_Luan\Classification\Test_data\Result_1000_Vector.txt', 'r',
                      encoding='UTF-8')
     for line in file_train:
         a = re.sub('[()\n]', '', line).split(',')

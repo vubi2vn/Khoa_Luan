@@ -364,6 +364,18 @@ header{
 .fa-thumbs-down:hover {
   color: red;
 }
+/* Login */
+.tab-pane{
+  height: 400px;
+}
+.sign-in{
+  width: 70%;
+  margin: auto;
+}
+.form-group label{
+  color: #111111 !important;
+}
+
 /* footer */
 footer .footer-copyright{
   background-color: #fed700;

@@ -1,7 +1,7 @@
 import re
 def check_grammar(word):
     dic=[['sd','sử dụng'],['dt','điện thoại'],['đt','điện thoại'],['sài','xài'],['nt','nhắn tin'],['sp','sản phẩm'],['j','gì'],
-         ['cv','công việc'],['dc','được'],['đc','được'],['dk','được'],['ko','không'],['vs','với'],['bin','pin'],
+         ['cv','công việc'],['dc','được'],['đc','được'],['dk','được'],['ko','không'],['k','không'],['vs','với'],['bin','pin'],
          ['cx','cũng'],['mik','mình'],['','không'],['xạc','sạc'],['sạt','sạc'],['wed','web'],['lác','lag'],['lắc','lag']
          ,['lát','lag'],['bt','bình thường'],['ms','mới'],['nhìu','nhiều']]
     for i in dic:
