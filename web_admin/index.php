@@ -72,6 +72,7 @@ if(isset($_POST["btn_logout"]))
                             case "ds_hangsx" : include "page/ds_hangsanxuat.php"; break;
                             case "ds_dienthoai" : include "page/ds_dienthoai.php"; break;
                             case "phone_link" : include "page/ds_link_dienthoai.php"; break;
+                            case "dm_baocao" : include "page/dm_baocao.php"; break;
                             default : include "page/home.php";
                         }
                         ?>

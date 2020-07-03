@@ -26,7 +26,7 @@
             <a href="index.php?p=ds_cuahang" class="list-group-item list-group-item-action" style="border:none"><i class="fas fa-store"></i> Danh mục cửa hàng</a>
             <a href="index.php?p=ds_hangsx" class="list-group-item list-group-item-action" style="border:none"><i class="fas fa-building"></i> Danh mục hãng sản xuất</a>
             <a href="index.php?p=ds_dienthoai" class="list-group-item list-group-item-action" style="border:none"><i class="fas fa-mobile"></i> Danh mục điện thoại</a>
-            <a href="#" class="list-group-item list-group-item-action" style="border:none"><i class="fas fa-flag"></i> Danh mục báo cáo bình luận</a>
+            <a href="index.php?p=dm_baocao" class="list-group-item list-group-item-action" style="border:none"><i class="fas fa-flag"></i> Danh mục báo cáo bình luận</a>
             <a href="#" class="list-group-item list-group-item-action" style="border:none"><i class="fas fa-comments"></i> Quản lí bình luận</a>
             <a href="#" class="list-group-item list-group-item-action" style="border:none"><i class="fas fa-user"></i> Quản lí người dùng</a>
     
