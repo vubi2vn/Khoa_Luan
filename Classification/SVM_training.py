@@ -23,15 +23,16 @@ class Classifier(object):
 
     def __training_result(self):
         y_true, y_pred = self.labels_test, self.estimator.predict(self.features_test)
+        print(y_pred)
         print(classification_report(y_true, y_pred))
 if __name__ == '__main__':
     features_train =[]
     label_train=[]
     features_test=[]
     label_test=[]
-    file_train=open(r'C:\Users\QuocDai\Desktop\Khóa luận\Classification\Training\Vector_traning.txt', 'r',
+    file_train=open(r'D:\GITHUB\Khoa_Luan\Classification\Training\Vector_traning.txt', 'r',
                      encoding='UTF-8')
-    file_test=open(r'C:\Users\QuocDai\Desktop\Khóa luận\Classification\Test_data\Result_30000_Vector.txt', 'r',
+    file_test=open(r'D:\GITHUB\Khoa_Luan\Classification\Test_data\Result_30000_Vector.txt', 'r',
                      encoding='UTF-8')
     for line in file_train:
         a=re.sub('[()\n]','',line).split(',')
@@ -49,4 +50,4 @@ if __name__ == '__main__':
         label_test.append(a[2])
     est=Classifier(features_train=features_train,labels_train=label_train, features_test=features_test,labels_test=label_test)
     est.training()
-    est.save_model(r'C:\Users\QuocDai\Desktop\Khóa luận\Classification\Training\train.joblib')
+    est.save_model(r'D:\GITHUB\Khoa_Luan\Classification\Training\train.joblib')

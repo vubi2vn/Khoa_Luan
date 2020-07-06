@@ -1,3 +1,28 @@
+<?php
+if(isset($_POST["btnLogin"]))
+{
+    $username = $_POST["username"];
+    $password = $_POST["password"];
+    $qr ="
+    SELECT * FROM `user`,`phan_quyen` WHERE user.USER_NAME = '$username' AND user.PASSWORD='$password' AND user.ID_PHAN_QUYEN = phan_quyen.ID_PHAN_QUYEN
+    ";
+    $user = mysqli_query($conn,$qr);
+    if(mysqli_num_rows($user)==1)
+    {
+        $row_users = mysqli_fetch_array($user);
+        $_SESSION["ID_USER"] = $row_users["ID_USER"];
+        $_SESSION["ID_PHAN_QUYEN"] = $row_users["ID_PHAN_QUYEN"];
+        $_SESSION["USER_NAME"] = $row_users["USER_NAME"]; 
+        $_SESSION["TEN_PHAN_QUYEN"] = $row_users["TEN_PHAN_QUYEN"];  
+        header('Location:index.php?p=home'); 
+    }
+    else
+    {
+        echo "<script type='text/javascript'>alert('Sai tài khoản hoặc mật khẩu!');</script>";
+    }
+}
+?>
+
 <div class="container-dangnhap center">
     <img src="images/logo.png" alt="logo">
     <div class="tab-content" id="pills-tabContent">
@@ -6,7 +31,7 @@
             <h3>Đăng nhập</h3>
             <p>Nhập thông tin</p>
             <div class="sign-in left">
-                <form id="login-form" class="form">                       
+                <form id="login-form" class="form" method = "POST">                       
                     <div class="form-group">
                         <label>Tên đăng nhập</label><br>
                         <input type="text" name="username" id="username" class="form-control">
@@ -16,7 +41,7 @@
                         <input type="password" name="password" id="password" class="form-control">
                     </div>
                     <div class="right">
-                        <button type="button" class="btn btn-primary">Xác nhận</button>
+                        <button name="btnLogin" type="submit" class="btn btn-primary">Xác nhận</button>
                     </div>
                 </form>
             </div>
@@ -39,7 +64,7 @@
                     <input type="password" name="confirm-password" id="confirm-password" class="form-control">
                 </div>
                 <div class="right">
-                    <button type="button" class="btn btn-primary">Xác nhận</button>
+                    <button type="button" class="btn btn-primary">Đăng ký</button>
                 </div>
             </form>
             </div>

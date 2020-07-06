@@ -1,10 +1,12 @@
 <?php
+session_start();
+require "lib/dbCon.php";
+require "lib/function.php";
 if (isset($_GET["p"]))
     $p = $_GET["p"];
 else
     $p = "";
 ?>
-
 <!DOCTYPE html>
 <html>
 
@@ -29,8 +31,11 @@ else
     <!-- Header -->
     <header>
     <?php include "blocks/header.php"; ?>
+    <?php include "web_admin/popup/log_out.php";?>
     </header>
     <div class="container-1">
+    
+        
         <?php 
         switch($p) {
             case "binhluan" : include "page/binhluan.php"; break;
@@ -61,6 +66,13 @@ else
                 }
             }
         });
+        
+        $(document).ready(function(){
+           
+            $('#log_out').on('show.bs.modal', function (event) {
+                
+            });          
+        })
     </script>
 </body>
 
