@@ -8,7 +8,7 @@ include "phone.php";
 if(isset($_GET['id']))
 {
     $id_phones=select_phone_of_trademark($conn,$_GET['id']);
-    if($id_phones->rowCount()>0)
+    if($id_phones!=null)
     {
         echo"<script type='text/javascript'>alert('Hãng sản xuất này vẫn còn dữ liệu về điện thoại.\n
                                  Hãy xóa dữ liệu điện thoại và thực hiện lại thao tác.');

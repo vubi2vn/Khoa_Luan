@@ -4,6 +4,25 @@
     session_start();
 ?>
 <?php
+//Kiểm tra session đăng nhập
+
+if(!isset($_SESSION["ID_USER"])||$_SESSION["QUYEN"]=="Người dùng")
+{
+    header("Location:login.php");
+}
+?>
+
+<?php
+//Đăng xuất
+if(isset($_POST["btn_logout"]))
+{
+    unset($_SESSION["ID_USER"]);
+    unset($_SESSION["USER_NAME"]);
+    unset($_SESSION["QUYEN"]);
+    header("Location:login.php");
+}
+?>
+<?php
 if (isset($_GET["p"]))
     $p = $_GET["p"];
 else
@@ -23,27 +42,6 @@ if($rs!=[null,null,null,null,null])
     
 }
 ?>
-
-<?php
-//Kiểm tra session đăng nhập
-
-if(!isset($_SESSION["ID_USER"])||$_SESSION["TEN_PHAN_QUYEN"]=="khachhang")
-{
-    header("Location:../?p=home");
-}
-?>
-
-<?php
-//Đăng xuất
-if(isset($_POST["btn_logout"]))
-{
-    unset($_SESSION["ID_USER"]);
-    unset($_SESSION["ID_PHAN_QUYEN"]);
-    unset($_SESSION["USER_NAME"]);
-    unset($_SESSION["TEN_PHAN_QUYEN"]);
-    header("Location:../?p=dangnhap");
-}
-?>
 <html>
     <head>
         <title>Admin</title>
@@ -53,7 +51,8 @@ if(isset($_POST["btn_logout"]))
 
         <script type="text/javascript" src="css/jquery-3.5.1.min.js"> </script>
         <script type="text/javascript" src="css/bootstrap-4.5.0-dist/js/bootstrap.min.js"> </script>
-        
+        <script type="text/javascript" src="ckeditor/ckeditor.js"> </script>
+        <script type="text/javascript" src="ckfinder/ckfinder.js"> </script>
     </head>
     <body margin="0">
             <div class="row" style="margin:0px">
@@ -74,6 +73,7 @@ if(isset($_POST["btn_logout"]))
                             case "ds_dienthoai" : include "page/ds_dienthoai.php"; break;
                             case "phone_link" : include "page/ds_link_dienthoai.php"; break;
                             case "dm_baocao" : include "page/dm_baocao.php"; break;
+                            case "ds_nguoidung" : include "page/ds_nguoidung.php"; break;
                             default : include "page/home.php";
                         }
                         ?>
@@ -90,15 +90,7 @@ if(isset($_POST["btn_logout"]))
             $("#toggle-menu-ht").click(function(){
              $("#sub-menu-ht").toggleClass("hide");
             });
-            $('#exampleModal').on('show.bs.modal', function (event) {
-                
-            });
-            $('#log_out').on('show.bs.modal', function (event) {
-                
-            });
-            $('#change_info_user').on('show.bs.modal', function (event) {
-                
-            });
+           
             
         })
     </script>

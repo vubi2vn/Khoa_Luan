@@ -50,4 +50,44 @@ function delete_store($conn,$id_store)
         return false;
     }
 }
+function insert_store($conn,$name,$link,$logo)
+{
+    try
+    {
+        $query="insert into cua_hang_ban_le values(null,:name,:link,:logo)";
+        $sql=$conn->prepare($query);
+        $sql->bindParam(':name',$name);
+        $sql->bindParam(':link',$link);
+        $sql->bindParam(':logo',$logo);
+        $sql->execute();
+        return true;
+    }
+    catch(PDOException $e)
+    {
+        echo "Error: " . $e->getMessage();
+        return false;
+    }
+}
+function update_store($conn,$id,$name,$link,$logo)
+{
+    try
+    {
+        $query="update cua_hang_ban_le set ten_cua_hang=:name, LINK_WEBSITE_CUA_HANG=:link, LO_CUA_HANG='$logo' where id_cua_hang=:id";
+        if($logo==""||$logo==null)
+        {
+            $query="update cua_hang_ban_le set ten_cua_hang=:name, LINK_WEBSITE_CUA_HANG=:link where id_cua_hang=:id";
+        }
+        $sql=$conn->prepare($query);
+        $sql->bindParam(':name',$name);
+        $sql->bindParam(':link',$link);
+        $sql->bindParam(':id',$id);
+        $sql->execute();
+        return true;
+    }
+    catch(PDOException $e)
+    {
+        echo "Error: " . $e->getMessage();
+        return false;
+    }
+}
 ?>

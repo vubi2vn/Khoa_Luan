@@ -26,6 +26,14 @@ function select_phone_of_trademark($conn,$id_trademark)
     $result=$sql->fetchAll();
     return $result;
 }
+function select_all_trademark($conn)
+{
+    $query="select * from hang_san_xuat";
+    $sql=$conn->prepare($query);
+    $sql->execute();
+    $result=$sql->fetchAll();
+    return $result;
+}
 function delete_trademark($conn,$id_trademark)
 {
     try
@@ -42,4 +50,42 @@ function delete_trademark($conn,$id_trademark)
         return false;
     }
 }
+
+function insert_trademark($conn,$name,$country)
+{
+    try
+    {
+        $query="insert into hang_san_xuat values (null,:name,:country)";
+        $sql=$conn->prepare($query);
+        $sql->bindParam(':name',$name);
+        $sql->bindParam(':country',$country);
+        $sql->execute();
+        return true;
+    }
+    catch(PDOException $e)
+    {
+        echo "Error: " . $e->getMessage();
+        return false;
+    }
+}
+
+function update_trademark($conn,$id,$name,$country)
+{
+    try
+    {
+        $query="update hang_san_xuat set ten_hang_san_xuat=:name, quoc_gia=:country where id_hang_san_xuat=:id";
+        $sql=$conn->prepare($query);
+        $sql->bindParam(':name',$name);
+        $sql->bindParam(':country',$country);
+        $sql->bindParam(':id',$id);
+        $sql->execute();
+        return true;
+    }
+    catch(PDOException $e)
+    {
+        echo "Error: " . $e->getMessage();
+        return false;
+    }
+}
 ?>
+

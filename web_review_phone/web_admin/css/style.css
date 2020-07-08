@@ -124,3 +124,10 @@
     width:30%;
     padding: 6px 12px;
 }
+/* =======================================capnhatbv.php==================================== */
+.part-of-news{
+    border: 1px solid #000;
+    border-bottom: none;
+    padding: 5px;
+    
+}

@@ -18,9 +18,46 @@ else if ($current_page < 1){
     $current_page = 1;
 }
 ?>
+<?php
+// Thêm hãng sản xuất mới
+if(isset($_POST["btn-insert-trademark"]))
+{
+    $trademark=trim($_POST["txt_trademark"]);
+    $country=trim($_POST["txt_country"]);
+    if(insert_trademark($conn,$trademark,$country))
+    {
+        echo "<script type='text/javascript'>alert('Đã thêm hãng sản xuất!');</script>";
+        header('refresh:1');
+    }
+    else
+    {
+        echo "<script type='text/javascript'>alert('Có lỗi trong quá trình thêm!');</script>";
+        header('refresh:1');
+    }
+}
+?>
+<?php
+//Cập nhật hãng sản xuất
+if(isset($_POST["btn-update-trademark"]))
+{
+    $id_trademark=$_POST["txt_idtrademark"];
+    $ntrademark=trim($_POST["txt_ntrademark"]);
+    $ncountry=trim($_POST["txt_ncountry"]);
+    if(update_trademark($conn,$id_trademark,$ntrademark,$ncountry))
+    {
+        echo "<script type='text/javascript'>alert('Cập nhật thành công!');</script>";
+        header('refresh:1');
+    }
+    else
+    {
+        echo "<script type='text/javascript'>alert('Có lỗi trong quá trình cập nhật!');</script>";
+        header('refresh:1');
+    }
+}
+?>
 <div class="ds_hsx">
     <h5>Danh sách hãng sản xuất</h5>
-    <a href="#" class="btn btn-success">Thêm mới</a>
+    <a href="#" class="btn btn-success" data-toggle="modal" data-target="#insert-trademark">Thêm mới</a>
     <hr/>
     <table class="table">
         
@@ -44,7 +81,11 @@ else if ($current_page < 1){
                 <td>'.$a['TEN_HANG_SAN_XUAT'].'</td>
                 <td>'.$a['QUOC_GIA'].'</td>
                 <td><button class="btn btn-danger" onclick="delete_trademark('.$a['ID_HANG_SAN_XUAT'].')">Xóa</button></td>
-                <td><a href="#" class="btn btn-primary">Sửa</a></td>
+                <td><button class="btn btn-primary" data-toggle="modal" data-target="#update-trademark"
+                     data-id="'.$a['ID_HANG_SAN_XUAT'].'"
+                     data-name="'.$a['TEN_HANG_SAN_XUAT'].'"
+                     data-country="'.$a['QUOC_GIA'].'">Sửa
+                </button></td>
                 </tr>';
             }
         ?>
@@ -93,10 +134,24 @@ else if ($current_page < 1){
         </ul>
     </nav>
 </div>
+<?php include "popup/insert_trademark.php";
+include "popup/update_trademark.php";
+
+?>
 <script>
     function delete_trademark(id){
         if(confirm("Tất cả thông tin về hãng sản xuất này sẽ bị xóa! Bạn vẫn muốn tiếp tục?") == true){
             window.location="backend/delete_trademark.php?id="+id.toString();
         }
     }
+    $('#update-trademark').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget)
+    var id = button.data('id')
+    var name = button.data('name')
+    var country = button.data('country')
+    var modal = $(this)
+    document.getElementById("txt_id_trademark").value = String(id)
+    document.getElementById("txt_ntrademark").value = String(name)
+    document.getElementById("txt_ncountry").value = String(country)
+    })
 </script>

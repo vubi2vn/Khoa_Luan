@@ -18,9 +18,48 @@ else if ($current_page < 1){
     $current_page = 1;
 }
 ?>
+
+<?php
+//Thêm danh mục báo cáo mới
+if(isset($_POST["btn-insert-report"]))
+{
+    $report=trim($_POST["txt_report"]);
+    $describe=trim($_POST["txt_describe"]);
+    if(insert_report($conn,$report,$describe))
+    {
+        echo "<script type='text/javascript'>alert('Đã thêm danh mục báo cáo mới!');</script>";
+        header('refresh:1');
+    }
+    else
+    {
+        echo "<script type='text/javascript'>alert('Có lỗi trong quá trình thêm!');</script>";
+        header('refresh:1');
+    }
+}
+?>
+<?php
+//Cập nhật hãng sản xuất
+if(isset($_POST["btn-update-report"]))
+{
+    $id_report=$_POST["txt_idreport"];
+    $nreport=trim($_POST["txt_nreport"]);
+    $ndescribe=trim($_POST["txt_ndescribe"]);
+    if(update_report($conn,$id_report,$nreport,$ndescribe))
+    {
+        echo "<script type='text/javascript'>alert('Cập nhật thành công!');</script>";
+        header('refresh:1');
+    }
+    else
+    {
+        echo "<script type='text/javascript'>alert('Có lỗi trong quá trình cập nhật!');</script>";
+        header('refresh:1');
+    }
+}
+?>
+
 <div class="ds_hsx">
     <h5>Danh mục báo cáo</h5>
-    <a href="#" class="btn btn-success">Thêm mới</a>
+    <a href="#" class="btn btn-success" data-toggle="modal" data-target="#insert-report">Thêm mới</a>
     <hr/>
     <table class="table">
         
@@ -44,7 +83,10 @@ else if ($current_page < 1){
                 <td>'.$a['LOAI_BAO_CAO'].'</td>
                 <td>'.$a['MO_TA_BAO_CAO'].'</td>
                 <td><button class="btn btn-danger" onclick="delete_report('.$a['ID_BAO_CAO'].')">Xóa</button></td>
-                <td><a href="#" class="btn btn-primary">Sửa</a></td>
+                <td><a href="#" class="btn btn-primary" data-toggle="modal" data-target="#update-report"
+                data-id="'.$a['ID_BAO_CAO'].'"
+                data-name="'.$a['LOAI_BAO_CAO'].'"
+                data-describe="'.$a['MO_TA_BAO_CAO'].'">Sửa</a></td>
                 </tr>';
             }
         ?>
@@ -93,10 +135,23 @@ else if ($current_page < 1){
         </ul>
     </nav>
 </div>
+<?php include "popup/insert_report.php";
+include "popup/update_report.php";
+?>
 <script>
     function delete_report(id){
         if(confirm("Tất cả thông tin về danh mục báo cáo này sẽ bị xóa! Bạn vẫn muốn tiếp tục?") == true){
             window.location="backend/delete_report.php?id="+id.toString();
         }
     }
+    $('#update-report').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget)
+    var id = button.data('id')
+    var name = button.data('name')
+    var describe = button.data('describe')
+    var modal = $(this)
+    document.getElementById("txt_id_report").value = String(id)
+    document.getElementById("txt_nreport").value = String(name)
+    document.getElementById("txt_ndescribe").value = String(describe)
+    })
 </script>

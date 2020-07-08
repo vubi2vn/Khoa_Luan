@@ -88,4 +88,78 @@
             return false;
         }
     }
+    function get_total_record_user($conn)
+    {
+        $query="select count(*) as total from user";
+        $sql=$conn->prepare($query);
+        $sql->execute();
+        $result=$sql->fetchAll();
+        foreach($result as $a)
+        {
+            return $a['total'];
+        }
+    }
+    function get_record_limit_user($conn,$id,$start,$limit)
+    {
+        $query="select * from user,phan_quyen where user.id_phan_quyen=phan_quyen.id_phan_quyen and id_user!=$id order by id_user asc limit $start,$limit";
+        $sql=$conn->prepare($query);
+        $sql->execute();
+        $result=$sql->fetchAll();
+        return $result;
+    }
+    function check_username($conn,$user_name)
+    {
+        $query="select * from user where user_name='$user_name'";
+        $sql=$conn->prepare($query);
+        $sql->execute();
+        $result=$sql->fetchAll();
+        foreach($result as $a)
+        {
+            return $a['ID_USER'];
+        }
+    }
+    function insert_user($conn,$username,$password,$id_author)
+    {
+        try{
+            $query="insert into user values (null,:phanquyen,:username,:pass,1)";
+            $sql=$conn->prepare($query);
+            $sql->bindParam(':phanquyen',$id_author);
+            $sql->bindParam(':username',$username);
+            $sql->bindParam(':pass',$password);
+            $sql->execute();
+            return true;
+        }
+        catch(PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            return false;
+          }
+    }
+    function insert_user_info($conn,$username)
+    {
+        try{
+            $id=check_username($conn,$username);
+            $query="insert into user_infomation(id_user) values ($id)";
+            $sql=$conn->prepare($query);
+            $sql->execute();
+            return true;
+        }
+        catch(PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            return false;
+          }
+    }
+    function update_access_user($conn,$id,$access,$author)
+    {
+        try{
+            $query="update user set id_phan_quyen='$author', truy_cap=b'$access' where id_user='$id'";
+            $sql=$conn->prepare($query);
+            $sql->execute();
+            return true;
+        }
+        catch(PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            return false;
+        }
+    }
+
 ?>

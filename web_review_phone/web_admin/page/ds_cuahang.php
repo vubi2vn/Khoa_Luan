@@ -1,11 +1,12 @@
 <?php
 include "backend/store.php";
+
 ?>
 
 <?php
 //Phân trang
 //source:https://freetuts.net/thuat-toan-phan-trang-voi-php-va-mysql-550.html
-$limit_record=7;
+$limit_record=6;
 $current_page=isset($_GET['page']) ? $_GET['page'] : 1;
 $total_record=get_total_record_store($conn);
 $total_record=$total_record>0?$total_record:1;
@@ -18,9 +19,65 @@ else if ($current_page < 1){
     $current_page = 1;
 }
 ?>
+
+<?php
+//Thêm cửa hàng mới
+if(isset($_POST["btn_submit_avatar"]))
+{
+    $name=$_POST["txt_store_name"];
+    $link=$_POST["txt_link"];
+    if($name==""||$name==null)
+    {
+        echo "<script type='text/javascript'>alert('Tên cửa hàng không được để trống!');</script>";
+        header('refresh:1');
+    }
+    else
+    {
+        include "backend/uploadIMG.php";
+        if(insert_store($conn,$name,$link,$url))
+        {
+            echo "<script type='text/javascript'>alert('Thêm cửa hàng thành công!');</script>";
+            header('refresh:1');
+        }
+        else
+        {
+            echo "<script type='text/javascript'>alert('Có lỗi trong quá trình thêm! Vui lòng liên hệ nhân viên kỹ thuật!');</script>";
+            header('refresh:1');
+        }
+    } 
+}
+?>
+<?php
+//Cập nhật cửa hàng
+if(isset($_POST["btn_submit"]))
+{
+    $id=$_POST["txt_store_id"];
+    $name=trim($_POST["txt_nstore_name"]);
+    $link=trim($_POST["txt_nlink"]);
+    if($name==""||$name==null)
+    {
+        echo "<script type='text/javascript'>alert('Tên cửa hàng không được để trống!');</script>";
+        header('refresh:1');
+    }
+    else
+    {
+        include "backend/uploadIMG.php";
+        if(update_store($conn,$id,$name,$link,$url))
+        {
+            echo "<script type='text/javascript'>alert('Cập nhật hàng thành công!');</script>";
+            header('refresh:1');
+        }
+        else
+        {
+            echo "<script type='text/javascript'>alert('Có lỗi trong quá trình cập nhật! Vui lòng liên hệ nhân viên kỹ thuật!');</script>";
+            header('refresh:1');
+        }
+    } 
+}
+?>
 <div class="ds_cuahang">
     <h5>Danh sách cửa hàng</h5>
-    <a href="#" class="btn btn-success">Thêm mới</a>
+    <a href="#" class="btn btn-success" data-toggle="modal" data-target="#insert-store">Thêm mới</a>
     <hr/>
     <table class="table">
         
@@ -42,11 +99,15 @@ else if ($current_page < 1){
             {
                 echo '<tr>
                 <th scope="row">'.$a['ID_CUA_HANG'].'</th>
-                <td><img src="../lib/images/'.$a['LOGO_CUA_HANG'].'" alt="logo" style="width:100px"></td>
+                <td><img src="'.$a['LO_CUA_HANG'].'" alt="logo" style="width:50px"></td>
                 <td>'.$a['TEN_CUA_HANG'].'</td>
                 <td><a href="'.$a['LINK_WEBSITE_CUA_HANG'].'">'.$a['LINK_WEBSITE_CUA_HANG'].'</a></td>
                 <td><button class="btn btn-danger" onclick="delete_store('.$a['ID_CUA_HANG'].')">Xóa</button></td>
-                <td><a href="#" class="btn btn-primary">Sửa</a></td>
+                <td><a href="#" class="btn btn-primary" data-toggle="modal" data-target="#update-store"
+                data-id="'.$a['ID_CUA_HANG'].'"
+                data-name="'.$a['TEN_CUA_HANG'].'"
+                data-link="'.$a['LINK_WEBSITE_CUA_HANG'].'"
+                >Sửa</a></td>
                 </tr>';
             }
         ?>
@@ -95,10 +156,23 @@ else if ($current_page < 1){
         </ul>
     </nav>
 </div>
+<?php include "popup/insert_store.php";
+include "popup/update_store.php"
+?>
 <script>
     function delete_store(id){
         if(confirm("Tất cả thông tin về cửa hàng sẽ bị xóa! Bạn vẫn muốn tiếp tục?") == true){
             window.location="backend/delete_store.php?id="+id.toString();
         }
     }
+    $('#update-store').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget)
+    var id = button.data('id')
+    var name = button.data('name')
+    var describe = button.data('link')
+    var modal = $(this)
+    document.getElementById("txt_store_id").value = String(id)
+    document.getElementById("txt_nstore_name").value = String(name)
+    document.getElementById("txt_nlink").value = String(describe)
+    })
 </script>

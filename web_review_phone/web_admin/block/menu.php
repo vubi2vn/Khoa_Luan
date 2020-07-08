@@ -9,7 +9,7 @@
     <a href="index.php" class="list-group-item list-group-item-action" style="border:none"><i class="fas fa-home"></i> Trang chủ</a>
     <?php
     // Xét quyền truy cập admin và authour
-    if($_SESSION["TEN_PHAN_QUYEN"]=="tacgia")
+    if($_SESSION["QUYEN"]=="Tác giả")
     {
         echo '<a href="#" class="list-group-item list-group-item-action toggle-menu" id="toggle-menu-bv" style="border:none"><i class="fas fa-newspaper"></i> 
         Quản lý bài viết <i class="fas fa-caret-down"></i></a>
@@ -28,12 +28,12 @@
             <a href="index.php?p=ds_dienthoai" class="list-group-item list-group-item-action" style="border:none"><i class="fas fa-mobile"></i> Danh mục điện thoại</a>
             <a href="index.php?p=dm_baocao" class="list-group-item list-group-item-action" style="border:none"><i class="fas fa-flag"></i> Danh mục báo cáo bình luận</a>
             <a href="#" class="list-group-item list-group-item-action" style="border:none"><i class="fas fa-comments"></i> Quản lí bình luận</a>
-            <a href="#" class="list-group-item list-group-item-action" style="border:none"><i class="fas fa-user"></i> Quản lí người dùng</a>
+            <a href="index.php?p=ds_nguoidung" class="list-group-item list-group-item-action" style="border:none"><i class="fas fa-user"></i> Quản lí người dùng</a>
     
             </div>';
     }
     ?>
     <a href="#" class="list-group-item list-group-item-action" style="border:none"><i class="fas fa-chart-bar"></i> Thống kê</a>
-    <a href="#" class="list-group-item list-group-item-action" data-toggle="modal" data-target="#exampleModal" style="border:none"><i class="fas fa-key"></i> Đổi mật khẩu</a>
+    <a href="#" class="list-group-item list-group-item-action" data-toggle="modal" data-target="#changePW" style="border:none"><i class="fas fa-key"></i> Đổi mật khẩu</a>
     <a href="#" class="list-group-item list-group-item-action" data-toggle="modal" data-target="#log_out" style="border:none"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a>
 </div>

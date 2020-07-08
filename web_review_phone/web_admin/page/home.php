@@ -1,7 +1,7 @@
 
     <div class="home">
         <h5>Chào mừng trở lại, <b><?php echo $name ?></b></h5>
-        <p>Quyền truy cập hiện tại của bạn là: <b><?php echo($_SESSION["TEN_PHAN_QUYEN"]) ?></b></p>
+        <p>Quyền truy cập hiện tại của bạn là: <b><?php echo($_SESSION["QUYEN"]) ?></b></p>
     </div>
     <div class="home">
         <h5>Để được hỗ trợ các vấn đề về website, vui lòng liên hệ với chúng tôi:</h5>

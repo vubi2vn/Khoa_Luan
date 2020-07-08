@@ -1,5 +1,6 @@
 <?php
 include "backend/phone.php";
+include "backend/store.php";
 ?>
 <?php
 
@@ -18,6 +19,7 @@ else
 $limit_record=7;
 $current_page=isset($_GET['page']) ? $_GET['page'] : 1;
 $total_record=get_total_record_phone_link($conn,$id_phone);
+$total_store=get_total_record_store($conn);
 $total_record=$total_record>0?$total_record:1;
 $total_page=ceil($total_record/$limit_record);
 if($current_page>$total_page)
@@ -28,9 +30,33 @@ else if ($current_page < 1){
     $current_page = 1;
 }
 ?>
+<?php
+// Thêm hãng sản xuất mới
+if(isset($_POST["btn-insert-link"]))
+{
+    $id_store=$_POST["store_option"];
+    $link=trim($_POST["txt_link"]);
+    if(insert_link_phone($conn,$id_phone,$id_store,$link))
+    {
+        echo "<script type='text/javascript'>alert('Đã thêm link!');</script>";
+        header('refresh:1');
+    }
+    else
+    {
+        echo "<script type='text/javascript'>alert('Có lỗi trong quá trình thêm!');</script>";
+        header('refresh:1');
+    }
+}
+?>
+
 <div class="ds_hsx">
     <h5>Danh sách link điện thoại <?php ?></h5>
-    <a href="#" class="btn btn-success">Thêm mới</a>
+    <?php 
+    if($total_store>$total_record)
+    {
+        echo'<a href="#" class="btn btn-success" data-toggle="modal" data-target="#insert-link">Thêm mới</a>'; 
+    }
+    ?>
     <hr/>
     <table class="table">
         
@@ -41,7 +67,6 @@ else if ($current_page < 1){
             <th scope="col">Link sản phẩm</th>
             <th scope="col">Ngày cập nhật</th>
             <th scope="col">Xóa</th>
-            <th scope="col">Sửa</th>
             
             </tr>
         </thead>
@@ -55,8 +80,7 @@ else if ($current_page < 1){
                 <td>'.$a['TEN_CUA_HANG'].'</td>
                 <td>'.$a['LINK_SAN_PHAM'].'</td>
                 <td>'.date_format(date_create($a['NGAY_CAP_NHAT_LINK']),"d/m/Y").'</td>
-                <td><a href="#" class="btn btn-danger">Xóa</a></td>
-                <td><a href="#" class="btn btn-primary">Sửa</a></td>
+                <td><a href="backend/delete_link.php?id_phone='.$id_phone.'&id_store='.$a['ID_CUA_HANG'].'" class="btn btn-danger">Xóa</a></td>
                 </tr>';
             }
         ?>
@@ -105,3 +129,4 @@ else if ($current_page < 1){
         </ul>
     </nav>
 </div>
+<?php include "popup/insert_link_phone.php"?>

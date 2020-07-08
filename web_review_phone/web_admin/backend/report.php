@@ -50,4 +50,40 @@ function delete_report($conn,$id_report)
         return false;
     }
 }
+function insert_report($conn,$report,$describe)
+{
+    try
+    {
+        $query="insert into bao_cao_binh_luan values (null,:report,:describe)";
+        $sql=$conn->prepare($query);
+        $sql->bindParam(':report',$report);
+        $sql->bindParam(':describe',$describe);
+        $sql->execute();
+        return true;
+    }
+    catch(PDOException $e)
+    {
+        echo "Error: " . $e->getMessage();
+        return false;
+    }
+}
+
+function update_report($conn,$id,$report,$describe)
+{
+    try
+    {
+        $query="update bao_cao_binh_luan set loai_bao_cao=:report, mo_ta_bao_cao=:describe where id_bao_cao=:id";
+        $sql=$conn->prepare($query);
+        $sql->bindParam(':report',$report);
+        $sql->bindParam(':describe',$describe);
+        $sql->bindParam(':id',$id);
+        $sql->execute();
+        return true;
+    }
+    catch(PDOException $e)
+    {
+        echo "Error: " . $e->getMessage();
+        return false;
+    }
+}
 ?>
