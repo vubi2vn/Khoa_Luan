@@ -1,5 +1,3 @@
-
-
 <?php
 //Phân trang
 //source:https://freetuts.net/thuat-toan-phan-trang-voi-php-va-mysql-550.html

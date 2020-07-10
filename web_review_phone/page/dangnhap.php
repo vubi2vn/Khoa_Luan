@@ -58,7 +58,7 @@ if(isset($_POST["btnRegister"]))
 }
 ?>
 <div class="container-dangnhap center">
-    <img src="images/logo.png" alt="logo">
+    <img src="lib/images/logo.png" alt="logo">
     <div class="tab-content" id="pills-tabContent">
         <!-- dang nhap -->
         <div class="tab-pane fade show active" id="pills-dangnhap" role="tabpanel" aria-labelledby="tab-dangnhap">

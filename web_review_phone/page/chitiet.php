@@ -32,7 +32,7 @@ else
     </div>
     <div class="clr"></div>
     <div class="box chitiet-hinh">
-        <img src="lib/images/<?php echo $row_ChonTheoID['URL_HINH_ANh'];?>" alt="phone image">
+        <img src="web_admin/<?php echo $row_ChonTheoID['URL_HINH_ANh'];?>" alt="phone image">
     </div>
     <div class="box chitiet-mua">
         <strong style="font-size: 25px;">Địa điểm mua</strong>
@@ -42,7 +42,7 @@ else
                     $row_LinkNCC = mysqli_fetch_array($LinkNCC);
                     echo $row_LinkNCC['LINK_SAN_PHAM'];?>
                 " target="_blank">
-                <img src="lib/images/<?php
+                <img src="web_admin/<?php
                     $CuaHangBanLe = CuaHangBanLe($conn,1);
                     $row_CuaHangBanLe = mysqli_fetch_array($CuaHangBanLe);
                     echo $row_CuaHangBanLe['LOGO_CUA_HANG'];
@@ -55,7 +55,7 @@ else
                     $row_LinkNCC = mysqli_fetch_array($LinkNCC);
                     echo $row_LinkNCC['LINK_SAN_PHAM'];?>
                 " target="_blank">
-                <img src="lib/images/<?php
+                <img src="web_admin/<?php
                     $CuaHangBanLe = CuaHangBanLe($conn,2);
                     $row_CuaHangBanLe = mysqli_fetch_array($CuaHangBanLe);
                     echo $row_CuaHangBanLe['LOGO_CUA_HANG'];
@@ -68,7 +68,7 @@ else
                     $row_LinkNCC = mysqli_fetch_array($LinkNCC);
                     echo $row_LinkNCC['LINK_SAN_PHAM'];
                     ?>" target="_blank">
-                <img src="lib/images/<?php
+                <img src="web_admin/<?php
                     $CuaHangBanLe = CuaHangBanLe($conn,3);
                     $row_CuaHangBanLe = mysqli_fetch_array($CuaHangBanLe);
                     echo $row_CuaHangBanLe['LOGO_CUA_HANG'];
@@ -81,7 +81,7 @@ else
                     $row_LinkNCC = mysqli_fetch_array($LinkNCC);
                     echo $row_LinkNCC['LINK_SAN_PHAM'];
                     ?>" target="_blank">
-                <img src="lib/images/<?php
+                <img src="web_admin/<?php
                     $CuaHangBanLe = CuaHangBanLe($conn,4);
                     $row_CuaHangBanLe = mysqli_fetch_array($CuaHangBanLe);
                     echo $row_CuaHangBanLe['LOGO_CUA_HANG'];
@@ -153,7 +153,8 @@ else
                             </button>
                             </div>
                             <div class="modal-body">
-                                <table><th colspan="2" class="navigat left no-margin">Màn hình</th>                                    
+                                <table>
+                                    <th colspan="2" class="navigat left no-margin">Màn hình</th>                                    
                                     <tr>
                                         <td style="width: 200px;">Công nghệ màn hình</td>
                                         <td><?php echo $row_ChiTietCauHinh['CONG_NGHE_MAN_HINH'];?></td>

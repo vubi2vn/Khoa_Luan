@@ -20,7 +20,7 @@ else
     {
         foreach($new as $a)
         {
-            echo '<h2>'.$a["title"].'<h2>';
+            echo '<h2>'.$a["TITLE"].'<h2>';
             echo $a["NOI_DUNG_BAI_VIET"];
         }
     }

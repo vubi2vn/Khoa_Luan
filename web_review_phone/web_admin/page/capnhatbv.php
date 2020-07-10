@@ -1,5 +1,5 @@
 <?php
-if($_SESSION["QUYEN"]!="Tác giả")
+if($_SESSION["TEN_PHAN_QUYEN"]!="tacgia")
 {
     header("Location:index.php");
 }
@@ -41,7 +41,7 @@ if(isset($_POST["btn_submit"]))
         echo "<script type='text/javascript'>alert('Có lỗi khi tạo bài viết!');</script>";
         header('refresh:1');
     }
-    
+
 }
 ?>
 <h5> Cập nhật bài viết mới</h5>
@@ -53,7 +53,7 @@ if(isset($_POST["btn_submit"]))
                 <label >Mẫu điện thoại</label>
                 </div>
                 <div class="col">
-                <select name="phone_option" class="form-control" >
+                <select name="phone_option" class="form-control">
                     <?php
                     if($phone!=null)
                     {
@@ -123,8 +123,8 @@ if(isset($_POST["btn_submit"]))
 </div>
 <script>
     CKEDITOR.replace( 'editor1' ,{
-        filebrowserBrowseUrl : '//localhost:8080/web_admin/ckfinder/ckfinder.html',
+        filebrowserBrowseUrl : '//localhost:81/phone/web_admin/ckfinder/ckfinder.html',
         filebrowserImageUploadUrl :
-        '//localhost:8080/web_admin/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images&currentFolder=/cars/',
+        '//localhost:81/phone/web_admin/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images&currentFolder=/cars/',
     });
 </script>

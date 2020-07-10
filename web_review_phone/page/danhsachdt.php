@@ -2,21 +2,22 @@
 // Phân trang
     $item_limit = 5;
     $page_Index=isset($_GET['page']) ? $_GET['page'] : 1;
-    $url_now = $_SERVER['REQUEST_URI'];
+    //$url_now = $_SERVER['REQUEST_URI'];
+    $url_now ='index.php?p=danhsachdt';
     $start = ($page_Index - 1) *$item_limit;
-    $flag = 'all';
+    
     
 // Phân loại
-    if (isset($_GET['Id_HangSX'])){
-        $flag = 'Id_HangSX';
+    if (isset($_GET['Id_HangSX'])){      
         $Id_HangSX = $_GET["Id_HangSX"];
+        $url_now ='index.php?p=danhsachdt&Id_HangSX'.$Id_HangSX.'';
         $PhoneList = PhoneList_HangSX_PhanTrang($conn,$Id_HangSX, $start, $item_limit);
         $Total_Item = PhoneList_HangSX_Count($conn,$Id_HangSX);
     }
-    else if (isset($_GET["GiaThap"])&&isset($_GET["GiaCao"])){
-        $flag = 'Gia';
+    else if (isset($_GET["GiaThap"])&&isset($_GET["GiaCao"])){      
         $GiaThap = $_GET["GiaThap"];
         $GiaCao = $_GET["GiaCao"];
+        $url_now ='index.php?p=danhsachdt&GiaThap='.$GiaThap.'&GiaCao='.$GiaCao.'';
         $PhoneList = PhoneList_Gia_PhanTrang($conn,$GiaThap,$GiaCao, $start, $item_limit);
         $Total_Item = PhoneList_Gia_Count($conn,$GiaThap,$GiaCao);
     }
@@ -63,7 +64,7 @@
         while($row = mysqli_fetch_array($PhoneList)) {
     ?>  
     <a class="phone-list-item" href="?p=chitiet&idDT=<?php echo $row['ID_DIEN_THOAI'];?>">
-        <img src="lib/images/<?php echo $row['URL_HINH_ANh'];?>" alt="phone image">
+        <img src="web_admin/<?php echo $row['URL_HINH_ANh'];?>" alt="phone image">
         <div class="desc">
             <h5><?php echo $row['TEN_DIEN_THOAI'];?></h5>
             <p><?php echo number_format($row['GIA_CA_THI_TRUONG']);?>đ</p>

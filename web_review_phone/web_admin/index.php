@@ -46,7 +46,7 @@ if($rs!=[null,null,null,null,null])
 
 <?php
 // Lấy số report chưa giải quyết
-$count_report=count_report_havent_resolved($conn); 
+//$count_report=count_report_havent_resolved($conn); 
 ?>
 <html style="height:100%">
     <head>

@@ -1,29 +1,9 @@
+<!-- HOME -->
 <!-- rank -->
 <?php 
-    function Top1_Dienthoai($conn){       
+    function Top_Dienthoai($conn,$top){       
         $qr ="
-            SELECT * FROM `dien_thoai` ORDER BY GIA_CA_THI_TRUONG DESC LIMIT 0,1
-        ";
-        return mysqli_query($conn,$qr);        
-    }
-
-    function Top2_Dienthoai($conn){       
-        $qr ="
-            SELECT * FROM `dien_thoai` ORDER BY GIA_CA_THI_TRUONG DESC LIMIT 1,1
-        ";
-        return mysqli_query($conn,$qr);        
-    }
-
-    function Top3_Dienthoai($conn){       
-        $qr ="
-            SELECT * FROM `dien_thoai` ORDER BY GIA_CA_THI_TRUONG DESC LIMIT 2,1
-        ";
-        return mysqli_query($conn,$qr);        
-    }
-
-    function Top4_Dienthoai($conn){       
-        $qr ="
-            SELECT * FROM `dien_thoai` ORDER BY GIA_CA_THI_TRUONG DESC LIMIT 3,1
+            SELECT * FROM `dien_thoai` ORDER BY GIA_CA_THI_TRUONG DESC LIMIT $top,1
         ";
         return mysqli_query($conn,$qr);        
     }
@@ -32,7 +12,10 @@
 <?php
     function NoiBat($conn){
         $qr ="
-            SELECT * FROM `dien_thoai` 
+            SELECT `dien_thoai`.*
+            FROM `dien_thoai` 
+                LEFT JOIN `bai_viet` ON `bai_viet`.`ID_DIEN_THOAI` = `dien_thoai`.`ID_DIEN_THOAI`
+            WHERE bai_viet.ID_USER IS NOT NULL
             ORDER BY GIA_CA_THI_TRUONG DESC LIMIT 0,10
         ";
         return mysqli_query($conn,$qr);
@@ -49,7 +32,6 @@
         return $row['total'];
     }
 ?>
-<!-- ds dien thoai theo dieu kien -->
 <?php
     function PhoneList_HangSX_Count($conn,$Id_HangSX){
         $qr ="
@@ -73,21 +55,31 @@
 <?php
     function PhoneList_PhanTrang($conn, $start, $item_limit){
         $qr ="
-            SELECT * FROM `dien_thoai` LIMIT $start,$item_limit 
+            SELECT `dien_thoai`.*
+            FROM `dien_thoai` 
+                LEFT JOIN `bai_viet` ON `bai_viet`.`ID_DIEN_THOAI` = `dien_thoai`.`ID_DIEN_THOAI`
+            WHERE bai_viet.ID_USER IS NOT NULL
+            LIMIT $start,$item_limit 
         ";
         return mysqli_query($conn,$qr);
     }
     function PhoneList_HangSX_PhanTrang($conn,$Id_HangSX,$start, $item_limit){
         $qr ="
-        SELECT * FROM `dien_thoai` WHERE `ID_HANG_SAN_XUAT`=$Id_HangSX
-        LIMIT $start,$item_limit
+            SELECT `dien_thoai`.*
+            FROM `dien_thoai` 
+                LEFT JOIN `bai_viet` ON `bai_viet`.`ID_DIEN_THOAI` = `dien_thoai`.`ID_DIEN_THOAI`
+            WHERE bai_viet.ID_USER IS NOT NULL && `ID_HANG_SAN_XUAT`=$Id_HangSX
+            LIMIT $start,$item_limit 
         ";
         return mysqli_query($conn,$qr);
     }
 
     function PhoneList_Gia_PhanTrang($conn,$GiaThap,$GiaCao,$start, $item_limit){
         $qr ="
-            SELECT * FROM `dien_thoai` WHERE `GIA_CA_THI_TRUONG` BETWEEN $GiaThap and $GiaCao
+            SELECT `dien_thoai`.*
+            FROM `dien_thoai` 
+                LEFT JOIN `bai_viet` ON `bai_viet`.`ID_DIEN_THOAI` = `dien_thoai`.`ID_DIEN_THOAI`
+            WHERE bai_viet.ID_USER IS NOT NULL && `GIA_CA_THI_TRUONG` BETWEEN $GiaThap and $GiaCao
             LIMIT $start,$item_limit
         ";
         return mysqli_query($conn,$qr);
