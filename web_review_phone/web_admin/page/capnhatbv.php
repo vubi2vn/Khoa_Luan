@@ -11,6 +11,39 @@ include "backend/news.php";
 <?php
 $phones=select_phone_without_news($conn);
 ?>
+<?php
+//kiểm tra biến get
+$phone=null;
+if(isset($_GET["news_id"]))
+{
+    $phone=select_phone_by_news_id($conn,$_GET["news_id"]);
+}
+?>
+<?php
+//Thêm bài viết mới
+if(isset($_POST["btn_submit"]))
+{
+    $id_phone=$_POST["phone_option"];
+    $title=trim($_POST["news_title"]);
+    $content=$_POST["editor1"];
+    if($title==null||$title=="")
+    {
+        echo "<script type='text/javascript'>alert('Tiêu đề không được bỏ trống!');</script>";
+        header('refresh:1');
+    }
+    elseif(update_news($conn,$id_phone,$_SESSION["ID_USER"],$title,$content,$name))
+    {
+        echo "<script type='text/javascript'>alert('Cập nhật bài viết cho điện thoại!');</script>";
+        header('refresh:1');
+    }
+    else
+    {
+        echo "<script type='text/javascript'>alert('Có lỗi khi tạo bài viết!');</script>";
+        header('refresh:1');
+    }
+    
+}
+?>
 <h5> Cập nhật bài viết mới</h5>
 <div class="news-infor">
     <form method="post">
@@ -20,9 +53,16 @@ $phones=select_phone_without_news($conn);
                 <label >Mẫu điện thoại</label>
                 </div>
                 <div class="col">
-                <select name="phone_option" class="form-control">
+                <select name="phone_option" class="form-control" >
                     <?php
-                    if($phones!=null)
+                    if($phone!=null)
+                    {
+                        foreach($phone as $a)
+                        {
+                            echo '<option value="'.$a["ID_DIEN_THOAI"].'">'.$a["TEN_DIEN_THOAI"].'</option>';
+                        }
+                    }
+                    else if($phones!=null)
                     {
                         foreach($phones as $a)
                         {
@@ -50,7 +90,7 @@ $phones=select_phone_without_news($conn);
                 <label >Nội dung bài viết</label>
                 </div>
                 <div class="col">
-                <textareaname="editor1" id="editor1"></textarea>
+                <textarea name="editor1" id="editor1"></textarea>
                 </div>
             </div>
         </div>
@@ -60,7 +100,7 @@ $phones=select_phone_without_news($conn);
                 <label >Tên tác giả</label>
                 </div>
                 <div class="col">
-                <input type="text" class="form-control" name="news_title" value="Tác giả" readonly>
+                <input type="text" class="form-control" name="name_author" value="<?php echo $name?>" readonly>
                 </div>
             </div>
         </div>
@@ -70,9 +110,9 @@ $phones=select_phone_without_news($conn);
                 </div>
                 <div class="col">
                 <?php
-                if($phones!=null)
+                if($phones!=null||$phone!=null)
                 {
-                    echo '<button type="submit" class="btn btn-primary">Xác nhận</button>';
+                    echo '<button type="submit" class="btn btn-primary" name="btn_submit">Xác nhận</button>';
                 } 
                 ?>
                 <a href="index.php?p=capnhat_baiviet" class="btn btn-danger" style="width:93px">Đặt lại</a>

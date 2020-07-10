@@ -1,6 +1,4 @@
-<?php
-include "backend/report.php";
-?>
+
 
 <?php
 //Phân trang

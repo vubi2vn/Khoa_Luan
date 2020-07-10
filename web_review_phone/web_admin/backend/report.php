@@ -86,4 +86,15 @@ function update_report($conn,$id,$report,$describe)
         return false;
     }
 }
+function count_report_havent_resolved($conn)
+{
+    $query="select count(*) as total from binh_luan WHERE ID_BINH_LUAN in (select ID_BINH_LUAN from chi_tiet_bao_cao WHERE TINH_TRANG_GIAI_QUYET=1)";
+    $sql=$conn->prepare($query);
+    $sql->execute();
+    $result=$sql->fetchAll();
+    foreach($result as $a)
+    {
+        return $a['total'];
+    }
+}
 ?>

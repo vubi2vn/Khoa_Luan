@@ -71,12 +71,92 @@ function delete_link_of_phone($conn,$id_phone)
         return false;
     }
 }
+function delete_likes_of_comment($conn,$id_comments)
+{
+    try
+    {
+        $query="delete from lich_su_like where id_binh_luan=:id";
+        $sql=$conn->prepare($query);
+        $sql->bindParam(':id',$id_comments);
+        $sql->execute();
+        return true;
+    }
+    catch(PDOException $e)
+    {
+        echo "Error: " . $e->getMessage();
+        return false;
+    }
+}
+function delete_reports_of_comment($conn,$id_comments)
+{
+    try
+    {
+        $query="delete from chi_tiet_bao_cao where id_binh_luan=:id";
+        $sql=$conn->prepare($query);
+        $sql->bindParam(':id',$id_comments);
+        $sql->execute();
+        return true;
+    }
+    catch(PDOException $e)
+    {
+        echo "Error: " . $e->getMessage();
+        return false;
+    }
+}
+function select_news_of_phone($conn,$id_phone)
+{
+    $query="select * FROM bai_viet WHERE id_dien_thoai='$id_phone' ";
+    $sql=$conn->prepare($query);
+    $sql->execute();
+    $result=$sql->fetchAll();
+    foreach($result as $a)
+    {
+        return $a["ID_BAI_VIET"];
+    }
+}
+function select_comments_of_news($conn,$id_news)
+{
+    $query="select * FROM binh_luan WHERE id_bai_viet='$id_news' ";
+    $sql=$conn->prepare($query);
+    $sql->execute();
+    $result=$sql->fetchAll();
+    return $result;
+}
+function delete_comments_of_news($conn,$id_news)
+{
+    try
+    {
+        $query="delete from binh_luan where id_bai_viet=:id";
+        $sql=$conn->prepare($query);
+        $sql->bindParam(':id',$id_news);
+        $sql->execute();
+        return true;
+    }
+    catch(PDOException $e)
+    {
+        echo "Error: " . $e->getMessage();
+        return false;
+    }
+}
 function delete_news_of_phone($conn,$id_phone)
 {
     try
     {
-        
-        $query="update bai_viet set id_dien_thoai=null where id_dien_thoai=:id";
+        $id_news=select_news_of_phone($conn,$id_phone);
+        if($id_news!=null)
+        {
+            $comments=select_comments_of_news($conn,$id_news);
+            if($comments!=null)
+            {
+                foreach($comments as $c)
+                {
+                    delete_reports_of_comment($conn,$c["ID_BINH_LUAN"]);
+                    delete_likes_of_comment($conn,$c["ID_BINH_LUAN"]);
+                }
+            }
+            delete_comments_of_news($conn,$id_news);
+        }
+        $query="delete from bai_viet where id_dien_thoai=:id";
         $sql=$conn->prepare($query);
         $sql->bindParam(':id',$id_phone);
         $sql->execute();

@@ -1,6 +1,7 @@
 <?php 
     include "backend/connect.php";
     include "backend/user.php";
+    include "backend/report.php";
     session_start();
 ?>
 <?php
@@ -42,7 +43,12 @@ if($rs!=[null,null,null,null,null])
     
 }
 ?>
-<html>
+
+<?php
+// Lấy số report chưa giải quyết
+$count_report=count_report_havent_resolved($conn); 
+?>
+<html style="height:100%">
     <head>
         <title>Admin</title>
         <link rel="stylesheet" href="css/bootstrap-4.5.0-dist/css/bootstrap.min.css" />
@@ -68,6 +74,8 @@ if($rs!=[null,null,null,null,null])
                         switch($p) {
                             case "user_info" : include "page/info_user.php"; break;
                             case "capnhat_baiviet" : include "page/capnhatbv.php"; break;
+                            case "ds_baiviet" : include "page/ds_baiviet.php"; break;
+                            case "noidung_baiviet" : include "page/noidungbv.php"; break;
                             case "ds_cuahang" : include "page/ds_cuahang.php"; break;
                             case "ds_hangsx" : include "page/ds_hangsanxuat.php"; break;
                             case "ds_dienthoai" : include "page/ds_dienthoai.php"; break;
