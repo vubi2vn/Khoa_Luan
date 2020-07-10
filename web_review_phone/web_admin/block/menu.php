@@ -9,7 +9,7 @@
     <a href="index.php" class="list-group-item list-group-item-action" style="border:none"><i class="fas fa-home"></i> Trang chủ</a>
     <?php
     // Xét quyền truy cập admin và authour
-    if($_SESSION["QUYEN"]=="Tác giả")
+    if($_SESSION["TEN_PHAN_QUYEN"]=="tacgia")
     {
         echo '<a href="#" class="list-group-item list-group-item-action toggle-menu" id="toggle-menu-bv" style="border:none"><i class="fas fa-newspaper"></i> 
         Quản lý bài viết <i class="fas fa-caret-down"></i></a>

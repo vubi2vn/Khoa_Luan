@@ -88,7 +88,7 @@
             $noibat = NoiBat($conn);
             while($row_noibat = mysqli_fetch_array($noibat)) {
         ?>
-        <a class="item" href="?p=chitiet&&idDT=<?php echo $row_noibat['ID_DIEN_THOAI'];?>">
+        <a class="item" href="?p=chitiet&idDT=<?php echo $row_noibat['ID_DIEN_THOAI'];?>">
             <img src="lib/images/<?php echo $row_noibat['URL_HINH_ANh'];?>" alt="phone image">
             <div class="item-caption">
                 <h5><?php echo $row_noibat['TEN_DIEN_THOAI'];?></h5>
@@ -109,7 +109,7 @@
             $noibat = NoiBat($conn);
             while($row_noibat = mysqli_fetch_array($noibat)) {
         ?>
-        <a class="phone-list-item" href="?p=chitiet&&idDT=<?php echo $row_noibat['ID_DIEN_THOAI'];?>">
+        <a class="phone-list-item" href="?p=chitiet&idDT=<?php echo $row_noibat['ID_DIEN_THOAI'];?>">
             <img src="lib/images/<?php echo $row_noibat['URL_HINH_ANh'];?>" alt="phone image">
             <div class="desc">
                 <h5><?php echo $row_noibat['TEN_DIEN_THOAI'];?></h5>
@@ -119,7 +119,7 @@
         <?php
             }
         ?>   
-        <div class="center clr">
+        <div class="center clr" style="padding: 10px;">
             <a href="?p=danhsachdt" type="button" class="btn btn-primary">xem thêm</a>
         </div>
         

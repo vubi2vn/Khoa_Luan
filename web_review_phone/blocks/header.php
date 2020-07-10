@@ -24,6 +24,7 @@ if(isset($_POST["btn_logout"]))
                 while($row_HangSanXuatTop7 = mysqli_fetch_array($HangSanXuatTop7)) {
             ?>
             <li><a href="?p=danhsachdt&&Id_HangSX=<?php echo $row_HangSanXuatTop7['ID_HANG_SAN_XUAT'];?>"><?php echo $row_HangSanXuatTop7['TEN_HANG_SAN_XUAT'];?></a></li> 
+            <li><a href="?p=danhsachdt&Id_HangSX=<?php echo $row_HangSanXuatTop7['ID_HANG_SAN_XUAT'];?>"><?php echo $row_HangSanXuatTop7['TEN_HANG_SAN_XUAT'];?></a></li> 
 
             <?php } ?>         
             </ul>
