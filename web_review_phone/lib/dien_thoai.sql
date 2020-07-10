@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th7 06, 2020 lúc 06:12 AM
+-- Thời gian đã tạo: Th7 10, 2020 lúc 07:53 AM
 -- Phiên bản máy phục vụ: 10.4.11-MariaDB
 -- Phiên bản PHP: 7.4.6
 
@@ -346,20 +346,21 @@ CREATE TABLE `user` (
   `ID_USER` int(11) NOT NULL,
   `ID_PHAN_QUYEN` int(11) DEFAULT NULL,
   `USER_NAME` char(20) COLLATE utf32_unicode_ci DEFAULT NULL,
-  `PASSWORD` char(20) COLLATE utf32_unicode_ci DEFAULT NULL
+  `PASSWORD` char(200) COLLATE utf32_unicode_ci DEFAULT NULL,
+  `TRUY_CAP` bit(1) NOT NULL DEFAULT b'1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf32 COLLATE=utf32_unicode_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `user`
 --
 
-INSERT INTO `user` (`ID_USER`, `ID_PHAN_QUYEN`, `USER_NAME`, `PASSWORD`) VALUES
-(1, 1, 'admin', '1'),
-(2, 2, 'khachhang', '1'),
-(3, 3, 'tacgia', '1'),
-(4, 4, 'test', '1'),
-(5, 2, 'thinh', '1'),
-(6, 2, 'dai', '1');
+INSERT INTO `user` (`ID_USER`, `ID_PHAN_QUYEN`, `USER_NAME`, `PASSWORD`, `TRUY_CAP`) VALUES
+(1, 1, 'admin', 'c4ca4238a0b923820dcc509a6f75849b', b'1'),
+(2, 2, 'khachhang', 'c4ca4238a0b923820dcc509a6f75849b', b'1'),
+(3, 3, 'tacgia', 'c4ca4238a0b923820dcc509a6f75849b', b'1'),
+(4, 4, 'test', 'c4ca4238a0b923820dcc509a6f75849b', b'0'),
+(5, 2, 'thinh', 'c4ca4238a0b923820dcc509a6f75849b', b'1'),
+(6, 2, 'dai', 'c4ca4238a0b923820dcc509a6f75849b', b'1');
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -515,7 +516,7 @@ ALTER TABLE `phan_quyen`
 -- AUTO_INCREMENT cho bảng `user`
 --
 ALTER TABLE `user`
-  MODIFY `ID_USER` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `ID_USER` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Các ràng buộc cho các bảng đã đổ

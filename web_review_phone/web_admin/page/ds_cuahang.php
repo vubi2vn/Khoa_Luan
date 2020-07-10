@@ -99,7 +99,7 @@ if(isset($_POST["btn_submit"]))
             {
                 echo '<tr>
                 <th scope="row">'.$a['ID_CUA_HANG'].'</th>
-                <td><img src="'.$a['LO_CUA_HANG'].'" alt="logo" style="width:50px"></td>
+                <td><img src="../lib/images/'.$a['LOGO_CUA_HANG'].'" alt="logo" style="width:100px"></td>
                 <td>'.$a['TEN_CUA_HANG'].'</td>
                 <td><a href="'.$a['LINK_WEBSITE_CUA_HANG'].'">'.$a['LINK_WEBSITE_CUA_HANG'].'</a></td>
                 <td><button class="btn btn-danger" onclick="delete_store('.$a['ID_CUA_HANG'].')">Xóa</button></td>

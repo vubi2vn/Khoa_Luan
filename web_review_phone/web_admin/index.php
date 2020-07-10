@@ -7,9 +7,9 @@
 <?php
 //Kiểm tra session đăng nhập
 
-if(!isset($_SESSION["ID_USER"])||$_SESSION["QUYEN"]=="Người dùng")
+if(!isset($_SESSION["ID_USER"])||$_SESSION["TEN_PHAN_QUYEN"]=="khachhang")
 {
-    header("Location:login.php");
+    header("Location:../?p=home");
 }
 ?>
 
@@ -19,8 +19,8 @@ if(isset($_POST["btn_logout"]))
 {
     unset($_SESSION["ID_USER"]);
     unset($_SESSION["USER_NAME"]);
-    unset($_SESSION["QUYEN"]);
-    header("Location:login.php");
+    unset($_SESSION["TEN_PHAN_QUYEN"]);
+    header("Location:../?p=dangnhap");
 }
 ?>
 <?php

@@ -1,8 +1,9 @@
+<!-- click đăng nhập -->
 <?php
 if(isset($_POST["btnLogin"]))
 {
     $username = $_POST["username"];
-    $password = $_POST["password"];
+    $password =md5($_POST["password"]);
     $qr ="
     SELECT * FROM `user`,`phan_quyen` WHERE user.USER_NAME = '$username' AND user.PASSWORD='$password' AND user.ID_PHAN_QUYEN = phan_quyen.ID_PHAN_QUYEN
     ";
@@ -10,11 +11,17 @@ if(isset($_POST["btnLogin"]))
     if(mysqli_num_rows($user)==1)
     {
         $row_users = mysqli_fetch_array($user);
-        $_SESSION["ID_USER"] = $row_users["ID_USER"];
-        $_SESSION["ID_PHAN_QUYEN"] = $row_users["ID_PHAN_QUYEN"];
-        $_SESSION["USER_NAME"] = $row_users["USER_NAME"]; 
-        $_SESSION["TEN_PHAN_QUYEN"] = $row_users["TEN_PHAN_QUYEN"];  
-        header('Location:index.php?p=home'); 
+        if($row_users["TRUY_CAP"]==0)
+        {
+            echo "<script type='text/javascript'>alert('Tài khoản không còn hoạt động!');</script>"; 
+        }else
+        {
+            $_SESSION["ID_USER"] = $row_users["ID_USER"];
+            $_SESSION["ID_PHAN_QUYEN"] = $row_users["ID_PHAN_QUYEN"];
+            $_SESSION["USER_NAME"] = $row_users["USER_NAME"]; 
+            $_SESSION["TEN_PHAN_QUYEN"] = $row_users["TEN_PHAN_QUYEN"];  
+            header('Location:index.php?p=home');
+        } 
     }
     else
     {
@@ -22,7 +29,34 @@ if(isset($_POST["btnLogin"]))
     }
 }
 ?>
-
+<!-- click đăng ký -->
+<?php
+if(isset($_POST["btnRegister"]))
+{
+    $n_username = $_POST["new_username"];
+    $n_password =$_POST["new_password"];
+    $c_password =$_POST["confirm_password"];
+    if(!$n_password || !$n_username || !$c_password)
+    {
+        echo "<script type='text/javascript'>alert('Vui lòng nhập đầy đủ thông tin');</script>";
+        exit;
+    }
+    if (mysqli_num_rows(Check_Username($conn,$n_username)))
+    {
+        echo "Tên đăng nhập này đã có người dùng. Vui lòng chọn tên đăng nhập khác. <a href='javascript: history.go(-1)'>Trở lại</a>";
+        exit;
+    }
+    if($n_password == $c_password)
+    {
+        DangkyTK($conn,$n_username,md5($n_password));
+        echo "<script type='text/javascript'>alert('Tạo tài khoản thành công');</script>";
+    }
+    else
+    {
+        echo "<script type='text/javascript'>alert('Confirm password wrong!');</script>";
+    }
+}
+?>
 <div class="container-dangnhap center">
     <img src="images/logo.png" alt="logo">
     <div class="tab-content" id="pills-tabContent">
@@ -50,21 +84,21 @@ if(isset($_POST["btnLogin"]))
         <div class="tab-pane fade" id="pills-taotaikhoan" role="tabpanel" aria-labelledby="tab-taotaikhoan">
             <h3>Tạo tài khoản</h3>
             <div class="sign-in left">
-            <form id="login-form" class="form">                       
+            <form id="login-form" class="form" method = "POST">                       
                 <div class="form-group">
                     <label>Tên đăng nhập</label><br>
-                    <input type="text" name="new-username" id="new-username" class="form-control">
+                    <input type="text" name="new_username" id="new_username" class="form-control">
                 </div>
                 <div class="form-group">
                     <label>Mật khẩu</label><br>
-                    <input type="password" name="new-password" id="new-password" class="form-control">
+                    <input type="password" name="new_password" id="new_password" class="form-control">
                 </div>
                 <div class="form-group">
                     <label>Nhập lại mật khẩu</label><br>
-                    <input type="password" name="confirm-password" id="confirm-password" class="form-control">
+                    <input type="password" name="confirm_password" id="confirm_password" class="form-control">
                 </div>
                 <div class="right">
-                    <button type="button" class="btn btn-primary">Đăng ký</button>
+                    <button name="btnRegister" type="submit" class="btn btn-primary">Đăng ký</button>
                 </div>
             </form>
             </div>

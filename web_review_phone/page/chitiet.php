@@ -15,13 +15,11 @@ else
 <?php
     $ChiTietCauHinh = ChiTietCauHinh($conn,$idDT);
     $row_ChiTietCauHinh = mysqli_fetch_array($ChiTietCauHinh); 
-    // $rowcount=mysqli_num_rows($result);
-    // echo "<script type='text/javascript'>alert('$rowcount');</script>";
-    // if(mysqli_num_rows($row_ChiTietCauHinh)==1)
-    // {
-    //     echo "<script type='text/javascript'>alert('Sản phẩm chưa có bài đánh giá!');</script>";
-    //     header('Location:index.php?p=home');
-    // }
+    if(mysqli_num_rows($ChiTietCauHinh)==0)
+    {
+        echo "<script type='text/javascript'>alert('Chưa có thông tin về điện thoại này!');
+        window.location.href='index.php?p=danhsachdt'; </script>";
+    }
 ?>
 
 <div class="container-1">
@@ -275,17 +273,14 @@ else
     <?php   
         $BaiVietTheoIdDT = BaiVietTheoIdDT($conn,$idDT);
         $row_BaiVietTheoIdDT = mysqli_fetch_array($BaiVietTheoIdDT);
-        
-    ?>
-    <?php
-        echo $row_BaiVietTheoIdDT['NOI_DUNG_BAI_VIET'];
-        // if(mysqli_num_rows($row_BaiVietTheoIdDT)==1)
-        // {
-        //     echo $row_BaiVietTheoIdDT['NOI_DUNG_BAI_VIET'];        
-        // }
-        // else{
-        //     echo "Điện thoại này hiện tại chưa có bài đánh giá";
-        // }
+
+        if(mysqli_num_rows($BaiVietTheoIdDT)==1)
+        {
+            echo $row_BaiVietTheoIdDT['NOI_DUNG_BAI_VIET'];        
+        }
+        else{
+            echo "Điện thoại này hiện tại chưa có bài đánh giá";
+        }
     ?>
     </div>
     <div class="clr"></div>
