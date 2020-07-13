@@ -72,7 +72,7 @@ function update_store($conn,$id,$name,$link,$logo)
 {
     try
     {
-        $query="update cua_hang_ban_le set ten_cua_hang=:name, LINK_WEBSITE_CUA_HANG=:link, LO_CUA_HANG='$logo' where id_cua_hang=:id";
+        $query="update cua_hang_ban_le set ten_cua_hang=:name, LINK_WEBSITE_CUA_HANG=:link, LOGO_CUA_HANG='$logo' where id_cua_hang=:id";
         if($logo==""||$logo==null)
         {
             $query="update cua_hang_ban_le set ten_cua_hang=:name, LINK_WEBSITE_CUA_HANG=:link where id_cua_hang=:id";

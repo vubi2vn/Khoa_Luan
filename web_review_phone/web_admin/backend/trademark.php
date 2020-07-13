@@ -51,14 +51,15 @@ function delete_trademark($conn,$id_trademark)
     }
 }
 
-function insert_trademark($conn,$name,$country)
+function insert_trademark($conn,$name,$country,$logo)
 {
     try
     {
-        $query="insert into hang_san_xuat values (null,:name,:country)";
+        $query="insert into hang_san_xuat values (null,:name,:country,:logo)";
         $sql=$conn->prepare($query);
         $sql->bindParam(':name',$name);
         $sql->bindParam(':country',$country);
+        $sql->bindParam(':logo',$logo);
         $sql->execute();
         return true;
     }
@@ -69,11 +70,15 @@ function insert_trademark($conn,$name,$country)
     }
 }
 
-function update_trademark($conn,$id,$name,$country)
+function update_trademark($conn,$id,$name,$country,$logo)
 {
     try
     {
-        $query="update hang_san_xuat set ten_hang_san_xuat=:name, quoc_gia=:country where id_hang_san_xuat=:id";
+        $query="update hang_san_xuat set ten_hang_san_xuat=:name, quoc_gia=:country, logo_hang_sx='$logo' where id_hang_san_xuat=:id";
+        if($logo=="")
+        {
+            $query="update hang_san_xuat set ten_hang_san_xuat=:name, quoc_gia=:country where id_hang_san_xuat=:id";
+        }
         $sql=$conn->prepare($query);
         $sql->bindParam(':name',$name);
         $sql->bindParam(':country',$country);

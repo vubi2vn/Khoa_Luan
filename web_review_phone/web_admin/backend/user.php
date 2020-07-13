@@ -1,7 +1,7 @@
 <?php
     function get_user_info($conn,$id)
     {
-        $r=[null,null,null,null,null];
+        $r=[null,null,null,null,null,null];
         $query="Select * FROM user_infomation where id_user='$id'";
         $sql=$conn->prepare($query);
         $sql->execute();
@@ -15,18 +15,20 @@
                 $r[2]=$a['gioi_tinh_user'];
                 $r[3]=$a['so_dien_thoai_user'];
                 $r[4]=$a['hinh_dai_dien'];
+                $r[5]=$a['email'];
             }
         }
         return $r;
     }
-    function update_user_info($conn,$id,$name,$birth,$sex,$phone)
+    function update_user_info($conn,$id,$name,$birth,$sex,$phone,$email)
     {
         try{
-            $query="update user_infomation SET ho_ten_user =:name , ngay_sinh_user = :birth, gioi_tinh_user = b'$sex', so_dien_thoai_user = :phone  WHERE user_infomation.id_user = :id";
+            $query="update user_infomation SET ho_ten_user =:name , ngay_sinh_user = :birth, gioi_tinh_user = b'$sex', so_dien_thoai_user = :phone, email=:email  WHERE user_infomation.id_user = :id";
             $sql=$conn->prepare($query);
             $sql->bindParam(':name',$name);
             $sql->bindParam(':birth',$birth);
             $sql->bindParam(':phone',$phone);
+            $sql->bindParam(':email',$email);
             $sql->bindParam(':id',$id);
             $sql->execute();
             return true;
@@ -101,7 +103,7 @@
     }
     function get_record_limit_user($conn,$id,$start,$limit)
     {
-        $query="select * from user,phan_quyen where user.id_phan_quyen=phan_quyen.id_phan_quyen and id_user!=$id order by id_user asc limit $start,$limit";
+        $query="select * from user,phan_quyen,user_infomation where user.id_user=user_infomation.id_user and user.id_phan_quyen=phan_quyen.id_phan_quyen and user.id_user!=$id order by user.id_user asc limit $start,$limit";
         $sql=$conn->prepare($query);
         $sql->execute();
         $result=$sql->fetchAll();

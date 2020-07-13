@@ -5,7 +5,7 @@ include "backend/trademark.php";
 <?php
 //Phân trang
 //source:https://freetuts.net/thuat-toan-phan-trang-voi-php-va-mysql-550.html
-$limit_record=7;
+$limit_record=5;
 $current_page=isset($_GET['page']) ? $_GET['page'] : 1;
 $total_record=get_total_record_trademark($conn);
 $total_record=$total_record>0?$total_record:1;
@@ -20,11 +20,13 @@ else if ($current_page < 1){
 ?>
 <?php
 // Thêm hãng sản xuất mới
-if(isset($_POST["btn-insert-trademark"]))
+if(isset($_POST["btn_submit_avatar"]))
 {
+    
     $trademark=trim($_POST["txt_trademark"]);
     $country=trim($_POST["txt_country"]);
-    if(insert_trademark($conn,$trademark,$country))
+    include "backend/uploadIMG.php";
+    if(insert_trademark($conn,$trademark,$country,$url))
     {
         echo "<script type='text/javascript'>alert('Đã thêm hãng sản xuất!');</script>";
         header('refresh:1');
@@ -38,12 +40,13 @@ if(isset($_POST["btn-insert-trademark"]))
 ?>
 <?php
 //Cập nhật hãng sản xuất
-if(isset($_POST["btn-update-trademark"]))
+if(isset($_POST["btn_submit"]))
 {
     $id_trademark=$_POST["txt_idtrademark"];
     $ntrademark=trim($_POST["txt_ntrademark"]);
     $ncountry=trim($_POST["txt_ncountry"]);
-    if(update_trademark($conn,$id_trademark,$ntrademark,$ncountry))
+    include "backend/uploadIMG.php";
+    if(update_trademark($conn,$id_trademark,$ntrademark,$ncountry,$url))
     {
         echo "<script type='text/javascript'>alert('Cập nhật thành công!');</script>";
         header('refresh:1');
@@ -64,6 +67,7 @@ if(isset($_POST["btn-update-trademark"]))
         <thead class="thead-light">
             <tr>
             <th scope="col">id</th>
+            <th scope="col">Logo</th>
             <th scope="col">Tên hãng</th>
             <th scope="col">Quốc gia</th>
             <th scope="col">Xóa</th>
@@ -78,6 +82,7 @@ if(isset($_POST["btn-update-trademark"]))
             {
                 echo '<tr>
                 <th scope="row">'.$a['ID_HANG_SAN_XUAT'].'</th>
+                <td> <img src="'.$a['LOGO_HANG_SX'].'" alt="logo" style="max-height:50px;" /></td>
                 <td>'.$a['TEN_HANG_SAN_XUAT'].'</td>
                 <td>'.$a['QUOC_GIA'].'</td>
                 <td><button class="btn btn-danger" onclick="delete_trademark('.$a['ID_HANG_SAN_XUAT'].')">Xóa</button></td>
