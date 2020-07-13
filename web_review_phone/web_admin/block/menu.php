@@ -21,13 +21,18 @@
     else
     {
         echo '<a href="#" class="list-group-item list-group-item-action toggle-menu" id="toggle-menu-ht" style="border:none"><i class="fas fa-tools"></i> 
-        Quản trị hệ thống <i class="fas fa-caret-down"></i></a>
+        Quản trị hệ thống <i class="fas fa-caret-down"></i>';
+        if($count_report>0)
+            {
+                echo '<span style="width:10px;height:10px;border-radius:50%; background-color:red; margin-left:10px;font-size:8px;padding:1px 4px">!<span>';
+            }
+        echo '</a>
         <div class="sub-menu" id="sub-menu-ht">
             <a href="index.php?p=ds_cuahang" class="list-group-item list-group-item-action" style="border:none"><i class="fas fa-store"></i> Danh mục cửa hàng</a>
             <a href="index.php?p=ds_hangsx" class="list-group-item list-group-item-action" style="border:none"><i class="fas fa-building"></i> Danh mục hãng sản xuất</a>
             <a href="index.php?p=ds_dienthoai" class="list-group-item list-group-item-action" style="border:none"><i class="fas fa-mobile"></i> Danh mục điện thoại</a>
             <a href="index.php?p=dm_baocao" class="list-group-item list-group-item-action" style="border:none"><i class="fas fa-flag"></i> Danh mục báo cáo bình luận</a>
-            <a href="#" class="list-group-item list-group-item-action" style="border:none"><i class="fas fa-comments"></i>Quản lí bình luận'; 
+            <a href="index.php?p=ds_binhluan" class="list-group-item list-group-item-action" style="border:none"><i class="fas fa-comments"></i>Quản lí bình luận'; 
             if($count_report>0)
             {
                 echo '<span style="width:10px;height:10px;border-radius:50%; background-color:red; margin-left:10px;font-size:8px;padding:1px 4px">!<span>';

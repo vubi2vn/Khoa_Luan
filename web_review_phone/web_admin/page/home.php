@@ -4,7 +4,7 @@
         <p>Quyền truy cập hiện tại của bạn là: <b><?php echo($_SESSION["TEN_PHAN_QUYEN"]) ?></b></p>
     </div>
     <?php
-    if(isset($_SESSION["TEN_PHAN_QUYEN"])&&$_SESSION["TEN_PHAN_QUYEN"]=="Admin")
+    if(isset($_SESSION["TEN_PHAN_QUYEN"])&&$_SESSION["TEN_PHAN_QUYEN"]=="admin")
     {
         if($count_report>0)
         {

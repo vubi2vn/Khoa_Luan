@@ -6,7 +6,7 @@ include "backend/store.php";
 <?php
 //Phân trang
 //source:https://freetuts.net/thuat-toan-phan-trang-voi-php-va-mysql-550.html
-$limit_record=6;
+$limit_record=5;
 $current_page=isset($_GET['page']) ? $_GET['page'] : 1;
 $total_record=get_total_record_store($conn);
 $total_record=$total_record>0?$total_record:1;
@@ -99,7 +99,7 @@ if(isset($_POST["btn_submit"]))
             {
                 echo '<tr>
                 <th scope="row">'.$a['ID_CUA_HANG'].'</th>
-                <td><img src="'.$a['LOGO_CUA_HANG'].'" alt="logo" style="width:100px"></td>
+                <td><img src="'.$a['LOGO_CUA_HANG'].'" alt="logo" style="width:70px"></td>
                 <td>'.$a['TEN_CUA_HANG'].'</td>
                 <td><a href="'.$a['LINK_WEBSITE_CUA_HANG'].'">'.$a['LINK_WEBSITE_CUA_HANG'].'</a></td>
                 <td><button class="btn btn-danger" onclick="delete_store('.$a['ID_CUA_HANG'].')">Xóa</button></td>

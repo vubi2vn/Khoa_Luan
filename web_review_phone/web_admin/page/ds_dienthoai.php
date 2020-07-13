@@ -145,7 +145,7 @@ if(isset($_POST["btn_submit"]))
                 <td>'.$a['TEN_DIEN_THOAI'].'</td>
                 <td>'.number_format($a['GIA_CA_THI_TRUONG']).' VND</td>
                 <td><a href="index.php?p=phone_link&id='.$a['ID_DIEN_THOAI'].'" >Link</a></td>
-                <td><a href="" >Xem</a></td>
+                <td><a href="index.php?p=cauhinh_dienthoai&id='.$a['ID_DIEN_THOAI'].'" >Xem</a></td>
                 <td><img src="'.$a['URL_HINH_ANh'].'" alt="hình ảnh" style="width:50px"></td>
                 <td>'.$a['DIEM_DANH_GIA'].'</td>
                 <td><button class="btn btn-danger" onclick="delete_store('.$a['ID_DIEN_THOAI'].')">Xóa</button></td>

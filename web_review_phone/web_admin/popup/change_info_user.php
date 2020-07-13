@@ -31,7 +31,7 @@
             </div>
             <div class="form-group">
                 <label class="label-info">Email:</label>
-                <div class="text-box-info"><input class="form-control" type="email" placeholder="vd: abc@gmail.com"></div>
+                <div class="text-box-info"><input class="form-control" type="email" name="txt_email" placeholder="vd: abc@gmail.com" value="<?php echo $email?>"></div>
             </div>
         
         </div>

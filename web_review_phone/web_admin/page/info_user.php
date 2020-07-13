@@ -5,7 +5,7 @@ $sex="";
 $phone="";
 $id=$_SESSION["ID_USER"];
 $rs=get_user_info($conn,$id);
-if($rs!=[null,null,null,null])
+if($rs!=[null,null,null,null,null])
 {
         $name=$rs["0"];
         $birth=$rs["1"];
@@ -22,6 +22,7 @@ if($rs!=[null,null,null,null])
         {
             $avatar=$rs[4];
         }
+        $email=$rs["5"];
     
 }
 
@@ -35,7 +36,8 @@ if(isset($_POST["btn-submit-user"]))
     $birth=$_POST['txt_birthday'];
     $sex=$_POST['gioitinh'];
     $phone=$_POST['txt_phone'];
-    if (update_user_info($conn,$id,$name,(string)$birth,$sex,$phone))
+    $email=$_POST['txt_email'];
+    if (update_user_info($conn,$id,$name,(string)$birth,$sex,$phone,$email))
     {
         echo "<script type='text/javascript'>alert('Cập nhật thành công!');</script>";
         header('refresh:1');
@@ -87,10 +89,10 @@ if(isset($_POST["btn_submit_avatar"]))
             <div class="user-information">
                 <ul class="list-group">
                     <li class="list-group-item" style="border-top:none;border-left:none;border-right:none"><div class="user-info-left">Họ và tên:</div> <div class="user-info-right"><?php echo $name ?></div></li>
-                    <li class="list-group-item" style="border-top:none;border-left:none;border-right:none"><div class="user-info-left">Ngày sinh:</div> <div class="user-info-right"><?php echo $birth ?></div></li>
+                    <li class="list-group-item" style="border-top:none;border-left:none;border-right:none"><div class="user-info-left">Ngày sinh:</div> <div class="user-info-right"><?php echo date_format(date_create($birth),"d/m/Y") ?></div></li>
                     <li class="list-group-item" style="border-top:none;border-left:none;border-right:none"><div class="user-info-left">Giới tính:</div> <div class="user-info-right"><?php echo $sex ?></div></li>
                     <li class="list-group-item" style="border-top:none;border-left:none;border-right:none"><div class="user-info-left">Số điện thoại:</div> <div class="user-info-right"><?php echo $phone ?></div></li>
-                    <li class="list-group-item" style="border-top:none;border-left:none;border-right:none"><div class="user-info-left">Email:</div> <div class="user-info-right">Admin</div></li>
+                    <li class="list-group-item" style="border-top:none;border-left:none;border-right:none"><div class="user-info-left">Email:</div> <div class="user-info-right"><?php echo $email ?></div></li>
                 </ul>
             </div>
         </div>

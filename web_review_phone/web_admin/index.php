@@ -46,7 +46,7 @@ if($rs!=[null,null,null,null,null])
 
 <?php
 // Lấy số report chưa giải quyết
-//$count_report=count_report_havent_resolved($conn); 
+$count_report=count_report_havent_resolved($conn); 
 ?>
 <html style="height:100%">
     <head>
@@ -82,6 +82,9 @@ if($rs!=[null,null,null,null,null])
                             case "phone_link" : include "page/ds_link_dienthoai.php"; break;
                             case "dm_baocao" : include "page/dm_baocao.php"; break;
                             case "ds_nguoidung" : include "page/ds_nguoidung.php"; break;
+                            case "ds_binhluan" : include "page/ds_binhluan.php"; break;
+                            case "ds_noidung_baocao" : include "page/ds_noidung_baocao.php"; break;
+                            case "cauhinh_dienthoai" : include "page/cauhinh_dienthoai.php"; break;
                             default : include "page/home.php";
                         }
                         ?>

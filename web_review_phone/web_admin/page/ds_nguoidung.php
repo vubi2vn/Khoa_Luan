@@ -95,8 +95,8 @@ if(isset($_POST["btn-update-user"]))
             <th scope="col">ID người dùng</th>
             <th scope="col">Phân quyền</th>
             <th scope="col">Tên đăng nhập</th>
+            <th scope="col">Tên người dùng</th>
             <th scope="col">Truy cập</th>
-            <th scope="col">Thông tin</th>
             <th scope="col">Sửa</th>
             
             </tr>
@@ -112,8 +112,8 @@ if(isset($_POST["btn-update-user"]))
                 <th scope="row">'.$a['ID_USER'].'</th>
                 <td>'.$a['TEN_PHAN_QUYEN'].'</td>
                 <td>'.$a['USER_NAME'].'</td>
+                <td>'.$a['ho_ten_user'].'</td>
                 <td>'.$truycap.'</td>
-                <td><a href="#">Xem</a></td>
                 <td><a href="#" class="btn btn-primary" data-toggle="modal" data-target="#update-user"
                     data-id="'.$a['ID_USER'].'"
                     data-access="'.$tc.'"

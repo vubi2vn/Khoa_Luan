@@ -11,7 +11,7 @@
     margin: 0;
     padding: 0;
     background-color: #FFC300;
-    height:100vh
+    height:auto;
 }
 .menu a{
     background: #FFC300;
