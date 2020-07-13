@@ -3,7 +3,11 @@
 <?php 
     function Top_Dienthoai($conn,$top){       
         $qr ="
-            SELECT * FROM `dien_thoai` ORDER BY GIA_CA_THI_TRUONG DESC LIMIT $top,1
+        SELECT `dien_thoai`.*
+        FROM `dien_thoai` 
+            LEFT JOIN `bai_viet` ON `bai_viet`.`ID_DIEN_THOAI` = `dien_thoai`.`ID_DIEN_THOAI`
+        WHERE bai_viet.ID_USER IS NOT NULL
+        ORDER BY DIEM_DANH_GIA DESC LIMIT $top,1
         ";
         return mysqli_query($conn,$qr);        
     }
@@ -160,15 +164,22 @@
 ?>
 <!-- binh luan -->
 <?php
-    function BinhLuanList($conn){
+    function BinhLuanList($conn,$idBV)
+    {
         $qr ="
-            SELECT * FROM `binh_luan`;
+            SELECT * FROM `binh_luan`,bai_viet 
+            WHERE binh_luan.ID_BAI_VIET = bai_viet.ID_BAI_VIET 
+            AND bai_viet.ID_BAI_VIET = '$idBV' AND HIEN_THI_BINH_LUAN = '1'
+            ORDER BY binh_luan.LUOT_LIKE DESC
         ";
         return mysqli_query($conn,$qr);
     }
     function BinhLuan2($conn){
         $qr ="
-            SELECT * FROM `binh_luan` limit 0,2;
+            SELECT * FROM `binh_luan`,bai_viet 
+            WHERE binh_luan.ID_BAI_VIET = bai_viet.ID_BAI_VIET 
+            AND bai_viet.ID_BAI_VIET = '$idBV' AND HIEN_THI_BINH_LUAN = '1'
+            ORDER BY binh_luan.LUOT_LIKE DESC LIMIT 0,2
         ";
         return mysqli_query($conn,$qr);
     }
@@ -177,48 +188,69 @@
             SELECT * FROM `binh_luan` where `ID_USER` =$ID_USER
         ";
         return mysqli_query($conn,$qr);
-    } 
-    function TongCmt($conn){
-        $qr ="
-            SELECT COUNT(*) as tongcmt FROM `binh_luan`
-        ";
-        $TongCmt = mysqli_query($conn,$qr);
-        $row = mysqli_fetch_array($TongCmt);
-        return $row['tongcmt'];
-    }
-
+    }    
     //count phân loại bl
-    function cmtTieuCuc($conn){
+    function cmtTieuCuc($conn,$idBV){
         $qr ="
-            SELECT * FROM `binh_luan` WHERE `PHAN_LOAI_BINH_LUAN`=0
+            SELECT * FROM `binh_luan`,bai_viet 
+            WHERE binh_luan.ID_BAI_VIET = bai_viet.ID_BAI_VIET 
+            AND bai_viet.ID_BAI_VIET = '$idBV' AND HIEN_THI_BINH_LUAN = '1' AND `PHAN_LOAI_BINH_LUAN`= 0
+            ORDER BY binh_luan.LUOT_LIKE DESC
         ";
         return mysqli_query($conn,$qr);
     }
 
-    function cmtTichCuc($conn){
+    // function cmtTichCuc($conn){
+    //     $qr ="
+    //         SELECT * FROM `binh_luan` WHERE `PHAN_LOAI_BINH_LUAN`=1
+    //     ";
+    //     return mysqli_query($conn,$qr);
+    // }
+    function cmtTichCuc($conn,$idBV){
         $qr ="
-            SELECT * FROM `binh_luan` WHERE `PHAN_LOAI_BINH_LUAN`=1
+            SELECT * FROM `binh_luan`,bai_viet 
+            WHERE binh_luan.ID_BAI_VIET = bai_viet.ID_BAI_VIET 
+            AND bai_viet.ID_BAI_VIET = '$idBV' AND HIEN_THI_BINH_LUAN = '1' AND `PHAN_LOAI_BINH_LUAN`= 1
+            ORDER BY binh_luan.LUOT_LIKE DESC
         ";
         return mysqli_query($conn,$qr);
     }
+    // function TongCmt($conn,$idBV){
+    //     $qr ="
+    //         SELECT COUNT(*) as tongcmt FROM `binh_luan`
+    //     ";
+    //     $TongCmt = mysqli_query($conn,$qr);
+    //     $row = mysqli_fetch_array($TongCmt);
+    //     return $row['tongcmt'];
+    // }
+    function TongCmt($conn,$idBV){
+        $TongCmt = BinhLuanList($conn,$idBV);
+        $count = mysqli_num_rows($TongCmt);
+        return $count;
+    }
 
-    function TongTieuCuc($conn){
-        $qr ="
-            SELECT COUNT(*) as TongTieuCuc FROM `binh_luan` WHERE `PHAN_LOAI_BINH_LUAN`=0
-        ";
-        $TongTieuCuc = mysqli_query($conn,$qr);
-        $row = mysqli_fetch_array($TongTieuCuc);
-        return $row['TongTieuCuc'];
+    function TongTieuCuc($conn,$idBV){
+        $TongTieuCuc = cmtTieuCuc($conn,$idBV);
+        $count = mysqli_num_rows($TongTieuCuc);
+        return $count;
     }
     
-    function TongTichCuc($conn){
+    function TongTichCuc($conn,$idBV){
+        $TongTichCuc = cmtTichCuc($conn,$idBV);
+        $count = mysqli_num_rows($TongTichCuc);
+        return $count;
+    }
+?>
+<!-- tinh diem -->
+<?php
+    function Update_DiemDanhGia($conn,$idBV){
+        $diem = round((TongTichCuc($conn,$idBV)/TongCmt($conn,$idBV))*10, 1); 
         $qr ="
-            SELECT COUNT(*) as TongTichCuc FROM `binh_luan` WHERE `PHAN_LOAI_BINH_LUAN`=1
+            UPDATE `dien_thoai`,`bai_viet` SET `DIEM_DANH_GIA`= '$diem' 
+            WHERE `dien_thoai`.`ID_DIEN_THOAI`= `bai_viet`.`ID_DIEN_THOAI` 
+                AND `bai_viet`.ID_BAI_VIET = '$idBV'
         ";
-        
-        $TongTichCuc = mysqli_query($conn,$qr);
-        $row = mysqli_fetch_array($TongTichCuc);
-        return $row['TongTichCuc'];
+        mysqli_query($conn,$qr);
     }
 ?>
 <!-- header -->
@@ -246,13 +278,21 @@
         $qr ="
             INSERT INTO `user`(`ID_PHAN_QUYEN`, `USER_NAME`, `PASSWORD`) VALUES ('2','$username','$password')
         ";
-    mysqli_query($conn,$qr);
+        mysqli_query($conn,$qr);
     }
 
     function Check_Username($conn,$username){
         $qr ="
             SELECT * FROM `user` WHERE `USER_NAME` = '$username'
         ";
-    return mysqli_query($conn,$qr);
+        return mysqli_query($conn,$qr);
+    }
+
+    function Insert_User_Information($conn,$username){
+        $row_users = mysqli_fetch_array(Check_Username($conn,$username));
+        $qr ="
+            INSERT INTO `user_infomation`(`id_user`) VALUES ('$row_users[ID_USER]')
+        ";
+        mysqli_query($conn,$qr);
     }
 ?>

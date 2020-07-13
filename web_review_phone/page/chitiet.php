@@ -311,8 +311,8 @@ else
         <div>
             <p><span id="total-cmt"><?php echo TongCmt($conn);?> </span>lượt đánh giá: 
                 <span id="total-tieu-cuc"><?php echo TongTieuCuc($conn);?> </span>tiêu cực,
-                <span id="total-tich-cuc"><?php echo TongTichCuc($conn);?></span>tích cực
-                <a href="?p=binhluan&&IdBv=<?php echo $row_BaiVietTheoIdDT['ID_BAI_VIET'];?>" type="button" class="btn btn-primary">Xem tất cả bình luận</a>
+                <span id="total-tich-cuc"><?php echo TongTichCuc($conn);?></span> tích cực
+                <a href="?p=binhluan&idBV=<?php echo $row_BaiVietTheoIdDT['ID_BAI_VIET'];?>" type="button" class="btn btn-primary">Xem tất cả bình luận</a>
             </p>
         </div>
     </div>

@@ -36,19 +36,18 @@ if(isset($_POST["btnRegister"]))
     $n_username = $_POST["new_username"];
     $n_password =$_POST["new_password"];
     $c_password =$_POST["confirm_password"];
-    if(!$n_password || !$n_username || !$c_password)
-    {
-        echo "<script type='text/javascript'>alert('Vui lòng nhập đầy đủ thông tin');</script>";
-        exit;
-    }
+   
     if (mysqli_num_rows(Check_Username($conn,$n_username)))
     {
+        // echo "<script type='text/javascript'>alert('Tên đăng nhập này đã được sử dụng');
+        // window.location.href='index.php?p=dangnhap';</script>";
         echo "Tên đăng nhập này đã có người dùng. Vui lòng chọn tên đăng nhập khác. <a href='javascript: history.go(-1)'>Trở lại</a>";
         exit;
     }
     if($n_password == $c_password)
     {
         DangkyTK($conn,$n_username,md5($n_password));
+        Insert_User_Information($conn,$n_username);
         echo "<script type='text/javascript'>alert('Tạo tài khoản thành công');</script>";
     }
     else
@@ -68,11 +67,11 @@ if(isset($_POST["btnRegister"]))
                 <form id="login-form" class="form" method = "POST">                       
                     <div class="form-group">
                         <label>Tên đăng nhập</label><br>
-                        <input type="text" name="username" id="username" class="form-control">
+                        <input type="text" required name="username" id="username" class="form-control" autofocus >
                     </div>
                     <div class="form-group">
                         <label>Mật khẩu</label><br>
-                        <input type="password" name="password" id="password" class="form-control">
+                        <input type="password" required name="password" id="password" class="form-control">
                     </div>
                     <div class="right">
                         <button name="btnLogin" type="submit" class="btn btn-primary">Xác nhận</button>
@@ -87,15 +86,16 @@ if(isset($_POST["btnRegister"]))
             <form id="login-form" class="form" method = "POST">                       
                 <div class="form-group">
                     <label>Tên đăng nhập</label><br>
-                    <input type="text" name="new_username" id="new_username" class="form-control">
+                    <input type="text" name="new_username" id="new_username" class="form-control" required minlength="6" maxlength="20">
                 </div>
                 <div class="form-group">
                     <label>Mật khẩu</label><br>
-                    <input type="password" name="new_password" id="new_password" class="form-control">
+                    <input type="password" name="new_password" id="new_password" class="form-control" required minlength="8" maxlength="20">
+                    <span class="validity"></span>
                 </div>
                 <div class="form-group">
                     <label>Nhập lại mật khẩu</label><br>
-                    <input type="password" name="confirm_password" id="confirm_password" class="form-control">
+                    <input type="password" name="confirm_password" id="confirm_password" class="form-control" required minlength="8" maxlength="20">
                 </div>
                 <div class="right">
                     <button name="btnRegister" type="submit" class="btn btn-primary">Đăng ký</button>
