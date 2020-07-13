@@ -297,7 +297,8 @@ else
         <div class="list-cmt">
 
             <?php
-            $BinhLuan2 = BinhLuan2($conn);
+            $idBV = $row_BaiVietTheoIdDT['ID_BAI_VIET'];
+            $BinhLuan2 = BinhLuan2($conn,$idBV);
             while($row_BinhLuan2 = mysqli_fetch_array($BinhLuan2)) {
             ?>
             <div class="cmt">
@@ -309,10 +310,10 @@ else
             <?php }?>
         </div>
         <div>
-            <p><span id="total-cmt"><?php echo TongCmt($conn);?> </span>lượt đánh giá: 
-                <span id="total-tieu-cuc"><?php echo TongTieuCuc($conn);?> </span>tiêu cực,
-                <span id="total-tich-cuc"><?php echo TongTichCuc($conn);?></span> tích cực
-                <a href="?p=binhluan&idBV=<?php echo $row_BaiVietTheoIdDT['ID_BAI_VIET'];?>" type="button" class="btn btn-primary">Xem tất cả bình luận</a>
+            <p><span id="total-cmt"><?php echo TongCmt($conn,$idBV);?> </span>lượt đánh giá: 
+                <span id="total-tieu-cuc"><?php echo TongTieuCuc($conn,$idBV);?> </span>tiêu cực,
+                <span id="total-tich-cuc"><?php echo TongTichCuc($conn,$idBV);?></span> tích cực
+                <a href="?p=binhluan&idBV=<?php echo $idBV?>" type="button" class="btn btn-primary">Xem tất cả bình luận</a>
             </p>
         </div>
     </div>

@@ -30,6 +30,8 @@
     function PhoneList_Count($conn){
         $qr ="
             SELECT COUNT(*) as total FROM `dien_thoai` 
+            LEFT JOIN `bai_viet` ON `bai_viet`.`ID_DIEN_THOAI` = `dien_thoai`.`ID_DIEN_THOAI`
+            WHERE bai_viet.ID_USER IS NOT NULL
         ";
         $count = mysqli_query($conn,$qr);
         $row = mysqli_fetch_array($count);
@@ -39,7 +41,9 @@
 <?php
     function PhoneList_HangSX_Count($conn,$Id_HangSX){
         $qr ="
-        SELECT COUNT(*) as total FROM `dien_thoai` WHERE `ID_HANG_SAN_XUAT`=$Id_HangSX
+        SELECT COUNT(*) as total FROM `dien_thoai` 
+        LEFT JOIN `bai_viet` ON `bai_viet`.`ID_DIEN_THOAI` = `dien_thoai`.`ID_DIEN_THOAI`
+            WHERE bai_viet.ID_USER IS NOT NULL && `ID_HANG_SAN_XUAT`=$Id_HangSX
         ";
         $count = mysqli_query($conn,$qr);
         $row = mysqli_fetch_array($count);
@@ -48,7 +52,10 @@
 
     function PhoneList_Gia_Count($conn,$GiaThap,$GiaCao){
         $qr ="
-            SELECT COUNT(*) as total FROM `dien_thoai` WHERE `GIA_CA_THI_TRUONG` BETWEEN $GiaThap and $GiaCao
+            SELECT COUNT(*) as total 
+            FROM `dien_thoai` 
+                LEFT JOIN `bai_viet` ON `bai_viet`.`ID_DIEN_THOAI` = `dien_thoai`.`ID_DIEN_THOAI`
+            WHERE bai_viet.ID_USER IS NOT NULL && `GIA_CA_THI_TRUONG` BETWEEN $GiaThap and $GiaCao
         ";
         $count = mysqli_query($conn,$qr);
         $row = mysqli_fetch_array($count);
@@ -174,7 +181,7 @@
         ";
         return mysqli_query($conn,$qr);
     }
-    function BinhLuan2($conn){
+    function BinhLuan2($conn,$idBV){
         $qr ="
             SELECT * FROM `binh_luan`,bai_viet 
             WHERE binh_luan.ID_BAI_VIET = bai_viet.ID_BAI_VIET 
@@ -200,12 +207,6 @@
         return mysqli_query($conn,$qr);
     }
 
-    // function cmtTichCuc($conn){
-    //     $qr ="
-    //         SELECT * FROM `binh_luan` WHERE `PHAN_LOAI_BINH_LUAN`=1
-    //     ";
-    //     return mysqli_query($conn,$qr);
-    // }
     function cmtTichCuc($conn,$idBV){
         $qr ="
             SELECT * FROM `binh_luan`,bai_viet 
@@ -215,14 +216,7 @@
         ";
         return mysqli_query($conn,$qr);
     }
-    // function TongCmt($conn,$idBV){
-    //     $qr ="
-    //         SELECT COUNT(*) as tongcmt FROM `binh_luan`
-    //     ";
-    //     $TongCmt = mysqli_query($conn,$qr);
-    //     $row = mysqli_fetch_array($TongCmt);
-    //     return $row['tongcmt'];
-    // }
+
     function TongCmt($conn,$idBV){
         $TongCmt = BinhLuanList($conn,$idBV);
         $count = mysqli_num_rows($TongCmt);
@@ -239,6 +233,21 @@
         $TongTichCuc = cmtTichCuc($conn,$idBV);
         $count = mysqli_num_rows($TongTichCuc);
         return $count;
+    }
+    // thêm bình luận
+    function Insert_cmt($conn,$idBV,$ID_USER,$TEN,$NOIDUNG,$PHAN_LOAI){
+        $qr ="
+            INSERT INTO `binh_luan`(`ID_BAI_VIET`, `ID_USER`, `TEN_NGUOI_BINH_LUAN`, `NOI_DUNG_BINH_LUAN`, `NGAY_BINH_LUAN`, `PHAN_LOAI_BINH_LUAN`) 
+            VALUES ('$idBV','$ID_USER','$TEN','$NOIDUNG',CURDATE(),'$PHAN_LOAI')
+        ";
+        mysqli_query($conn,$qr);
+    }
+    // user_infomation
+    function Get_user_infomation($conn,$ID_USER){
+        $qr ="
+            SELECT * FROM `user_infomation` WHERE `id_user` = $ID_USER
+        ";
+        return mysqli_query($conn,$qr);
     }
 ?>
 <!-- tinh diem -->

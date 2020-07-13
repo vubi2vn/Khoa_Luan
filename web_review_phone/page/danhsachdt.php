@@ -1,6 +1,6 @@
 <?php
 // Phân trang
-    $item_limit = 5;
+    $item_limit = 20;
     $page_Index=isset($_GET['page']) ? $_GET['page'] : 1;
     //$url_now = $_SERVER['REQUEST_URI'];
     $url_now ='index.php?p=danhsachdt';

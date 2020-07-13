@@ -86,7 +86,7 @@ if(isset($_POST["btnRegister"]))
             <form id="login-form" class="form" method = "POST">                       
                 <div class="form-group">
                     <label>Tên đăng nhập</label><br>
-                    <input type="text" name="new_username" id="new_username" class="form-control" required minlength="6" maxlength="20">
+                    <input type="text" name="new_username" id="new_username" class="form-control" autocomplete="off" required minlength="6" maxlength="20">
                 </div>
                 <div class="form-group">
                     <label>Mật khẩu</label><br>
