@@ -8,6 +8,14 @@ if(isset($_POST["btn_logout"]))
     unset($_SESSION["TEN_PHAN_QUYEN"]);
     header("Location:?p=dangnhap");
 }
+
+$avatar = null;
+if(isset($_SESSION["ID_USER"])){
+    $Get_user_infomation = Get_user_infomation($conn,$_SESSION["ID_USER"]);
+    $row_Get_user_infomation = mysqli_fetch_array($Get_user_infomation);
+    $avatar = $row_Get_user_infomation['hinh_dai_dien'];
+}
+
 ?>
 
 <header>
@@ -31,7 +39,13 @@ if(isset($_POST["btn_logout"]))
 
         <div class="dropdown">
         <a type="button" class="login center">
-            <i class="fas fa-user-circle fa-2x"></i>
+            <?php 
+                if(!$avatar){
+                    echo '<i class="fas fa-user-circle fa-2x"></i>';
+                }else{                   
+                    echo '<img src="web_admin/'.$avatar.'" class="fas"></img>';
+                };
+            ?>
         </a>
             <div class="dropdown-content center" style="left:-50px;">             
               <?php

@@ -4,6 +4,11 @@
 
 <?php
     //kiem tra idbv
+    $ID_USER = 0;
+    if(isset($_SESSION["ID_USER"])) 
+    { 
+        $ID_USER = $_SESSION["ID_USER"];
+    }
     if (isset($_GET['idBV'])){
         $idBV = $_GET["idBV"];
         if($idBV==null)
@@ -18,15 +23,13 @@
     //new cmt
     if(isset($_POST["btnSend"]))
     {
-        if(isset($_SESSION["ID_USER"])) 
-        { 
-            $ID_USER = $_SESSION["ID_USER"];
-        }
-        else 
+        if($ID_USER == 0) 
         { 
             echo "<script type='text/javascript'>alert('Bạn cần đăng nhập trước khi bình luận!');
-            </script>";
+            window.location.href='index.php?p=dangnhap';</script>";
+            exit;
         }
+       
         $user_information = mysqli_fetch_array(Get_user_infomation($conn,$ID_USER));
         $TEN = $user_information['ho_ten_user'];
         $noi_dung = $_POST["noi_dung"];
@@ -39,8 +42,8 @@
         $vector=change_to_vector($string);
         $command = escapeshellcmd('Testing.py '.$vector[0].' '.$vector[1]); //Chuyển mã trong tập tin test.py thành các lệnh
         $output = shell_exec($command); // Lấy kết quả trả về biến $output
+
         $PHAN_LOAI=trim($output);
-        
         Insert_cmt($conn,$idBV,$ID_USER,$TEN,$noi_dung,$PHAN_LOAI);
         Update_DiemDanhGia($conn,$idBV);
         echo "<script type='text/javascript'>alert('Bình luận thành công!');</script>";
@@ -54,7 +57,7 @@
     <p class=" navigat"><a href='javascript: history.go(-1)'>Chi tiết sản phẩm</a> -> Bình luận</p>
     <div class="chitiet-cmt">
         <form class="form" method = "POST">
-            <textarea name="noi_dung" class="form-control" rows="3" minlength="20" maxlength="500"></textarea>
+            <textarea name="noi_dung" class="form-control" rows="3" maxlength="500"></textarea>
             <div class="chitiet-cmt-emotion">
                 <a href="#">Quy định đăng bình luận !</a>
                 <button name="btnSend" type="submit" class="btn btn-primary" >Gửi</button>
@@ -75,11 +78,20 @@
         <!--  -->
         <div class="tab-content" id="pills-tabContent">
             <div class="tab-pane fade show active" id="pills-tongcmt" role="tabpanel" aria-labelledby="tab-tongcmt">
-                <h3>Tất cả bình luận</h3>  
+                 
                 <div class="list-cmt">
                 <?php
-                    $BinhLuanList = BinhLuanList($conn,$idBV);
-                   
+                    if(mysqli_num_rows(MyBinhLuan($conn,$idBV,$ID_USER))>0){
+                        // echo '<div class="My-cmt">Bình luận của bạn';
+                        echo '<h5>Bình luận của bạn</h5>'; 
+                        $MyBinhLuan = MyBinhLuan($conn,$idBV,$ID_USER);                 
+                        while($row_MyBinhLuan = mysqli_fetch_array($MyBinhLuan)){
+                            echo '<div class="cmt">  
+                            <div class="cmt-noidung">'.$row_MyBinhLuan['NOI_DUNG_BINH_LUAN'].'</div>                           
+                            </div>';
+                        }
+                    }
+                    $BinhLuanList = BinhLuanList($conn,$idBV,$ID_USER);                 
                     while($row_BinhLuanList = mysqli_fetch_array($BinhLuanList)) {
                     ?>
                     <div class="cmt">

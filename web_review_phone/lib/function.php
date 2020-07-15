@@ -159,43 +159,57 @@
         return mysqli_query($conn,$qr);
     }
 
-    
-    function NDBaiViet($conn,$idBV){
-        $qr ="
-            SELECT * FROM `noi_dung_bai_viet`
-            Where `ID_BAI_VIET` = $idBV
-
-        ";
-        return mysqli_query($conn,$qr);
+    function BaiViet_Readmore($string, $limit, $substitute){// (chuỗi, số từ, từ thay thế)
+        if( strlen($string) <= $limit ){//kiểm tra xem có cần readmore ko
+            $final_string = $string;
+        } else {
+            $final_string = "";
+            $paragraph = explode("<p>", $string);//mỗi phần cắt là 1 thẻ <p>
+            foreach( $paragraph as $value ){
+                if( strlen($final_string . $value) < $limit ){
+                    $final_string .= $value;//thêm tiếp sau final string
+                } else {
+                    break;
+                }
+            }
+            $final_string .= $substitute;//thêm từ thay thế cho toàn bộ vế sau
+        }
+        return $final_string;
     }
 ?>
 <!-- binh luan -->
 <?php
-    function BinhLuanList($conn,$idBV)
+    function MyBinhLuan($conn,$idBV,$ID_USER)
     {
         $qr ="
             SELECT * FROM `binh_luan`,bai_viet 
             WHERE binh_luan.ID_BAI_VIET = bai_viet.ID_BAI_VIET 
-            AND bai_viet.ID_BAI_VIET = '$idBV' AND HIEN_THI_BINH_LUAN = '1'
+            AND bai_viet.ID_BAI_VIET = '$idBV' AND HIEN_THI_BINH_LUAN = '1' AND binh_luan.ID_USER = '$ID_USER'
             ORDER BY binh_luan.LUOT_LIKE DESC
         ";
         return mysqli_query($conn,$qr);
     }
-    function BinhLuan2($conn,$idBV){
+
+    function BinhLuanList($conn,$idBV,$ID_USER)
+    {
         $qr ="
             SELECT * FROM `binh_luan`,bai_viet 
             WHERE binh_luan.ID_BAI_VIET = bai_viet.ID_BAI_VIET 
-            AND bai_viet.ID_BAI_VIET = '$idBV' AND HIEN_THI_BINH_LUAN = '1'
+            AND bai_viet.ID_BAI_VIET = '$idBV' AND HIEN_THI_BINH_LUAN = '1' AND binh_luan.ID_USER != '$ID_USER'
+            ORDER BY binh_luan.LUOT_LIKE DESC
+        ";
+        return mysqli_query($conn,$qr);
+    }
+    function BinhLuan2($conn,$idBV,$ID_USER){
+        $qr ="
+            SELECT * FROM `binh_luan`,bai_viet 
+            WHERE binh_luan.ID_BAI_VIET = bai_viet.ID_BAI_VIET 
+            AND bai_viet.ID_BAI_VIET = '$idBV' AND HIEN_THI_BINH_LUAN = '1' AND binh_luan.ID_USER != '$ID_USER'
             ORDER BY binh_luan.LUOT_LIKE DESC LIMIT 0,2
         ";
         return mysqli_query($conn,$qr);
     }
-    function BinhLuan_IDUser($conn,$ID_USER){
-        $qr ="
-            SELECT * FROM `binh_luan` where `ID_USER` =$ID_USER
-        ";
-        return mysqli_query($conn,$qr);
-    }    
+ 
     //count phân loại bl
     function cmtTieuCuc($conn,$idBV){
         $qr ="
@@ -218,8 +232,12 @@
     }
 
     function TongCmt($conn,$idBV){
-        $TongCmt = BinhLuanList($conn,$idBV);
-        $count = mysqli_num_rows($TongCmt);
+        $qr ="
+            SELECT * FROM `binh_luan`,bai_viet 
+            WHERE binh_luan.ID_BAI_VIET = bai_viet.ID_BAI_VIET 
+            AND bai_viet.ID_BAI_VIET = '$idBV' AND HIEN_THI_BINH_LUAN = '1'
+        ";
+        $count = mysqli_num_rows(mysqli_query($conn,$qr));
         return $count;
     }
 
@@ -240,6 +258,7 @@
             INSERT INTO `binh_luan`(`ID_BAI_VIET`, `ID_USER`, `TEN_NGUOI_BINH_LUAN`, `NOI_DUNG_BINH_LUAN`, `NGAY_BINH_LUAN`, `PHAN_LOAI_BINH_LUAN`) 
             VALUES ('$idBV','$ID_USER','$TEN','$NOIDUNG',CURDATE(),b'$PHAN_LOAI')
         ";
+        //echo $qr;
         mysqli_query($conn,$qr);
     }
     // user_infomation

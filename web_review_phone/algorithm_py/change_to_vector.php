@@ -4,15 +4,18 @@ function change_to_vector($string)
     $array_score=[];
     if(!isset($_SESSION['array_score']))
     {
-    $file = fopen("CalculateTF.csv","r");
+        $file = fopen("./algorithm_py/CalculateTF.csv","r");
 
-        while(!feof($file))
+        while(! feof($file))
         {
             $array_score[]=fgetcsv($file);
         }
 
         fclose($file);
         $_SESSION['array_score']=$array_score;
+        // $file = fopen("./algorithm_py/CalculateTF.csv","r");
+        // print_r(fgetcsv($file));
+        // fclose($file);
     }
     else
     {

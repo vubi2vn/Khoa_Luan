@@ -1,4 +1,10 @@
 <?php 
+$ID_USER = 0;
+if(isset($_SESSION["ID_USER"])) 
+{ 
+    $ID_USER = $_SESSION["ID_USER"];
+}
+
 if (isset($_GET['idDT'])){
     $idDT = $_GET["idDT"];
     if($idDT==null)
@@ -275,13 +281,10 @@ else
         $BaiVietTheoIdDT = BaiVietTheoIdDT($conn,$idDT);
         $row_BaiVietTheoIdDT = mysqli_fetch_array($BaiVietTheoIdDT);
 
-        if(mysqli_num_rows($BaiVietTheoIdDT)==1)
-        {
-            echo $row_BaiVietTheoIdDT['NOI_DUNG_BAI_VIET'];        
-        }
-        else{
-            echo "Điện thoại này hiện tại chưa có bài đánh giá";
-        }
+        echo $row_BaiVietTheoIdDT['NOI_DUNG_BAI_VIET'];        
+        // $readmore = '<a href="#" name="readmore"> Đọc thêm</a>';
+        // echo BaiViet_Readmore($row_BaiVietTheoIdDT['NOI_DUNG_BAI_VIET'], 1500, $readmore);//(chuỗi, số từ, từ thay thế)
+
     ?>
     </div>
     <div class="clr"></div>
@@ -289,16 +292,24 @@ else
     <!-- Phần bình luận nhỏ -->
     <p class=" navigat">Bình luận</p>
     <div class="chitiet-cmt">
-        <textarea class="form-control" rows="3"></textarea>
-        <div class="chitiet-cmt-emotion">
-            <a href="#">Quy định đăng bình luận !</a>
-            <button type="button" class="btn btn-primary">Gửi</button>
-        </div>
+        
         <div class="list-cmt">
 
             <?php
             $idBV = $row_BaiVietTheoIdDT['ID_BAI_VIET'];
-            $BinhLuan2 = BinhLuan2($conn,$idBV);
+
+            if(mysqli_num_rows(MyBinhLuan($conn,$idBV,$ID_USER))>0){
+                // echo '<div class="My-cmt">Bình luận của bạn';
+                echo '<h5>Bình luận của bạn</h5>'; 
+                $MyBinhLuan = MyBinhLuan($conn,$idBV,$ID_USER);                 
+                while($row_MyBinhLuan = mysqli_fetch_array($MyBinhLuan)){
+                    echo '<div class="cmt">  
+                    <div class="cmt-noidung">'.$row_MyBinhLuan['NOI_DUNG_BINH_LUAN'].'</div>                           
+                    </div>';
+                }
+            }
+            
+            $BinhLuan2 = BinhLuan2($conn,$idBV,$ID_USER);
             while($row_BinhLuan2 = mysqli_fetch_array($BinhLuan2)) {
             ?>
             <div class="cmt">
@@ -313,7 +324,7 @@ else
             <p><span id="total-cmt"><?php echo TongCmt($conn,$idBV);?> </span>lượt đánh giá: 
                 <span id="total-tieu-cuc"><?php echo TongTieuCuc($conn,$idBV);?> </span>tiêu cực,
                 <span id="total-tich-cuc"><?php echo TongTichCuc($conn,$idBV);?></span> tích cực
-                <a href="?p=binhluan&idBV=<?php echo $idBV?>" type="button" class="btn btn-primary">Xem tất cả bình luận</a>
+                <a href="?p=binhluan&idBV=<?php echo $idBV?>" type="button" class="btn btn-primary">Bình luận</a>
             </p>
         </div>
     </div>
