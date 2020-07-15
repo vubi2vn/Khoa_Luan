@@ -12,11 +12,11 @@
             </div>
             <div class="form-group" >
                 <label class="label-info">Tên cửa hàng:</label>
-                <div class="text-box-info"><input class="form-control" type="text" name="txt_nstore_name" id="txt_nstore_name" placeholder="vd: Điện máy xanh"/></div>
+                <div class="text-box-info"><input class="form-control" type="text" name="txt_nstore_name" id="txt_nstore_name" placeholder="vd: Điện máy xanh" minlength="8" maxlength="50" required/></div>
             </div>
             <div class="form-group">
                 <label class="label-info">Link website:</label>
-                <div class="text-box-info"><input class="form-control" name="txt_nlink" id="txt_nlink" type="text" placeholder="vd: http://dienmayxanh.com"/></div>
+                <div class="text-box-info"><input class="form-control" name="txt_nlink" id="txt_nlink" type="text" placeholder="vd: http://dienmayxanh.com"/ maxlength="200"></div>
             </div>
             <div class="form-group">
                 <label class="label-info">Logo:</label>

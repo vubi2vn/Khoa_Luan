@@ -47,15 +47,15 @@ if(isset($_POST["btn_change_pw"]))
         <div class="modal-body">
             <form method="post" name="changePW-form" required>
                 <div class="form-group">
-                    <input type="password" name="old-pass" id="old-pass" class="form-control" onkeyup="checkpass()" onblur="checkpass()" placeholder="Mật khẩu hiện tại">
+                    <input type="password" name="old-pass" id="old-pass" class="form-control"  placeholder="Mật khẩu hiện tại" minlength="8" maxlength="20" required>
                     <small id="check_pass"></small>
                 </div>
                 <div class="form-group">
-                    <input type="password" name="new-pass" id="new-pass" class="form-control" onkeyup="checknewpass()" placeholder="Mật khẩu mới">
+                    <input type="password" name="new-pass" id="new-pass" class="form-control"  placeholder="Mật khẩu mới" minlength="8" maxlength="20" required>
                     <small id="check_new_pass"></small>
                 </div>
                 <div class="form-group">
-                    <input type="password" name="re-pass" id="re-pass" class="form-control"  onkeyup="checkrepass()" placeholder="Xác nhận mật khẩu">
+                    <input type="password" name="re-pass" id="re-pass" class="form-control"  onkeyup="checkrepass()" placeholder="Xác nhận mật khẩu" minlength="8" maxlength="20" required>
                     <small id="check_re_pass"></small>
                 </div>
             
@@ -71,36 +71,7 @@ if(isset($_POST["btn_change_pw"]))
 
 </div>
 <script>
-    function checkpass(){
-        var x,y;
-        x = document.getElementById("old-pass").value;
-        if(x.length==0)
-        {
-            y="Mật khẩu không được để trống!";
-            document.getElementById("check_pass").style.color = 'red';
-        }
-        else
-        {
-            y="Mật khẩu hợp lệ!"
-            document.getElementById("check_pass").style.color = 'green';
-        }
-        document.getElementById("check_pass").innerHTML = y;
-    }
-    function checknewpass(){
-        var x,y;
-        x = document.getElementById("new-pass").value;
-        if(x.length<8||x.length>20)
-        {
-            y="Mật khẩu phải từ 8 đến 20 ký tự!";
-            document.getElementById("check_new_pass").style.color = 'red';
-        }
-        else
-        {
-            y="Mật khẩu hợp lệ!"
-            document.getElementById("check_new_pass").style.color = 'green';
-        }
-        document.getElementById("check_new_pass").innerHTML = y;
-    }
+    
     function checkrepass(){
         var x,y,z;
         x = document.getElementById("new-pass").value;

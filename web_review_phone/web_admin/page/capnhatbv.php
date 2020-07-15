@@ -1,4 +1,5 @@
 <?php
+//Kiểm tra phân quyền
 if($_SESSION["TEN_PHAN_QUYEN"]!="tacgia")
 {
     header("Location:index.php");
@@ -80,7 +81,7 @@ if(isset($_POST["btn_submit"]))
                 <label >Tiêu đề bài viết</label>
                 </div>
                 <div class="col">
-                <input type="text" class="form-control" name="news_title" placeholder="ABC">
+                <input type="text" class="form-control" name="news_title" placeholder="ABC" minlength="10" maxlength="200" required>
                 </div>
             </div>
         </div>

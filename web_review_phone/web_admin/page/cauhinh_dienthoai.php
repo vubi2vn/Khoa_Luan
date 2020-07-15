@@ -1,3 +1,10 @@
+<?php
+//Kiểm tra phân quyền
+if($_SESSION["TEN_PHAN_QUYEN"]!="admin")
+{
+    header("Location:index.php");
+}
+?>
     <?php
     include "backend/phone.php";
     ?>

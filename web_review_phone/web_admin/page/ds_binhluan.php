@@ -1,5 +1,12 @@
 <?php include "backend/comments.php"?>
 <?php
+//Kiểm tra phân quyền
+if($_SESSION["TEN_PHAN_QUYEN"]!="admin")
+{
+    header("Location:index.php");
+}
+?>
+<?php
 //Phân trang
 //source:https://freetuts.net/thuat-toan-phan-trang-voi-php-va-mysql-550.html
 $limit_record=3;

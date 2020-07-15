@@ -1,3 +1,8 @@
+<style>
+.menu{
+    height:auto;
+}
+</style>
 <?php include "backend/news.php"?>
 <?php
 $new=null;

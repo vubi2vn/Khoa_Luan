@@ -10,11 +10,11 @@
         <form name="change-info-user" method="post">
             <div class="form-group">
                 <label class="label-info">Họ và tên:</label>
-                <div class="text-box-info"><input class="form-control" name="txt_user_name" type="text" placeholder="vd: Nguyễn Văn A" value="<?php echo $name ?>" name="user-name"/></div>
+                <div class="text-box-info"><input class="form-control" name="txt_user_name" type="text" placeholder="vd: Nguyễn Văn A" value="<?php echo $name ?>" name="user-name" minlength="4" maxlength="50" required/></div>
             </div>
             <div class="form-group">
                 <label class="label-info">Ngày sinh:</label>
-                <div class="text-box-info"><input class="form-control" name="txt_birthday" type="date" placeholder="vd: 09/07/1998" value="<?php echo $birth ?>"></div>
+                <div class="text-box-info"><input class="form-control" name="txt_birthday" type="date" placeholder="vd: 09/07/1998" value="<?php echo $birth ?>" required></div>
             </div>
             <div class="form-group">
                 <label class="label-info">Giới tính:</label>
@@ -27,11 +27,11 @@
             </div>
             <div class="form-group">
                 <label class="label-info">Số điện thoại:</label>
-                <div class="text-box-info"><input class="form-control" name="txt_phone" type="number" placeholder="vd: Nguyễn Văn A" value="<?php echo $phone ?>"></div>
+                <div class="text-box-info"><input class="form-control" name="txt_phone" type="number" placeholder="vd: Nguyễn Văn A" value="<?php echo $phone ?>" max="9999999999"></div>
             </div>
             <div class="form-group">
                 <label class="label-info">Email:</label>
-                <div class="text-box-info"><input class="form-control" type="email" name="txt_email" placeholder="vd: abc@gmail.com" value="<?php echo $email?>"></div>
+                <div class="text-box-info"><input class="form-control" type="email" name="txt_email" placeholder="vd: abc@gmail.com" value="<?php echo $email?>" maxlength="200"></div>
             </div>
         
         </div>

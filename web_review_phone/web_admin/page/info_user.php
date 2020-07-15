@@ -81,7 +81,7 @@ if(isset($_POST["btn_submit_avatar"]))
             <ul class="list-group">
                 <a href="#" class="list-group-item list-group-item-action" data-toggle="modal" data-target="#change_info_user" ><i class="fas fa-user"></i> Cập nhật thông tin</a>
                 <a href="#" class="list-group-item list-group-item-action" data-toggle="modal" data-target="#change_avatar"><i class="fas fa-portrait"></i> Đổi ảnh đại diện</a>
-                <a href="#" class="list-group-item list-group-item-action" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-key"></i> Đổi mật khẩu</a>
+                <a href="#" class="list-group-item list-group-item-action" data-toggle="modal" data-target="#changePW"><i class="fas fa-key"></i> Đổi mật khẩu</a>
                 <a href="#" class="list-group-item list-group-item-action" data-toggle="modal" data-target="#log_out"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a>
             </ul>
         </div>

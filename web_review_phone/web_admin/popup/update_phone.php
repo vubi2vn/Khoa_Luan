@@ -1,5 +1,5 @@
 <?php
-$trademark=select_all_trademark($conn);
+$trademarks=select_all_trademark($conn);
 ?>
 <div class="modal fade" id="update-phone" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -15,14 +15,14 @@ $trademark=select_all_trademark($conn);
             </div>
             <div class="form-group" >
                 <label class="label-info">Tên điện thoại:</label>
-                <div class="text-box-info"><input class="form-control" type="text" name="txt_nphone_name" id="txt_nphone_name" placeholder="vd: Nokia A92"/></div>
+                <div class="text-box-info"><input class="form-control" type="text" name="txt_nphone_name" id="txt_nphone_name" placeholder="vd: Nokia A92" minlength="8" maxlength="50" required/></div>
             </div>
             <div class="form-group" style="height:44px">
                 <label "label-info">Hãng sản xuất:</label>
                 <div class="text-box-info">
                     <select class="form-control" id="trademark_option" name="trademark_option" >
                     <?php
-                        foreach($trademark as $a)
+                        foreach($trademarks as $a)
                         {
                             echo '<option value="'.$a["ID_HANG_SAN_XUAT"].'">'.$a["TEN_HANG_SAN_XUAT"].'</option>';
                         }
@@ -42,7 +42,13 @@ $trademark=select_all_trademark($conn);
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
-            <input type="submit" class="btn btn-primary" name="btn_submit" value="Cập nhật"/>
+            <?php
+            if($trademarks!=null)
+            {
+                echo '<input type="submit" class="btn btn-primary" name="btn_submit" value="Cập nhật"/>';
+            }
+            ?>
+            
         </div>
         </div>
         </form>

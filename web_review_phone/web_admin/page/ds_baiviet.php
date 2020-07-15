@@ -1,7 +1,13 @@
 <?php
 include "backend/news.php";
 ?>
-
+<?php
+//Kiểm tra phân quyền
+if($_SESSION["TEN_PHAN_QUYEN"]!="tacgia")
+{
+    header("Location:index.php");
+}
+?>
 <?php
 //Phân trang
 //source:https://freetuts.net/thuat-toan-phan-trang-voi-php-va-mysql-550.html

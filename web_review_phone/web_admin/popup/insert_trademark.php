@@ -8,11 +8,11 @@
         <form method="post" enctype="multipart/form-data">
             <div class="form-group">
                 <label class="label-info">Hãng sản xuất:</label>
-                <div class="text-box-info"><input class="form-control" type="text" name="txt_trademark" placeholder="vd: VSmart"/></div>
+                <div class="text-box-info"><input class="form-control" type="text" name="txt_trademark" placeholder="vd: VSmart" minlength="8" maxlength="50" required/></div>
             </div>
             <div class="form-group">
                 <label class="label-info">Quốc gia:</label>
-                <div class="text-box-info"><input class="form-control" name="txt_country" type="text" placeholder="vd: Việt Nam"/></div>
+                <div class="text-box-info"><input class="form-control" name="txt_country" type="text" placeholder="vd: Việt Nam" maxlength="50"/></div>
             </div>
             <div class="form-group">
                 <label class="label-info">Logo:</label>

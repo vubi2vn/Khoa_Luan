@@ -3,6 +3,13 @@ include "backend/phone.php";
 include "backend/store.php";
 ?>
 <?php
+//Kiểm tra phân quyền
+if($_SESSION["TEN_PHAN_QUYEN"]!="admin")
+{
+    header("Location:index.php");
+}
+?>
+<?php
 
 if(isset($_GET["id"]))
 {
