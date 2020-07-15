@@ -2,14 +2,22 @@
 function change_to_vector($string)
 {
     $array_score=[];
-    $file = fopen("./algorithm_py/CalculateTF.csv","r");
-
-    while(! feof($file))
+    if(!isset($_SESSION['array_score']))
     {
-        $array_score[]=fgetcsv($file);
-    }
+    $file = fopen("CalculateTF.csv","r");
 
-    fclose($file);
+        while(!feof($file))
+        {
+            $array_score[]=fgetcsv($file);
+        }
+
+        fclose($file);
+        $_SESSION['array_score']=$array_score;
+    }
+    else
+    {
+        $array_score=$_SESSION['array_score'];
+    }
     $score_pos_bf=0;
     $score_neg_bf=0;
     $score_pos_at=0;
@@ -21,7 +29,7 @@ function change_to_vector($string)
         {
             for($i=1;$i<count($array_score);$i++)
             {
-                if($a==$array_score[$i][0])
+                if($a===($array_score[$i][0]??"a"))
                 {
                     if($array_score[$i][5]>0)
                     {
@@ -61,5 +69,6 @@ function change_to_vector($string)
         $y=0;
     }
     return [$x,$y];
+    
 }
 ?>

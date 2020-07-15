@@ -25,7 +25,7 @@
         else 
         { 
             echo "<script type='text/javascript'>alert('Bạn cần đăng nhập trước khi bình luận!');
-            window.location.href='index.php?p=dangnhap';</script>";
+            </script>";
         }
         $user_information = mysqli_fetch_array(Get_user_infomation($conn,$ID_USER));
         $TEN = $user_information['ho_ten_user'];
@@ -35,16 +35,16 @@
         $PHAN_LOAI="";
         $vector=null;
         $string="";
-        $string=trim($_POST["noi_dung"]);
+        $string=trim(strtoupper($_POST["noi_dung"]));
         $vector=change_to_vector($string);
-        $command = escapeshellcmd('./algorithm_py/Testing.py '.$vector[0].' '.$vector[1]); //Chuyển mã trong tập tin test.py thành các lệnh
+        $command = escapeshellcmd('Testing.py '.$vector[0].' '.$vector[1]); //Chuyển mã trong tập tin test.py thành các lệnh
         $output = shell_exec($command); // Lấy kết quả trả về biến $output
-        $PHAN_LOAI=$output;
-
+        $PHAN_LOAI=trim($output);
+        
         Insert_cmt($conn,$idBV,$ID_USER,$TEN,$noi_dung,$PHAN_LOAI);
         Update_DiemDanhGia($conn,$idBV);
-        //echo "<script type='text/javascript'>alert('Bình luận thành công $PHAN_LOAI !');</script>";
-        // header('refresh:1');
+        echo "<script type='text/javascript'>alert('Bình luận thành công!');</script>";
+        header('refresh:1');
     }
 ?>
 
@@ -54,7 +54,7 @@
     <p class=" navigat"><a href='javascript: history.go(-1)'>Chi tiết sản phẩm</a> -> Bình luận</p>
     <div class="chitiet-cmt">
         <form class="form" method = "POST">
-            <textarea name="noi_dung" class="form-control" rows="3" required maxlength="500"></textarea>
+            <textarea name="noi_dung" class="form-control" rows="3" minlength="20" maxlength="500"></textarea>
             <div class="chitiet-cmt-emotion">
                 <a href="#">Quy định đăng bình luận !</a>
                 <button name="btnSend" type="submit" class="btn btn-primary" >Gửi</button>

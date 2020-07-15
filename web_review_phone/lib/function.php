@@ -238,7 +238,7 @@
     function Insert_cmt($conn,$idBV,$ID_USER,$TEN,$NOIDUNG,$PHAN_LOAI){
         $qr ="
             INSERT INTO `binh_luan`(`ID_BAI_VIET`, `ID_USER`, `TEN_NGUOI_BINH_LUAN`, `NOI_DUNG_BINH_LUAN`, `NGAY_BINH_LUAN`, `PHAN_LOAI_BINH_LUAN`) 
-            VALUES ('$idBV','$ID_USER','$TEN','$NOIDUNG',CURDATE(),'$PHAN_LOAI')
+            VALUES ('$idBV','$ID_USER','$TEN','$NOIDUNG',CURDATE(),b'$PHAN_LOAI')
         ";
         mysqli_query($conn,$qr);
     }

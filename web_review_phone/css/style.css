@@ -422,7 +422,7 @@ header{
 }
 /* Login */
 .tab-pane{
-  height: 400px;
+  min-height: 400px;
 }
 .sign-in{
   width: 70%;
