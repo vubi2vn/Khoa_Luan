@@ -53,10 +53,12 @@ $count_report=count_report_havent_resolved($conn);
         <title>Admin</title>
         <link rel="stylesheet" href="css/bootstrap-4.5.0-dist/css/bootstrap.min.css" />
         <link href="css/fontawesome-free-5.13.0-web/css/all.css" rel="stylesheet">
+        <link type="text/css" href="css/Chart.min.css" rel="stylesheet"/>
         <link type="text/css" href="css/style.css" rel="stylesheet"/>
 
         <script type="text/javascript" src="css/jquery-3.5.1.min.js"> </script>
         <script type="text/javascript" src="css/bootstrap-4.5.0-dist/js/bootstrap.min.js"> </script>
+        <script type="text/javascript" src="css/Chart.min.js"> </script>
         <script type="text/javascript" src="ckeditor/ckeditor.js"> </script>
         <script type="text/javascript" src="ckfinder/ckfinder.js"> </script>
     </head>
@@ -85,6 +87,7 @@ $count_report=count_report_havent_resolved($conn);
                             case "ds_binhluan" : include "page/ds_binhluan.php"; break;
                             case "ds_noidung_baocao" : include "page/ds_noidung_baocao.php"; break;
                             case "cauhinh_dienthoai" : include "page/cauhinh_dienthoai.php"; break;
+                            case "thongke" : include "page/thongke.php"; break;
                             default : include "page/home.php";
                         }
                         ?>

@@ -43,7 +43,7 @@
             </div>';
     }
     ?>
-    <a href="#" class="list-group-item list-group-item-action" style="border:none"><i class="fas fa-chart-bar"></i> Thống kê</a>
+    <a href="index.php?p=thongke" class="list-group-item list-group-item-action" style="border:none"><i class="fas fa-chart-bar"></i> Thống kê</a>
     <a href="#" class="list-group-item list-group-item-action" data-toggle="modal" data-target="#changePW" style="border:none"><i class="fas fa-key"></i> Đổi mật khẩu</a>
     <a href="#" class="list-group-item list-group-item-action" data-toggle="modal" data-target="#log_out" style="border:none"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a>
 </div>
