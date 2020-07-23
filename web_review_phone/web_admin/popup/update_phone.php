@@ -18,7 +18,7 @@ $trademarks=select_all_trademark($conn);
                 <div class="text-box-info"><input class="form-control" type="text" name="txt_nphone_name" id="txt_nphone_name" placeholder="vd: Nokia A92" minlength="8" maxlength="50" required/></div>
             </div>
             <div class="form-group" style="height:44px">
-                <label "label-info">Hãng sản xuất:</label>
+                <label class = "label-info">Hãng sản xuất:</label>
                 <div class="text-box-info">
                     <select class="form-control" id="trademark_option" name="trademark_option" >
                     <?php

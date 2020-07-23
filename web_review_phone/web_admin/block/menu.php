@@ -18,7 +18,7 @@
             <a href="index.php?p=capnhat_baiviet" class="list-group-item list-group-item-action" style="border:none"><i class="fas fa-plus"></i> Tạo mới bài viết</a>
         </div>';
     } 
-    else
+    else if($_SESSION["TEN_PHAN_QUYEN"]=="admin")
     {
         echo '<a href="#" class="list-group-item list-group-item-action toggle-menu" id="toggle-menu-ht" style="border:none"><i class="fas fa-tools"></i> 
         Quản trị hệ thống <i class="fas fa-caret-down"></i>';
@@ -40,10 +40,12 @@
             echo '</a>
             <a href="index.php?p=ds_nguoidung" class="list-group-item list-group-item-action" style="border:none"><i class="fas fa-user"></i> Quản lí người dùng</a>
     
-            </div>';
+            </div>
+            <a href="index.php?p=thongke" class="list-group-item list-group-item-action" style="border:none"><i class="fas fa-chart-bar"></i> Thống kê</a>
+            ';
     }
     ?>
-    <a href="index.php?p=thongke" class="list-group-item list-group-item-action" style="border:none"><i class="fas fa-chart-bar"></i> Thống kê</a>
+   
     <a href="#" class="list-group-item list-group-item-action" data-toggle="modal" data-target="#changePW" style="border:none"><i class="fas fa-key"></i> Đổi mật khẩu</a>
     <a href="#" class="list-group-item list-group-item-action" data-toggle="modal" data-target="#log_out" style="border:none"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a>
 </div>

@@ -298,15 +298,15 @@ else
             <?php
             $idBV = $row_BaiVietTheoIdDT['ID_BAI_VIET'];
 
-            if(mysqli_num_rows(MyBinhLuan($conn,$idBV,$ID_USER))>0){
-                // echo '<div class="My-cmt">Bình luận của bạn';
-                echo '<h5>Bình luận của bạn</h5>'; 
+            if(mysqli_num_rows(MyBinhLuan($conn,$idBV,$ID_USER))>0){             
+                echo '<h5>Bình luận của bạn</h5><div class="My-cmt">'; 
                 $MyBinhLuan = MyBinhLuan($conn,$idBV,$ID_USER);                 
                 while($row_MyBinhLuan = mysqli_fetch_array($MyBinhLuan)){
                     echo '<div class="cmt">  
                     <div class="cmt-noidung">'.$row_MyBinhLuan['NOI_DUNG_BINH_LUAN'].'</div>                           
                     </div>';
                 }
+                echo '</div>';
             }
             
             $BinhLuan2 = BinhLuan2($conn,$idBV,$ID_USER);
@@ -316,6 +316,7 @@ else
                 <div class="cmt-ten"><?php echo $row_BinhLuan2['TEN_NGUOI_BINH_LUAN'];?></div>
                 <div class="cmt-noidung"><?php echo $row_BinhLuan2['NOI_DUNG_BINH_LUAN'];?></div>
                 <i onclick="function_like(this)" class="fas fa-thumbs-up"></i>
+                <?php echo $row_BinhLuan2['LUOT_LIKE'];?>
                 <a href="#">Báo cáo bình luận</a>
             </div>
             <?php }?>

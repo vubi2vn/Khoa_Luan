@@ -1,3 +1,8 @@
+<!--  -->
+<?php
+if(isset($_SESSION['ID_USER']))
+header('Location:index.php?p=home');
+?>
 <!-- click đăng nhập -->
 <?php
 if(isset($_POST["btnLogin"]))

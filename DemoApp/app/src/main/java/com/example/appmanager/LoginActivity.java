@@ -29,7 +29,7 @@ public class LoginActivity extends AppCompatActivity {
     Button btn_login;
 
 //    String urlcheckuser="http://10.0.2.2:8080/app_manager/login.php";
-    String urlcheckuser="http://10.0.2.2:8080/app_manager/login.php";
+    String urlcheckuser="http://10.0.2.2:81/phone/app_manager/login.php";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

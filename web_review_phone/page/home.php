@@ -51,6 +51,7 @@
                 <span class="rank-number">'.$i.'</span>
                 <span class="rank-img"><img src="web_admin/'.$row_top_dt['URL_HINH_ANh'].'" alt="phone image"></span>
                 <span class="rank-name">'.$row_top_dt['TEN_DIEN_THOAI'].'</span>
+                <span class="rank-score">'.$row_top_dt['DIEM_DANH_GIA'].'</span>
                 <span class="rank-badge"><i class="fa '.$icon_rank.'" aria-hidden="true"></i></span>
             </a>
             ';

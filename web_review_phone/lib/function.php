@@ -268,6 +268,36 @@
         ";
         return mysqli_query($conn,$qr);
     }
+    //like binh luan
+    function like_cmt($conn,$ID_BINH_LUAN,$ID_USER){
+        $qr ="
+            INSERT INTO `lich_su_like`(`ID_BINH_LUAN`, `ID_USER`, `NGAY_NHAN_LIKE`) 
+            VALUES ('$ID_BINH_LUAN','$ID_USER',CURDATE());
+        ";
+        echo $qr;
+        //mysqli_query($conn,$qr);
+    }
+
+    function check_like($conn,$ID_BINH_LUAN,$ID_USER){
+        $qr ="
+            SELECT * FROM `lich_su_like` WHERE 1
+        ";
+        return mysqli_query($conn,$qr);
+    }
+    //bao cao binh luan
+    function bao_cao_binh_luan($conn){
+        $qr ="
+            SELECT * FROM `bao_cao_binh_luan` 
+        ";
+        return mysqli_query($conn,$qr);
+    }
+    
+    function baocao($conn,$ID_BINH_LUAN,$ID_USER){
+        $qr ="
+            SELECT * FROM `lich_su_like` 
+        ";
+        return mysqli_query($conn,$qr);
+    }
 ?>
 <!-- tinh diem -->
 <?php

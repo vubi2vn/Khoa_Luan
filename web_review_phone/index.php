@@ -42,6 +42,7 @@ else
             case "chitiet" : include "page/chitiet.php"; break;
             case "dangnhap" : include "page/dangnhap.php"; break;
             case "danhsachdt" : include "page/danhsachdt.php"; break;
+            case "timkiem" : include "page/timkiem.php"; break;
             default : include "page/home.php";
         }
         ?>
@@ -72,7 +73,7 @@ else
             $('#log_out').on('show.bs.modal', function (event) {
                 
             });          
-        })
+        });
     </script>
 </body>
 

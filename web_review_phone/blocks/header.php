@@ -18,12 +18,26 @@ if(isset($_SESSION["ID_USER"])){
 
 ?>
 
+<?php
+$key = "";
+if(isset($_GET['key']))
+{
+    $key = $_GET['key'];
+}
+
+if(isset($_POST["btnSearch"]))
+{
+    $key = $_POST['key'];
+    header("Location:?p=timkiem&key=$key");
+}
+?>
+
 <header>
     <div class="wrap-main">
         <a class="logo" href="?p=home"><img src="lib/images/logo.png" alt="logo"></a>
-        <form id= "search-site">
-            <input class="form-control" id="search-keyword"  type="text" aria-label="Tìm kiếm" placeholder="Tìm kiếm" >
-            <button type="button" class="btn btn-light"><i class="fa fa-search " aria-hidden="true"></i></button>
+        <form id= "search-site"  method = "POST">
+            <input class="form-control" name="key" id="search-keyword"  type="text" aria-label="Tìm kiếm" placeholder="Tìm kiếm" value = "<?php echo $key?>">
+            <button type="submit" class="btn btn-light" name="btnSearch"><i class="fa fa-search " aria-hidden="true"></i></button>
         </form>       
         <div id="menu">
             <ul>
@@ -52,10 +66,19 @@ if(isset($_SESSION["ID_USER"])){
                 if(!isset($_SESSION["ID_USER"])){
                     echo "<a href='?p=dangnhap'>Đăng nhập</a>";
                 }else{
-                    echo '
-                        <a href="web_admin/index.php">Xem thông tin</a>
-                        <a href="#" data-toggle="modal" data-target="#log_out"> Đăng xuất</a>
+                    echo '<i>Tên đăng nhập: '.$_SESSION["USER_NAME"].'</i>';
+                    if($_SESSION["TEN_PHAN_QUYEN"]=="khachhang"){
+                        echo '
+                                <a href="web_admin/index.php">Thông tin cá nhân</a>               
+                            ';
+                    }else{ 
+                        echo '                  
+                            <a href="web_admin/index.php">Xem thông tin</a>
                         ';
+                    }
+                    echo '                  
+                        <a href="#" data-toggle="modal" data-target="#log_out"> Đăng xuất</a>
+                    ';
                 }
               ?>  
                       

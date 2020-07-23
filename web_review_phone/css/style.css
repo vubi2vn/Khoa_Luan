@@ -205,13 +205,17 @@ header{
   width: 30px;
 }
 .rank a span:nth-child(2) {
-  width: 70px;
+  width: 50px;
 }
 .rank a span:nth-child(3) {
   width: 230px;
 }
 .rank a span:nth-child(4) {
-  width: 70px;
+  width: 45px;
+  text-align: right;
+}
+.rank a span:nth-child(5) {
+  width: 25px;
   text-align: right;
 }
 .rank a:hover {
@@ -407,19 +411,25 @@ header{
 .cmt-noidung{
   padding-left: 10px;
 }
-
-/* like/dislike */
-.cmt .fas {
-  margin: 0px 20px;
-  font-size: 20px;
-  cursor: pointer;
+.My-cmt{
+  border: 1px solid #ccc;
 }
-.fa-thumbs-up:hover {
+/* like/dislike */
+.My-cmt .fas{
+  margin: 0px 0px 0px 20px;
+}
+.cmt .fas {
+  margin: 0px 0px 0px 20px;
+  border: none;
+  background: none;
+  /* cursor: pointer; */
+}
+/* .fa-thumbs-up:hover {
   color: blue;
 }
 .fa-thumbs-down:hover {
   color: red;
-}
+} */
 /* Login */
 .tab-pane{
   min-height: 400px;

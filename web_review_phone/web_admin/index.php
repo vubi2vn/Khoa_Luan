@@ -7,12 +7,11 @@
 <?php
 //Kiểm tra session đăng nhập
 
-if(!isset($_SESSION["ID_USER"])||$_SESSION["TEN_PHAN_QUYEN"]=="khachhang")
+if(!isset($_SESSION["ID_USER"]))
 {
     header("Location:../?p=home");
 }
 ?>
-
 <?php
 //Đăng xuất
 if(isset($_POST["btn_logout"]))
@@ -43,7 +42,6 @@ if($rs!=[null,null,null,null,null])
     
 }
 ?>
-
 <?php
 // Lấy số report chưa giải quyết
 $count_report=count_report_havent_resolved($conn); 

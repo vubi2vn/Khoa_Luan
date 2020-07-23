@@ -1,7 +1,12 @@
 <?php
     include "./algorithm_py/change_to_vector.php";
 ?>
-
+<?php
+    if(isset($_POST['btn_update_baocao']))
+    {
+        
+    }
+?>
 <?php
     //kiem tra idbv
     $ID_USER = 0;
@@ -38,13 +43,17 @@
         $PHAN_LOAI="";
         $vector=null;
         $string="";
-        $string=trim(strtoupper($_POST["noi_dung"]));
+        $string=trim(mb_strtolower($_POST["noi_dung"],'UTF-8'));
         $vector=change_to_vector($string);
         $command = escapeshellcmd('Testing.py '.$vector[0].' '.$vector[1]); //Chuyển mã trong tập tin test.py thành các lệnh
         $output = shell_exec($command); // Lấy kết quả trả về biến $output
+        
+        
+        
 
         $PHAN_LOAI=trim($output);
         Insert_cmt($conn,$idBV,$ID_USER,$TEN,$noi_dung,$PHAN_LOAI);
+        
         Update_DiemDanhGia($conn,$idBV);
         echo "<script type='text/javascript'>alert('Bình luận thành công!');</script>";
         header('refresh:1');
@@ -82,14 +91,17 @@
                 <div class="list-cmt">
                 <?php
                     if(mysqli_num_rows(MyBinhLuan($conn,$idBV,$ID_USER))>0){
-                        // echo '<div class="My-cmt">Bình luận của bạn';
-                        echo '<h5>Bình luận của bạn</h5>'; 
+                        
+                        echo '<h5>Bình luận của bạn</h5><div class="My-cmt">'; 
                         $MyBinhLuan = MyBinhLuan($conn,$idBV,$ID_USER);                 
                         while($row_MyBinhLuan = mysqli_fetch_array($MyBinhLuan)){
                             echo '<div class="cmt">  
-                            <div class="cmt-noidung">'.$row_MyBinhLuan['NOI_DUNG_BINH_LUAN'].'</div>                           
-                            </div>';
+                            <div class="cmt-noidung">'.$row_MyBinhLuan['NOI_DUNG_BINH_LUAN'].'</div>   
+                            <i class="fas fa-thumbs-up"></i> '
+                            .$row_MyBinhLuan['LUOT_LIKE'].'</div>'                      
+                            ;
                         }
+                        echo '</div>';
                     }
                     $BinhLuanList = BinhLuanList($conn,$idBV,$ID_USER);                 
                     while($row_BinhLuanList = mysqli_fetch_array($BinhLuanList)) {
@@ -97,8 +109,11 @@
                     <div class="cmt">
                         <div class="cmt-ten"><?php echo $row_BinhLuanList['TEN_NGUOI_BINH_LUAN'];?></div>
                         <div class="cmt-noidung"><?php echo $row_BinhLuanList['NOI_DUNG_BINH_LUAN'];?></div>
-                        <i onclick="function_like(this)" class="fas fa-thumbs-up"></i>
-                        <a href="#">Báo cáo bình luận</a>
+                        <button class="fas fa-thumbs-up" disabled></button>
+                        <?php echo $row_BinhLuanList['LUOT_LIKE'];?>
+                        <!-- <a href="#">Báo cáo bình luận</a> -->
+                        <a href="#" data-toggle="modal" data-target="#report_cmt" data-noidung="<?php echo $row_BinhLuanList['NOI_DUNG_BINH_LUAN'];?>"
+                        data-id="<?php echo $row_BinhLuanList['ID_BINH_LUAN'];?>"> Báo cáo bình luận</a>
                     </div>
                 <?php }?>
             </div>
@@ -113,7 +128,8 @@
                     <div class="cmt">
                         <div class="cmt-ten"><?php echo $row_cmtTieuCuc['TEN_NGUOI_BINH_LUAN'];?></div>
                         <div class="cmt-noidung"><?php echo $row_cmtTieuCuc['NOI_DUNG_BINH_LUAN'];?></div>
-                        <i onclick="function_like(this)" class="fas fa-thumbs-up"></i>
+                        <button class="fas fa-thumbs-up"></button>
+                        <?php echo $row_cmtTieuCuc['LUOT_LIKE'];?>
                         <a href="#">Báo cáo bình luận</a>
                     </div>
                 <?php }?>
@@ -129,7 +145,8 @@
                     <div class="cmt">
                         <div class="cmt-ten"><?php echo $row_cmtTichCuc['TEN_NGUOI_BINH_LUAN'];?></div>
                         <div class="cmt-noidung"><?php echo $row_cmtTichCuc['NOI_DUNG_BINH_LUAN'];?></div>
-                        <i onclick="function_like(this)" class="fas fa-thumbs-up"></i>
+                        <button class="fas fa-thumbs-up"></button>
+                        <?php echo $row_cmtTichCuc['LUOT_LIKE'];?>
                         <a href="#">Báo cáo bình luận</a>
                     </div>
                 <?php }?>
@@ -139,3 +156,16 @@
     </div>
     <div class="clr"></div>
 </div>
+<?php
+include "./web_admin/popup/report_cmt.php"
+?>
+<script>
+$('#report_cmt').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget)
+    var noidung = button.data('noidung')
+    var id = button.data('id')
+    var modal = $(this)
+    document.getElementById("noidung_binhluan").value = String(noidung)
+    document.getElementById("id_noidung").value = String(id)
+    })
+</script>
