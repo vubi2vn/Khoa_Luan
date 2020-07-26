@@ -126,8 +126,10 @@ header{
 .login:hover{
   background: #fff;
 }
-/* Dropdown menu */
 
+.login img{
+  height: 35px;
+}
 
 /* Container */
 .container-1 {

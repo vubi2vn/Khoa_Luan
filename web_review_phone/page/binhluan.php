@@ -1,19 +1,31 @@
 <?php
     include "./algorithm_py/change_to_vector.php";
-?>
-<?php
-    if(isset($_POST['btn_update_baocao']))
-    {
-        
-    }
-?>
-<?php
-    //kiem tra idbv
-    $ID_USER = 0;
+    $ID_USER = null;
     if(isset($_SESSION["ID_USER"])) 
     { 
         $ID_USER = $_SESSION["ID_USER"];
     }
+?>
+<!-- them bao cao -->
+<?php
+    if(isset($_POST['btn_update_baocao']))
+    {
+        if($ID_USER == null) 
+        { 
+            echo "<script type='text/javascript'>alert('Bạn cần đăng nhập trước khi tương tác!');
+            window.location.href='index.php?p=dangnhap';</script>";
+            exit;
+        }
+        $ID_BINH_LUAN = $_POST['id_noidung'];
+        $ID_BAO_CAO = $_POST['ID_BAO_CAO'];
+        $NOI_DUNG_BAO_CAO = $_POST['noidung_baocao'];
+        insert_baocao($conn,$ID_BINH_LUAN,$ID_USER,$ID_BAO_CAO,$NOI_DUNG_BAO_CAO);
+        echo "<script type='text/javascript'>alert('Báo cáo thành công!');</script>";
+        header('refresh:1');
+    }
+?>
+<?php
+    //kiem tra idbv
     if (isset($_GET['idBV'])){
         $idBV = $_GET["idBV"];
         if($idBV==null)
@@ -28,7 +40,7 @@
     //new cmt
     if(isset($_POST["btnSend"]))
     {
-        if($ID_USER == 0) 
+        if($ID_USER == null) 
         { 
             echo "<script type='text/javascript'>alert('Bạn cần đăng nhập trước khi bình luận!');
             window.location.href='index.php?p=dangnhap';</script>";
@@ -68,7 +80,7 @@
         <form class="form" method = "POST">
             <textarea name="noi_dung" class="form-control" rows="3" maxlength="500"></textarea>
             <div class="chitiet-cmt-emotion">
-                <a href="#">Quy định đăng bình luận !</a>
+                <a href="#" data-toggle="modal" data-target="#quydinh_cmt">Quy định đăng bình luận !</a>
                 <button name="btnSend" type="submit" class="btn btn-primary" >Gửi</button>
             </div>
         </form>
@@ -84,7 +96,7 @@
             <a class="nav-link" id="tab-cmtTichCuc" data-toggle="pill" href="#pills-cmtTichCuc" role="tab" aria-controls="pills-cmtTichCuc" aria-selected="false"><?php echo TongTichCuc($conn,$idBV);?> tích cực</a>
         </li>
         </ul>
-        <!--  -->
+        <!-- toàn bộ cmt  -->
         <div class="tab-content" id="pills-tabContent">
             <div class="tab-pane fade show active" id="pills-tongcmt" role="tabpanel" aria-labelledby="tab-tongcmt">
                  
@@ -109,9 +121,9 @@
                     <div class="cmt">
                         <div class="cmt-ten"><?php echo $row_BinhLuanList['TEN_NGUOI_BINH_LUAN'];?></div>
                         <div class="cmt-noidung"><?php echo $row_BinhLuanList['NOI_DUNG_BINH_LUAN'];?></div>
-                        <button class="fas fa-thumbs-up" disabled></button>
+                        <button onclick="like()" class="fas fa-thumbs-up" data-iduser="<?php echo $ID_USER;?>" data-id="<?php echo $row_BinhLuanList['ID_BINH_LUAN'];?>"></button>
                         <?php echo $row_BinhLuanList['LUOT_LIKE'];?>
-                        <!-- <a href="#">Báo cáo bình luận</a> -->
+
                         <a href="#" data-toggle="modal" data-target="#report_cmt" data-noidung="<?php echo $row_BinhLuanList['NOI_DUNG_BINH_LUAN'];?>"
                         data-id="<?php echo $row_BinhLuanList['ID_BINH_LUAN'];?>"> Báo cáo bình luận</a>
                     </div>
@@ -130,7 +142,8 @@
                         <div class="cmt-noidung"><?php echo $row_cmtTieuCuc['NOI_DUNG_BINH_LUAN'];?></div>
                         <button class="fas fa-thumbs-up"></button>
                         <?php echo $row_cmtTieuCuc['LUOT_LIKE'];?>
-                        <a href="#">Báo cáo bình luận</a>
+                        <a href="#" data-toggle="modal" data-target="#report_cmt" data-noidung="<?php echo $row_cmtTieuCuc['NOI_DUNG_BINH_LUAN'];?>"
+                        data-id="<?php echo $row_cmtTieuCuc['ID_BINH_LUAN'];?>"> Báo cáo bình luận</a>
                     </div>
                 <?php }?>
             </div>
@@ -147,7 +160,8 @@
                         <div class="cmt-noidung"><?php echo $row_cmtTichCuc['NOI_DUNG_BINH_LUAN'];?></div>
                         <button class="fas fa-thumbs-up"></button>
                         <?php echo $row_cmtTichCuc['LUOT_LIKE'];?>
-                        <a href="#">Báo cáo bình luận</a>
+                        <a href="#" data-toggle="modal" data-target="#report_cmt" data-noidung="<?php echo $row_cmtTichCuc['NOI_DUNG_BINH_LUAN'];?>"
+                        data-id="<?php echo $row_cmtTichCuc['ID_BINH_LUAN'];?>"> Báo cáo bình luận</a>
                     </div>
                 <?php }?>
             </div>
@@ -168,4 +182,27 @@ $('#report_cmt').on('show.bs.modal', function (event) {
     document.getElementById("noidung_binhluan").value = String(noidung)
     document.getElementById("id_noidung").value = String(id)
     })
+});
+
+$('#quydinh_cmt').on('show.bs.modal', function (event) {
+        
+});  
+// $(document).ready(function(){
+//     alert(1);
+// });
+function like()
+{
+    var id = button.data('id')
+    var iduser = button.data('iduser')
+    jQuery.ajax({
+    type: "POST",
+    url: '/lib/function.php',
+    dataType: 'json',
+    data: {functionname: 'like_cmt', arguments: [$conn,id,iduser]},
+
+    success:function(data) {
+        alert(data); 
+         }
+});
+}  
 </script>

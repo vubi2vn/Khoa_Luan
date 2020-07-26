@@ -292,11 +292,12 @@
         return mysqli_query($conn,$qr);
     }
     
-    function baocao($conn,$ID_BINH_LUAN,$ID_USER){
+    function insert_baocao($conn,$ID_BINH_LUAN,$ID_USER,$ID_BAO_CAO,$NOI_DUNG_BAO_CAO){
         $qr ="
-            SELECT * FROM `lich_su_like` 
+        INSERT INTO `chi_tiet_bao_cao`(`ID_BINH_LUAN`, `ID_USER`, `ID_BAO_CAO`, `NGAY_BAO_CAO`, `NOI_DUNG_BAO_CAO`, `TINH_TRANG_GIAI_QUYET`) 
+        VALUES ('$ID_BINH_LUAN','$ID_USER',$ID_BAO_CAO,CURDATE(),'$NOI_DUNG_BAO_CAO',0);
         ";
-        return mysqli_query($conn,$qr);
+        mysqli_query($conn,$qr);
     }
 ?>
 <!-- tinh diem -->

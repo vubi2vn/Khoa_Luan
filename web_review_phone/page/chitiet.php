@@ -317,7 +317,6 @@ else
                 <div class="cmt-noidung"><?php echo $row_BinhLuan2['NOI_DUNG_BINH_LUAN'];?></div>
                 <i onclick="function_like(this)" class="fas fa-thumbs-up"></i>
                 <?php echo $row_BinhLuan2['LUOT_LIKE'];?>
-                <a href="#">Báo cáo bình luận</a>
             </div>
             <?php }?>
         </div>

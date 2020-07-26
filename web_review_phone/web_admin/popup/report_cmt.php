@@ -1,4 +1,3 @@
-
 <div class="modal fade" id="report_cmt" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -20,7 +19,7 @@
         <div class="form-group" >
             <label class = "label-info">Loại báo cáo:</label>
             <div class="text-box-info">
-                <select class="form-control" id="trademark_option" name="trademark_option" >
+                <select class="form-control" id="ID_BAO_CAO" name="ID_BAO_CAO" >
                 <?php
                     $bao_cao_binh_luan = bao_cao_binh_luan($conn);
                     while($row_bao_cao_binh_luan = mysqli_fetch_array($bao_cao_binh_luan))                 
