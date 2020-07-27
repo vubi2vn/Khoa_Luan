@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".DetailActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/detail_comment_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        app:title="Thông tin chi tiết"
+        app:titleTextColor="#fff" />
+
+    <ScrollView
+        android:id="@+id/scrollView3"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/detail_toolbar">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="30dp">
+
+                <TextView
+                    android:id="@+id/textView6"
+                    android:layout_width="170dp"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="30dp"
+                    android:text="Tên điện thoại:" />
+
+                <TextView
+                    android:id="@+id/txt_detail_phone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="null" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="30dp">
+
+                <TextView
+                    android:id="@+id/textView10"
+                    android:layout_width="170dp"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="30dp"
+                    android:text="Tên người bình luận:" />
+
+                <TextView
+                    android:id="@+id/txt_detail_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="null" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="30dp">
+
+                <TextView
+                    android:id="@+id/textView8"
+                    android:layout_width="170dp"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="30dp"
+                    android:text="Nội dung" />
+
+                <TextView
+                    android:id="@+id/txt_detail_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="null" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="30dp">
+
+                <TextView
+                    android:id="@+id/textView12"
+                    android:layout_width="170dp"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="30dp"
+                    android:text="Loại báo cáo:" />
+
+                <TextView
+                    android:id="@+id/txt_detail_report"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="null" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="30dp">
+
+                <TextView
+                    android:id="@+id/textView14"
+                    android:layout_width="170dp"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="30dp"
+                    android:text="ID user báo cáo:" />
+
+                <TextView
+                    android:id="@+id/txt_detail_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="null" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="30dp">
+
+                <TextView
+                    android:id="@+id/textView15"
+                    android:layout_width="170dp"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="30dp"
+                    android:text="Ngày bình luận:" />
+
+                <TextView
+                    android:id="@+id/txt_detail_cmtdate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="null" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="30dp">
+
+                <TextView
+                    android:id="@+id/textView16"
+                    android:layout_width="170dp"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="30dp"
+                    android:text="Ngày báo cáo:" />
+
+                <TextView
+                    android:id="@+id/txt_detail_rpdate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="null" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="30dp">
+
+                <Switch
+                    android:id="@+id/switch_hide"
+                    android:layout_width="212dp"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:paddingLeft="30dp"
+                    android:text="Hiện bình luận" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="30dp">
+
+                <TextView
+                    android:id="@+id/textView18"
+                    android:layout_width="170dp"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="30dp"
+                    android:text="Phân lớp" />
+
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <RadioButton
+                        android:id="@+id/radio_detail_pos"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:checked="false"
+                        android:text="Tích cực" />
+
+                    <RadioButton
+                        android:id="@+id/radio_detail_neg"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Tiêu cực" />
+                </RadioGroup>
+
+            </LinearLayout>
+            <Button
+                android:id="@+id/btn_detail_update"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Cập nhật"
+                android:background="@drawable/enable_button"/>
+        </LinearLayout>
+    </ScrollView>
+
+
+
+</LinearLayout>

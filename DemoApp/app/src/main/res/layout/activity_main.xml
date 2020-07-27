@@ -1,18 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/drawer_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:id="@+id/toolbar_frame"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/detail_toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="@color/colorPrimary"
+                    app:title="VnPhone"
+                    app:titleTextColor="#fff" />
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/container_frame"
+                android:layout_width="match_parent"
+                android:layout_height="672dp"
+                android:background="#FDFDFD"
+                >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+
+                    <EditText
+                        android:id="@+id/edit_search"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_margin="10dp"
+                        android:background="@drawable/rounded_edittext"
+                        android:drawableLeft="@drawable/ic_search_black_24dp"
+                        android:ems="10"
+                        android:hint="Tìm kiếm"
+                        android:inputType="text" />
+                    <HorizontalScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
+
+                            <ToggleButton
+                                android:id="@+id/btn_search_yes"
+                                android:layout_width="150dp"
+                                android:layout_height="wrap_content"
+                                android:textOff="Đã xử lý"
+                                android:textOn="Đã xử lý"
+                                android:layout_margin="10dp"
+                                android:background="@drawable/toggle_custom"/>
+
+                            <ToggleButton
+                                android:id="@+id/btn_search_no"
+                                android:layout_width="150dp"
+                                android:layout_height="wrap_content"
+                                android:text="ToggleButton"
+                                android:textOff="Chưa xử lý"
+                                android:textOn="Chưa xử lý"
+                                android:layout_margin="10dp"
+                                android:background="@drawable/toggle_custom"/>
+                        </LinearLayout>
+                    </HorizontalScrollView>
+
+                    <ListView
+                        android:id="@+id/list_comment"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:divider="#FDFDFD "
+                        android:dividerHeight="10dp"
+                        android:textAlignment="center"
+                        android:padding="20dp"
+                        android:background="#FDFDFD">
+
+                    </ListView>
+
+                </LinearLayout>
+
+            </FrameLayout>
+        </LinearLayout>
+
+
+        <com.google.android.material.navigation.NavigationView
+            android:id="@+id/navagation_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:fitsSystemWindows="true"
+            app:headerLayout="@layout/navigation_header"
+            app:menu="@menu/menu_navigation" />
+    </androidx.drawerlayout.widget.DrawerLayout>
+
+</LinearLayout>

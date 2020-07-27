@@ -28,8 +28,8 @@ public class LoginActivity extends AppCompatActivity {
     EditText txt_user,txt_pass;
     Button btn_login;
 
-//    String urlcheckuser="http://10.0.2.2:8080/app_manager/login.php";
-    String urlcheckuser="http://10.0.2.2:81/phone/app_manager/login.php";
+    public static String server_url="http://10.0.2.2:8080/";
+    String urlcheckuser=server_url+"/app_manager/login.php";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,7 +69,9 @@ public class LoginActivity extends AppCompatActivity {
                 @Override
                 public void onResponse(String response) {
                     if(response.trim().equals("success")){
+                        intent.putExtra("user_name",txt_user.getText().toString().trim());
                         startActivity(intent);
+                        finish();
                     }
                     else
                     {
