@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
 
     String user_name;
     String server_url=LoginActivity.server_url;
-    String image_url=server_url+"web_review_phone/web_admin/";
+    String image_url=server_url+"phone/web_admin/";
     String getuser_infor_url=server_url+"/app_manager/getUserInfor.php";
     String getuser_comments_url=server_url+"/app_manager/getCommentList.php";
     String condition,check;

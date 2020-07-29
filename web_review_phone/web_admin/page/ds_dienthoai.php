@@ -58,7 +58,7 @@ if(isset($_POST["btn_submit_avatar"]))
                 if(insert_review_for_phone($conn,$name))
                 {
                     echo "<script type='text/javascript'>alert('Thêm điện thoại thành công!');</script>";
-                    header('refresh:1');
+                    // header('refresh:1');
                 }
                 else
                 {

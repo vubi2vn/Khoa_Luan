@@ -46,7 +46,7 @@
         <?php } ?>
     </div>
     <div class="timkiem-gia clr">
-        Chọn mức giá: 
+        <strong style ="font-size: 20px">Chọn mức giá:</strong>
         <a href="?p=danhsachdt&GiaThap=0&GiaCao=2000000">Dưới 2 triệu</a>
         <a href="?p=danhsachdt&GiaThap=2000000&GiaCao=4000000">Từ 2-4 triệu</a>
         <a href="?p=danhsachdt&GiaThap=4000000&GiaCao=7000000">Từ 4-7 triệu</a>

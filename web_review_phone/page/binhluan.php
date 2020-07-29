@@ -8,6 +8,18 @@
 ?>
 <!-- them bao cao -->
 <?php
+    if(isset($_POST['btnLike']))
+    {   
+        if($ID_USER == null) 
+        { 
+            echo "<script type='text/javascript'>alert('Bạn cần đăng nhập trước khi tương tác!');
+            window.location.href='index.php?p=dangnhap';</script>";
+            exit;
+        }
+        $ID_BINH_LUAN = $_POST['id_binh_luan'];
+        like_cmt($conn,$ID_BINH_LUAN,$ID_USER);
+        header('refresh:1');
+    }
     if(isset($_POST['btn_update_baocao']))
     {
         if($ID_USER == null) 
@@ -118,15 +130,21 @@
                     $BinhLuanList = BinhLuanList($conn,$idBV,$ID_USER);                 
                     while($row_BinhLuanList = mysqli_fetch_array($BinhLuanList)) {
                     ?>
+                    <form method = "POST">
                     <div class="cmt">
+
                         <div class="cmt-ten"><?php echo $row_BinhLuanList['TEN_NGUOI_BINH_LUAN'];?></div>
                         <div class="cmt-noidung"><?php echo $row_BinhLuanList['NOI_DUNG_BINH_LUAN'];?></div>
-                        <button onclick="like()" class="fas fa-thumbs-up" data-iduser="<?php echo $ID_USER;?>" data-id="<?php echo $row_BinhLuanList['ID_BINH_LUAN'];?>"></button>
+                        
+                        <input name ="id_binh_luan" value = "<?php echo $row_BinhLuanList['ID_BINH_LUAN'] ?>" hidden></input>
+                        <button name="btnLike" type="submit" class="fas fa-thumbs-up" ></button>
+
                         <?php echo $row_BinhLuanList['LUOT_LIKE'];?>
 
                         <a href="#" data-toggle="modal" data-target="#report_cmt" data-noidung="<?php echo $row_BinhLuanList['NOI_DUNG_BINH_LUAN'];?>"
                         data-id="<?php echo $row_BinhLuanList['ID_BINH_LUAN'];?>"> Báo cáo bình luận</a>
                     </div>
+                    </form>
                 <?php }?>
             </div>
         </div>
@@ -181,28 +199,30 @@ $('#report_cmt').on('show.bs.modal', function (event) {
     var modal = $(this)
     document.getElementById("noidung_binhluan").value = String(noidung)
     document.getElementById("id_noidung").value = String(id)
-    })
-});
+    });
 
-$('#quydinh_cmt').on('show.bs.modal', function (event) {
+
+// $('#quydinh_cmt').on('show.bs.modal', function (event) {
         
-});  
+// });  
 // $(document).ready(function(){
-//     alert(1);
+//     jQuery("#")
 // });
-function like()
-{
-    var id = button.data('id')
-    var iduser = button.data('iduser')
-    jQuery.ajax({
-    type: "POST",
-    url: '/lib/function.php',
-    dataType: 'json',
-    data: {functionname: 'like_cmt', arguments: [$conn,id,iduser]},
+// function like()
+// {
+//     var id = $(this).data('id');
+//     alert(id);
+//     var id_cmt=id;
+//     var id_user=iduser;
+//     $.ajax({
+//     type: "POST",
+//     url: './lib/like.php',
+//     dataType: 'json',
+//     data: {idcmt: id, iduser: id_user },
 
-    success:function(data) {
-        alert(data); 
-         }
-});
+//     success:function(data) {
+//         alert(data);
+//          }
+// });
 }  
 </script>

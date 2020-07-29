@@ -6,10 +6,9 @@
 ?>
 <?php
 //Kiểm tra session đăng nhập
-
 if(!isset($_SESSION["ID_USER"]))
 {
-    header("Location:../?p=home");
+    header("Location:../index.php");
 }
 ?>
 <?php

@@ -28,7 +28,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText txt_user,txt_pass;
     Button btn_login;
 
-    public static String server_url="http://10.0.2.2:8080/";
+    public static String server_url="http://10.0.2.2:81/";
     String urlcheckuser=server_url+"/app_manager/login.php";
     @Override
     protected void onCreate(Bundle savedInstanceState) {

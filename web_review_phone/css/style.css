@@ -325,6 +325,9 @@ header{
 .timkiem-gia{
   padding: 10px;
 }
+.timkiem-gia a{
+  margin: 10px;
+}
 /* Trang chitiet */
 /* chi tiet hinh anh */
 .chitiet-hinh{
