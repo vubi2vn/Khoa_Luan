@@ -76,7 +76,7 @@ else if ($current_page < 1){
                 }
                 else
                 {
-                    echo '<li class="page-item"><a class="page-link" href="index.php?p=ds_bai_viet&page='.$i.'">'.$i.'</a></li>';
+                    echo '<li class="page-item"><a class="page-link" href="index.php?p=ds_baiviet&page='.$i.'">'.$i.'</a></li>';
                 }
             }
         ?>

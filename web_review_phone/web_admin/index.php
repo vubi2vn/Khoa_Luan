@@ -2,6 +2,7 @@
     include "backend/connect.php";
     include "backend/user.php";
     include "backend/report.php";
+    include "backend/new_thongbao.php";
     session_start();
 ?>
 <?php
@@ -44,6 +45,7 @@ if($rs!=[null,null,null,null,null])
 <?php
 // Lấy số report chưa giải quyết
 $count_report=count_report_havent_resolved($conn); 
+$thongbao_xemchua=thongbao_xemchua($conn,$_SESSION['ID_USER']);
 ?>
 <html style="height:100%">
     <head>
@@ -85,6 +87,7 @@ $count_report=count_report_havent_resolved($conn);
                             case "ds_noidung_baocao" : include "page/ds_noidung_baocao.php"; break;
                             case "cauhinh_dienthoai" : include "page/cauhinh_dienthoai.php"; break;
                             case "thongke" : include "page/thongke.php"; break;
+                            case "thongbao" : include "page/thongbao.php"; break;
                             default : include "page/home.php";
                         }
                         ?>

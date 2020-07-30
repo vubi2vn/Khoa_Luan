@@ -53,6 +53,7 @@ if(isset($_POST["btnRegister"]))
     {
         DangkyTK($conn,$n_username,md5($n_password));
         Insert_User_Information($conn,$n_username);
+        header('refresh:1');
         echo "<script type='text/javascript'>alert('Tạo tài khoản thành công');</script>";
     }
     else

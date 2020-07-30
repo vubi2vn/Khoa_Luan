@@ -93,6 +93,7 @@
             <textarea name="noi_dung" class="form-control" rows="3" maxlength="500"></textarea>
             <div class="chitiet-cmt-emotion">
                 <a href="#" data-toggle="modal" data-target="#quydinh_cmt">Quy định đăng bình luận !</a>
+                
                 <button name="btnSend" type="submit" class="btn btn-primary" >Gửi</button>
             </div>
         </form>
@@ -137,7 +138,7 @@
                         <div class="cmt-noidung"><?php echo $row_BinhLuanList['NOI_DUNG_BINH_LUAN'];?></div>
                         
                         <input name ="id_binh_luan" value = "<?php echo $row_BinhLuanList['ID_BINH_LUAN'] ?>" hidden></input>
-                        <button name="btnLike" type="submit" class="fas fa-thumbs-up" ></button>
+                        <button name="btnLike" type="submit" class="fas fa-thumbs-up" <?php check_like($conn,$row_BinhLuanList['ID_BINH_LUAN'],$ID_USER);?> ></button>
 
                         <?php echo $row_BinhLuanList['LUOT_LIKE'];?>
 
@@ -158,7 +159,7 @@
                     <div class="cmt">
                         <div class="cmt-ten"><?php echo $row_cmtTieuCuc['TEN_NGUOI_BINH_LUAN'];?></div>
                         <div class="cmt-noidung"><?php echo $row_cmtTieuCuc['NOI_DUNG_BINH_LUAN'];?></div>
-                        <button class="fas fa-thumbs-up"></button>
+                        <button class="fas fa-thumbs-up" <?php check_like($conn,$row_cmtTieuCuc['ID_BINH_LUAN'],$ID_USER);?>></button>
                         <?php echo $row_cmtTieuCuc['LUOT_LIKE'];?>
                         <a href="#" data-toggle="modal" data-target="#report_cmt" data-noidung="<?php echo $row_cmtTieuCuc['NOI_DUNG_BINH_LUAN'];?>"
                         data-id="<?php echo $row_cmtTieuCuc['ID_BINH_LUAN'];?>"> Báo cáo bình luận</a>
@@ -176,7 +177,7 @@
                     <div class="cmt">
                         <div class="cmt-ten"><?php echo $row_cmtTichCuc['TEN_NGUOI_BINH_LUAN'];?></div>
                         <div class="cmt-noidung"><?php echo $row_cmtTichCuc['NOI_DUNG_BINH_LUAN'];?></div>
-                        <button class="fas fa-thumbs-up"></button>
+                        <button class="fas fa-thumbs-up" <?php check_like($conn,$row_cmtTichCuc['ID_BINH_LUAN'],$ID_USER);?>></button>
                         <?php echo $row_cmtTichCuc['LUOT_LIKE'];?>
                         <a href="#" data-toggle="modal" data-target="#report_cmt" data-noidung="<?php echo $row_cmtTichCuc['NOI_DUNG_BINH_LUAN'];?>"
                         data-id="<?php echo $row_cmtTichCuc['ID_BINH_LUAN'];?>"> Báo cáo bình luận</a>
@@ -200,29 +201,4 @@ $('#report_cmt').on('show.bs.modal', function (event) {
     document.getElementById("noidung_binhluan").value = String(noidung)
     document.getElementById("id_noidung").value = String(id)
     });
-
-
-// $('#quydinh_cmt').on('show.bs.modal', function (event) {
-        
-// });  
-// $(document).ready(function(){
-//     jQuery("#")
-// });
-// function like()
-// {
-//     var id = $(this).data('id');
-//     alert(id);
-//     var id_cmt=id;
-//     var id_user=iduser;
-//     $.ajax({
-//     type: "POST",
-//     url: './lib/like.php',
-//     dataType: 'json',
-//     data: {idcmt: id, iduser: id_user },
-
-//     success:function(data) {
-//         alert(data);
-//          }
-// });
-}  
 </script>

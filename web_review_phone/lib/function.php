@@ -279,9 +279,11 @@
 
     function check_like($conn,$ID_BINH_LUAN,$ID_USER){
         $qr ="
-            SELECT * FROM `lich_su_like` WHERE 1
+        SELECT * FROM `lich_su_like` WHERE `ID_BINH_LUAN`= $ID_BINH_LUAN AND `ID_USER` = $ID_USER
         ";
-        return mysqli_query($conn,$qr);
+        $count = mysqli_num_rows(mysqli_query($conn,$qr));
+        if($count > 0)
+            echo 'disabled';
     }
     //bao cao binh luan
     function bao_cao_binh_luan($conn){

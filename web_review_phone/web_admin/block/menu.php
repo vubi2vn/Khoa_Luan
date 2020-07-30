@@ -45,7 +45,12 @@
             ';
     }
     ?>
-   
+    
+    <a href="index.php?p=thongbao" class="list-group-item list-group-item-action" style="border:none"><i class="fas fa-bell"></i> Thông báo
+    <?php
+    if($thongbao_xemchua)
+        echo '<span style="width:10px;height:10px;border-radius:50%; background-color:red; margin-left:10px;font-size:8px;padding:1px 4px">!<span>';
+    ?></a>
     <a href="#" class="list-group-item list-group-item-action" data-toggle="modal" data-target="#changePW" style="border:none"><i class="fas fa-key"></i> Đổi mật khẩu</a>
     <a href="#" class="list-group-item list-group-item-action" data-toggle="modal" data-target="#log_out" style="border:none"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a>
 </div>
