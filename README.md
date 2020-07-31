@@ -25,8 +25,8 @@ pip install numpy
 Instruction run website review phone:
 1. Copy file "phone" to C:\xampp\htdocs
 2. Run xampp, start Apache and MySQL
-	Create databse "dien_thoai" by phpMyAdmin
-	import dien_thoai.sql in folder lib
+	* Create databse "dien_thoai" by phpMyAdmin
+	* import dien_thoai.sql in folder lib
 3. Congratulation! Now you can run website in localhost.
 
 If you find a problem, incorrect comment, obsolete or improper code or such,please contact with us. 
