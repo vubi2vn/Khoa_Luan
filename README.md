@@ -23,7 +23,7 @@ pip install numpy
 
 ## How to run website review phone
 Instruction run website review phone:
-1. Copy file "phone" in C:\xampp\htdocs
+1. Copy file "phone" to C:\xampp\htdocs
 2. Run xampp, start Apache and MySQL
 	Create databse "dien_thoai" by phpMyAdmin
 	import dien_thoai.sql in folder lib
