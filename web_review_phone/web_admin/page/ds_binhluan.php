@@ -29,6 +29,13 @@ if(isset($_POST["btn-update-comment"]))
     $id=$_POST["txt_idcomment"];
     $class=$_POST["select_class"];
     $hide=$_POST["radio_hide"];
+    $user_comment=$_POST["user_comment"];
+    $user_report=$_POST["user_report"];
+    $content=$_POST["content"];
+    $phone=$_POST["phone_name"];
+    $cmt_date=$_POST["comment_date"];
+    $rp_date=$_POST["report_date"];
+    $old_hide=$_POST["old_class"];
     {
         if($id!=null&&$id!="")
         {
@@ -44,18 +51,30 @@ if(isset($_POST["btn-update-comment"]))
                     echo "<script type='text/javascript'>alert('Cập nhật điểm đánh giá thất bại!');</script>";
                 }
                 echo "<script type='text/javascript'>alert('Đã cập nhật bình luận!');</script>";
-                header('refresh:1');
+                if($hide!=$old_hide)
+                {
+                    if(!send_notification_reporter($conn,$user_report,$phone,$rp_date))
+                    {
+                        echo "<script type='text/javascript'>alert('Gửi thông báo cho người báo cáo thất bại');</script>";
+                    }
+                    if(!send_notification_commenter($conn,$user_comment,$phone,$cmt_date,$content))
+                    {
+                        echo "<script type='text/javascript'>alert('Gửi thông báo cho người bình luận');</script>";
+                    }
+                }
+                
             }
             else
             {
-                echo "<script type='text/javascript'>alert('Có lỗi trong quá trình cập nhật!');</script>";
                 header('refresh:3');
+                echo "<script type='text/javascript'>alert('Có lỗi trong quá trình cập nhật!');</script>";
             }
+
         }
         else
         {
-            echo "<script type='text/javascript'>alert('Lỗi xác định id!');</script>";
             header('refresh:3');
+            echo "<script type='text/javascript'>alert('Lỗi xác định id!');</script>";
         }
     }
 }
@@ -97,11 +116,22 @@ if(isset($_POST["btn-update-comment"]))
                     echo 'Đã giải quyết';
                 }
                 echo '</td>
-                <td><a href="index.php?p=ds_noidung_baocao&id='.$a['ID_BINH_LUAN'].'" class="btn btn-success">Xem</a></td>
-                <td><button class="btn btn-primary" data-toggle="modal" data-target="#update-comment"
+                <td><a href="index.php?p=ds_noidung_baocao&id='.$a['ID_BINH_LUAN'].'" class="btn btn-success" >Xem</a></td>
+                <td><button class="btn btn-primary" data-toggle="modal"  data-target="#update-comment"
                 data-id="'.$a['ID_BINH_LUAN'].'"
                 data-classes="'.$a['PHAN_LOAI_BINH_LUAN'].'"
-                data-hide="'.$a['HIEN_THI_BINH_LUAN'].'">Sửa
+                data-hide="'.$a['HIEN_THI_BINH_LUAN'].'"
+                data-user-comment="'.$a[2].'"
+                data-user-report="'.$a[24].'"
+                data-phone="'.$a['TEN_DIEN_THOAI'].'"
+                data-comment-date="'.$a['NGAY_BINH_LUAN'].'"
+                data-report-date="'.$a['NGAY_BAO_CAO'].'"
+                data-content="'.$a['NOI_DUNG_BINH_LUAN'].'" ';
+                if($a['coun']<=0)
+                {
+                    echo 'disabled';
+                }
+                echo '>Sửa
                 </button></td>
                 </tr>';
             }
@@ -169,5 +199,21 @@ $('#update-comment').on('show.bs.modal', function (event) {
         document.getElementById("radio_hide_false").checked=true
     }
     modal.find('#select_class').val(classes)
+
+
+    var user_comment = button.data('user-comment')
+    var user_report = button.data('user-report')
+    var content = button.data('content')
+    var phone = button.data('phone')
+    var report_date = button.data('report-date')
+    var comment_date = button.data('comment-date')
+
+    document.getElementById("user_comment").value = String(user_comment)
+    document.getElementById("user_report").value = String(user_report)
+    document.getElementById("content").value = String(content)
+    document.getElementById("report_date").value = String(report_date)
+    document.getElementById("comment_date").value = String(comment_date )
+    document.getElementById("phone_name").value = String(phone)
+    document.getElementById("old_class").value = String(hide)
     })
 </script>

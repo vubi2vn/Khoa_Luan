@@ -5,6 +5,7 @@
     { 
         $ID_USER = $_SESSION["ID_USER"];
     }
+
 ?>
 <!-- them bao cao -->
 <?php
@@ -93,8 +94,12 @@
             <textarea name="noi_dung" class="form-control" rows="3" maxlength="500"></textarea>
             <div class="chitiet-cmt-emotion">
                 <a href="#" data-toggle="modal" data-target="#quydinh_cmt">Quy định đăng bình luận !</a>
-                
-                <button name="btnSend" type="submit" class="btn btn-primary" >Gửi</button>
+                <?php
+                if($_SESSION["TEN_PHAN_QUYEN"] == "khachhang")
+                {
+                    echo '<button name="btnSend" type="submit" class="btn btn-primary" >Gửi</button>';
+                }
+                ?>
             </div>
         </form>
         <!--  -->

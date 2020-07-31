@@ -276,17 +276,20 @@ else
     <!-- bai review dien thoai -->
     <p class=" navigat">Đánh giá sản phẩm</p>
     <div class="chitiet-review">
-    
-    <?php   
-        $BaiVietTheoIdDT = BaiVietTheoIdDT($conn,$idDT);
-        $row_BaiVietTheoIdDT = mysqli_fetch_array($BaiVietTheoIdDT);
+        <div id="nd" class="hide">
+            <div class="tran transparent"></div>
+            <?php   
+                $BaiVietTheoIdDT = BaiVietTheoIdDT($conn,$idDT);
+                $row_BaiVietTheoIdDT = mysqli_fetch_array($BaiVietTheoIdDT);
 
-        echo $row_BaiVietTheoIdDT['NOI_DUNG_BAI_VIET'];        
-        // $readmore = '<a href="#" name="readmore"> Đọc thêm</a>';
-        // echo BaiViet_Readmore($row_BaiVietTheoIdDT['NOI_DUNG_BAI_VIET'], 1500, $readmore);//(chuỗi, số từ, từ thay thế)
-
-    ?>
+                echo $row_BaiVietTheoIdDT['NOI_DUNG_BAI_VIET'];     
+               ?>
+        </div>
+        <div class="Thugon">
+            <a href="#" id="TG">Xem thêm</a>
+        </div>
     </div>
+
     <div class="clr"></div>
     
     <!-- Phần bình luận nhỏ -->
@@ -329,5 +332,17 @@ else
         </div>
     </div>
     <div class="clr"></div>
-
 </div>
+<!-- thu gọn chi tiết -->
+<script>
+    $(document).ready(function () {
+        $(".Thugon").click(function () {
+            $("#nd").toggleClass("hide");
+            if (!$("#nd").hasClass("hide")) { document.getElementById("TG").innerText = "Xem thêm";  }
+
+            else { document.getElementById("TG").innerText = "Thu gọn"; }
+            $(".tran").toggleClass("transparent");
+
+        })
+    })
+</script>

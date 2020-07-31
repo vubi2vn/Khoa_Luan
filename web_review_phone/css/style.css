@@ -379,16 +379,48 @@ header{
   height: 40px;
   text-align: left;
 }
-/* Bai danh gia */
+/* Bai viet */
 .chitiet-review{
   background: #fff;
   padding: 10px;
 }
-/* .chitiet-review img{
-  margin-left: auto;
-  margin-right: auto;
-  display: block;
-} */
+.chitiet-review .Thugon a:hover{
+  background-color: skyblue;
+  color: #fff;
+}
+.chitiet-review .Thugon{
+  padding: 0;
+  margin: 0 auto 0 45%;
+}
+
+.chitiet-review #nd{
+  width:auto;
+  text-align: justify;
+  padding: 0 20% 0 20%;
+  position: relative;
+}
+
+.chitiet-review #nd .tran{
+  position: absolute;
+  left:0;
+  top: 0;
+  width: 100%;
+  height:500px;
+}
+
+.hide{
+display: block;
+text-overflow: ellipsis;
+word-wrap: break-word;
+overflow: hidden;
+max-height: 500px;
+line-height: 1.0em;
+margin-bottom: 10px;
+
+}
+.transparent{
+  background: linear-gradient(transparent,#fff);
+}
 /* Phan binh luan */
 .chitiet-cmt{
   background: #fff;

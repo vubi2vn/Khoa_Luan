@@ -35,13 +35,15 @@ if(isset($_POST["btn_submit_avatar"]))
     $price=$_POST["txt_price"];
     if($name==""||$name==null)
     {
-        echo "<script type='text/javascript'>alert('Tên điện thoại không được để trống!');</script>";
         header('refresh:1');
+        echo "<script type='text/javascript'>alert('Tên điện thoại không được để trống!');</script>";
+        
     }
     elseif(find_phone($conn,$name)!=null)
     {
-        echo "<script type='text/javascript'>alert('Tên điện thoại bị trùng!');</script>";
         header('refresh:1');
+        echo "<script type='text/javascript'>alert('Tên điện thoại bị trùng!');</script>";
+        
     }
     elseif((float)$price<100000)
     {
@@ -57,13 +59,15 @@ if(isset($_POST["btn_submit_avatar"]))
             {
                 if(insert_review_for_phone($conn,$name))
                 {
+                    header('refresh:1');
                     echo "<script type='text/javascript'>alert('Thêm điện thoại thành công!');</script>";
-                    // header('refresh:1');
+                    
                 }
                 else
                 {
-                    echo "<script type='text/javascript'>alert('Có lỗi trong quá trình tạo bài viết! Vui lòng liên hệ nhân viên kỹ thuật!');</script>";
                     header('refresh:1');
+                    echo "<script type='text/javascript'>alert('Có lỗi trong quá trình tạo bài viết! Vui lòng liên hệ nhân viên kỹ thuật!');</script>";
+                    
                 }
             }
             else

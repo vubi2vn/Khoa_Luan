@@ -17,8 +17,8 @@ else if ($current_page < 1){
 // update đã đọc
 if(isset($_POST["btn-da-doc"]))
 {
-    update_dadoc($conn,$_SESSION["ID_USER"],$_POST['id_thongbao']);
-    header('refresh:1');
+    update_dadoc($conn,$_POST['txtx_id_chitiet_thongbao']);
+    
 }
 ?>
 <div class="thongbao">
@@ -27,10 +27,10 @@ if(isset($_POST["btn-da-doc"]))
     <table class="table">
         <thead class="thead-light">
             <tr>
-            <th scope="col">ID thông báo</th>
             <th scope="col">Ngày nhận</th>
-            <th scope="col">Nội dung</th>
-            <th scope="col">Đã xem</th>
+            <th scope="col">Tên thông báo</th>
+            <th scope="col">Trạng thái</th>
+            <th scope="col">Xem chi tiết</th>
             </tr>
         </thead>
         <tbody>
@@ -38,21 +38,31 @@ if(isset($_POST["btn-da-doc"]))
             $start=($current_page-1)*$limit_record;
             foreach(get_record_limit_thongbaos($conn,$_SESSION["ID_USER"],$start,$limit_record) as $a)
             {
-                echo '<form class="form" method = "POST">
+                
+                echo '
                 <tr>
-                <th scope="row">'.$a['ID_THONG_BAO'].'</th>
                 <td>'.$a['NGAY_GUI_THONG_BAO'].'</td>
-                <td>'.$a['NOI_DUNG_KHAC'].'</td>
-                <td><input class="form-control" type="text" name="id_thongbao" id="id_thongbao" value="'.$a['ID_THONG_BAO'].'" hidden/>';
+                <td>'.$a['TEN_THONG_BAO'].'</td>
+                <td>';
                 if($a['DA_XEM']==0)
                 {
-                    echo '<button class="btn btn-primary" type="submit" name="btn-da-doc">Đánh dấu đã đọc</button>';
+                    echo '<p style="color:red">Chưa xem</p>';
                 }
                 else
                 {
-                    echo '<button class="btn btn-primary" disabled>Đã đọc</button>';
+                    echo '<p>Đã xem</p>';
                 }
-                echo '</td></form>';
+                echo '</td>
+                <td>
+                <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#chitiet_thongbao" 
+                data-ten_tb="'.$a['TEN_THONG_BAO'].'"
+                data-noidung_tb="'.$a['NOI_DUNG_THONG_BAO'].'"
+                data-noidung-khac="'.$a['NOI_DUNG_KHAC'].'"
+                data-id-chitiet-thongbao="'.$a['ID_CHI_TIET_THONG_BAO'].'"
+                data-id_thongbao="'.$a['ID_THONG_BAO'].'"
+                >Xem chi tiết</a></td>
+                ';
+
             }
         ?>
             
@@ -100,3 +110,21 @@ if(isset($_POST["btn-da-doc"]))
         </ul>
     </nav>
 </div>
+
+<?php 
+include "popup/chitiet_thongbao.php"; 
+?>
+<script>
+    $('#chitiet_thongbao').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget)
+    var ten_tb = button.data('ten_tb')
+    var noidung_tb = button.data('noidung_tb')
+    var noidung_khac = button.data('noidung-khac')
+    var id_chitiet_thongbao = button.data('id-chitiet-thongbao')
+    var modal = $(this)
+    document.getElementById("lbl_ten_tb").innerHTML = String(ten_tb)
+    document.getElementById("txt_noidung_tb").innerHTML = String(noidung_tb)
+    document.getElementById("txt_noidung_khac").innerHTML = String(noidung_khac)
+    document.getElementById("txtx_id_chitiet_thongbao").value = String(id_chitiet_thongbao)
+    });
+</script>

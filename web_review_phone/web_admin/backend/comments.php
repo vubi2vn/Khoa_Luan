@@ -49,9 +49,8 @@ function update_comment($conn,$id,$class,$hide)
 {
     try
     {
-        $query="update binh_luan set phan_loai_binh_luan=b'$class',hien_thi_binh_luan=:hide where id_binh_luan=:id";
+        $query="update binh_luan set phan_loai_binh_luan=b'$class',hien_thi_binh_luan=b'$hide' where id_binh_luan=:id";
         $sql=$conn->prepare($query);
-        $sql->bindParam(':hide',$hide);
         $sql->bindParam(':id',$id);
         $sql->execute();
         return true;
@@ -128,6 +127,42 @@ function update_phone_score($conn,$id_comment)
         $sql=$conn->prepare($query);
         $sql->bindParam(':result',$result);
         $sql->bindParam(':id',$id_phone);
+        $sql->execute();
+        return true;
+    }
+    catch(PDOException $e)
+    {
+        echo "Error: " . $e->getMessage();
+        return false;
+    }
+}
+function send_notification_reporter($conn,$id_user,$phone_name,$report_date)
+{
+    try
+    {
+        $content ="Chi tiết:<br/> Bài viết về điện thoại: $phone_name,<br/> ngày báo cáo: $report_date";
+        $query="insert into chi_tiet_thong_bao values(null,:id_user,1,CURDATE(),0,:content)";
+        $sql=$conn->prepare($query);
+        $sql->bindParam(':content',$content);
+        $sql->bindParam(':id_user',$id_user);
+        $sql->execute();
+        return true;
+    }
+    catch(PDOException $e)
+    {
+        echo "Error: " . $e->getMessage();
+        return false;
+    }
+}
+function send_notification_commenter($conn,$id_user,$phone_name,$comment_date,$value)
+{
+    try
+    {
+        $content ="Chi tiết:<br/> Bài viết về điện thoại: $phone_name,<br/> ngày bình luận: $comment_date.<br/> Nội dung bình luận: $value<br/>";
+        $query="insert into chi_tiet_thong_bao values(null,:id_user,2,CURDATE(),0,:content)";
+        $sql=$conn->prepare($query);
+        $sql->bindParam(':content',$content);
+        $sql->bindParam(':id_user',$id_user);
         $sql->execute();
         return true;
     }

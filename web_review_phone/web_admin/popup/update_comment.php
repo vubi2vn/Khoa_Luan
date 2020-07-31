@@ -20,12 +20,34 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="label-info">Ẩn bình luận:</label>
+                <label class="label-info">Hiện bình luận:</label>
                 <div class="text-box-info">
                 <input  name="radio_hide" id="radio_hide_false" type="radio" value="0"/> Không<br/>
                 <input  name="radio_hide" id="radio_hide_true" type="radio" value="1" /> Có<br/>
                 </div>
             </div>
+            <div class="form-group">
+                <input type="text" hidden name="old_class" id="old_class">
+            </div>
+            <div class="form-group">
+                <input type="text" hidden name="user_report" id="user_report">
+            </div>
+            <div class="form-group">
+                <input type="text" hidden name="user_comment" id="user_comment">
+            </div>
+            <div class="form-group">
+                <input type="text" hidden name="phone_name" id="phone_name">
+            </div>
+            <div class="form-group">
+                <input type="text" hidden name="report_date" id="report_date">
+            </div>
+            <div class="form-group">
+                <input type="text" hidden name="comment_date" id="comment_date">
+            </div>
+            <div class="form-group">
+                <input type="text" hidden name="content" id="content">
+            </div>
+
         
         </div>
         <div class="modal-footer">
