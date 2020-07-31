@@ -17,9 +17,9 @@ pip install beautifulsoup4
 pip install numpy
 ```
 ## Files SourceCode include:
-*Classfication: Repare database code (python)
-*phone: Website review phone
-*DemoApp: App Android
+* Classfication: Repare database code (python)
+* phone: Website review phone
+* DemoApp: App Android
 
 ## How to run website review phone
 Instruction run website review phone:
