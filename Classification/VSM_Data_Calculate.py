@@ -49,8 +49,8 @@ def TinhGiaTriTheoTF (word, array_pos, array_neg):
 
 if __name__ == '__main__':
     #Đọc file
-    file_nega = open(r'C:\Users\QuocDai\Desktop\Khóa luận\Classification\Data\Result_negative_new003.txt', 'r', encoding='UTF-8')
-    file_pos = open(r'C:\Users\QuocDai\Desktop\Khóa luận\Classification\Data\Result_positive_new003.txt', 'r', encoding='UTF-8')
+    file_nega = open(r'D:\GITHUB\Khoa_Luan\Classification\Data\Result_negative_new003.txt', 'r', encoding='UTF-8')
+    file_pos = open(r'D:\GITHUB\Khoa_Luan\Classification\Data\Result_positive_new003.txt', 'r', encoding='UTF-8')
 
 
     comment_all=[]
@@ -81,7 +81,7 @@ if __name__ == '__main__':
     TachTu_cotrung(comment_neg, array_neg)
 
     #Ghi file CSV
-    with open(r'C:\Users\QuocDai\Desktop\Khóa luận\Classification\Train\CalculateTF.csv','w',encoding="utf-8",newline='') as csv_file:
+    with open(r'D:\GITHUB\Khoa_Luan\Classification\Train\CalculateTF.csv','w',encoding="utf-8",newline='') as csv_file:
         writer = csv.writer(csv_file,delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
         writer.writerow(['Word','tf_pos','tf_neg','score_pos','score_neg','idf'])
         #Tính các giá trị của từng chữ và ghi lại

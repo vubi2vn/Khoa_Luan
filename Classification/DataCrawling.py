@@ -7,7 +7,7 @@ if __name__ == '__main__':
     url = 'https://www.thegioididong.com/dtdd/samsung-galaxy-a51/danh-gia?s=1&p=1'
     page = urllib.request.urlopen(url)
     soup = BeautifulSoup(page, 'html.parser')
-    file1= open(r"C:\Users\QuocDai\Desktop\Khóa luận\Classification\Draw_data\TieuCuc_00.txt","a",encoding='utf-8')
+    file1= open(r"D:\GITHUB\Khoa_Luan\Classification\Draw_data\TieuCuc_00.txt","a",encoding='utf-8')
     arr_comments=[]
     comments=[]
 

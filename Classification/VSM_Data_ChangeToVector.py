@@ -5,11 +5,11 @@ if __name__ == '__main__':
     comment_all = []
 
     #Đọc file
-    file_nega = open(r'C:\Users\QuocDai\Desktop\Khóa luận\Classification\Draw_data\1500_negative.txt', 'r',
+    file_nega = open(r'D:\GITHUB\Khoa_Luan\Classification\Draw_data\1500_negative.txt', 'r',
                      encoding='UTF-8')
-    file_pos = open(r'C:\Users\QuocDai\Desktop\Khóa luận\Classification\Draw_data\1500_positive.txt', 'r',
+    file_pos = open(r'D:\GITHUB\Khoa_Luan\Classification\Draw_data\1500_positive.txt', 'r',
                     encoding='UTF-8')
-    file_result_vector = open(r'C:\Users\QuocDai\Desktop\Khóa luận\Classification\Test_data\Result_30000_Vector.txt', 'w',
+    file_result_vector = open(r'D:\GITHUB\Khoa_Luan\Classification\Test_data\Result_30000_Vector.txt', 'w',
                     encoding='UTF-8')
 
 
@@ -23,7 +23,7 @@ if __name__ == '__main__':
         comment_all.append(n)
 
     #Đọc file csv
-    with open(r'C:\Users\QuocDai\Desktop\Khóa luận\Classification\Training\CalculateTF.csv','r',encoding="utf-8") as csv_file:
+    with open(r'D:\GITHUB\Khoa_Luan\Classification\Training\CalculateTF.csv','r',encoding="utf-8") as csv_file:
         data = csv.reader(csv_file)
         count_comment = 1
         for comment in comment_all:

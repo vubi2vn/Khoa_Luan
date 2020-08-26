@@ -5,7 +5,7 @@ import csv
 import joblib
 
 def changeToVector(string):
-    with open(r'C:\Users\QuocDai\Desktop\Khóa luận\Classification\Data\CalculateTF.csv','r',encoding="utf-8") as csv_file:
+    with open(r'D:\GITHUB\Khoa_Luan\Classification\Data\CalculateTF.csv','r',encoding="utf-8") as csv_file:
         data = csv.reader(csv_file)
         word_array=string.split()
         score_pos=0
@@ -55,7 +55,7 @@ class SVMmodel(object):
 
 if __name__=='__main__':
     string = 'Tương đối tốt, nói chung pin nhanh hết so với con A70 của mình mua trước đó, phím tăng giảm âm lượng bấm hơi cứng,'
-    svm=SVMmodel(urlModel=r'C:\Users\QuocDai\Desktop\Khóa luận\Classification\Train\train.joblib',stringTest=string)
+    svm=SVMmodel(urlModel=r'D:\GITHUB\Khoa_Luan\Classification\Train\train.joblib',stringTest=string)
     svm.testing()
 
 

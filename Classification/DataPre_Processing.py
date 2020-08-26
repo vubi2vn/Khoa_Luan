@@ -12,9 +12,9 @@ def check_grammar(word):
 
 if __name__ == '__main__':
 
-    file_result = open(r"C:\Users\QuocDai\Desktop\Khóa luận\Classification\Draw_data\1500_positive.txt", "w",
+    file_result = open(r"D:\GITHUB\Khoa_Luan\Classification\Draw_data\1500_positive.txt", "w",
                        encoding='utf-8')
-    with open(r"C:\Users\QuocDai\Desktop\Khóa luận\Classification\Draw_data\TichCuc_1500.txt","r",encoding='utf-8') as file_source:
+    with open(r"D:\GITHUB\Khoa_Luan\Classification\Draw_data\TichCuc_1500.txt","r",encoding='utf-8') as file_source:
         for line in file_source:
             string_a = re.sub('[.,?!"()/%$#@^]','',line).split()
             for a in string_a:
@@ -22,9 +22,9 @@ if __name__ == '__main__':
                     a = check_grammar(a)
                     file_result.write(a.lower() + " ")
             file_result.write("\n")
-    file_result_1 = open(r"C:\Users\QuocDai\Desktop\Khóa luận\Classification\Draw_data\1500_negative.txt", "w",
+    file_result_1 = open(r"D:\GITHUB\Khoa_Luan\Classification\Draw_data\1500_negative.txt", "w",
                              encoding='utf-8')
-    with open(r"C:\Users\QuocDai\Desktop\Khóa luận\Classification\Draw_data\TieuCuc_1500.txt", "r",
+    with open(r"D:\GITHUB\Khoa_Luan\Classification\Draw_data\TieuCuc_1500.txt", "r",
                   encoding='utf-8') as file_source_1:
         for line in file_source_1:
             string_a = re.sub('[.,?!"()/%$#@^]',' ',line).split()

@@ -32,7 +32,7 @@ if __name__ == '__main__':
     label_test=[]
     file_train=open(r'D:\GITHUB\Khoa_Luan\Classification\Training\Vector_traning.txt', 'r',
                      encoding='UTF-8')
-    file_test=open(r'D:\GITHUB\Khoa_Luan\Classification\Test_data\Result_30000_Vector.txt', 'r',
+    file_test=open(r'D:\GITHUB\Khoa_Luan\Classification\Test_data\Result_3000_Vector.txt', 'r',
                      encoding='UTF-8')
     for line in file_train:
         a=re.sub('[()\n]','',line).split(',')
